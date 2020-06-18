@@ -1,0 +1,3 @@
+// PEOPLE
+export const PEOPLE_LOADING = 'PEOPLE_LOADING';
+export const PEOPLE_LOADED = 'PEOPLE_LOADED';
