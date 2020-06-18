@@ -20,7 +20,7 @@ export const getPeople = (city = '') => async (dispatch) => {
     }
 
     // Send GET request to /people endpoint
-    const res = await api.get(`/people${querystring}`);
+    const res = await api.get(`/person${querystring}`);
 
     // Send Message: PEOPLE_LOADED
     dispatch({
