@@ -1,7 +1,7 @@
 {
-  "name": "projectb",
+  "name": "symscreen",
   "version": "0.1.0",
-  "homepage": "https://sandychad.github.io/project-b-frontend/",
+  "homepage": "https://sandychad.github.io/symscreen-frontend/",
   "private": true,
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",

@@ -17,7 +17,7 @@ class Header extends Component {
   render() {
     return (
       <Navbar bg='primary' variant='dark' expand='sm' fixed='top'>
-        <Navbar.Brand>ProjectB</Navbar.Brand>
+        <Navbar.Brand>SymScreen</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse className='justify-content-end'>
           <SplitButton alignRight variant='primary' title='Org Name'>
