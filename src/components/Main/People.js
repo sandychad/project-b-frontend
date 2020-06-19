@@ -4,15 +4,19 @@ import React, { Component, Fragment } from 'react';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
+import { setPerson } from '../../redux/actions/survey';
+
+// React Router
+import { Redirect } from 'react-router-dom';
 
 // Bootstrap
 import {
   Container,
+  Button,
   ToggleButton,
   ToggleButtonGroup,
   Row,
   Col,
-  Button,
 } from 'react-bootstrap';
 
 const letters = [
@@ -51,13 +55,16 @@ export class People extends Component {
       lastNames: [],
       availableLetters: [],
       selectedLetter: '',
+      redirect: false,
     };
 
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   static propTypes = {
     people: PropTypes.array.isRequired,
+    setPerson: PropTypes.func.isRequired,
   };
 
   componentDidUpdate(prevProps) {
@@ -95,7 +102,16 @@ export class People extends Component {
     this.setState({ selectedLetter: event.target.value });
   }
 
+  handleClick(person) {
+    this.props.setPerson(person);
+    this.setState({ redirect: true });
+  }
+
   render() {
+    if (this.state.redirect) {
+      return <Redirect to='/main/questions' />;
+    }
+
     return (
       <Container className='mt-4'>
         <Col md={6}>
@@ -121,7 +137,13 @@ export class People extends Component {
             if (person.last_name[0] === this.state.selectedLetter) {
               return (
                 <Row className='mt-2 mb-2' key={person.employee_id}>
-                  <Button size='lg' variant='outline-primary' block>
+                  <Button
+                    onClick={() => this.handleClick(person)}
+                    size='lg'
+                    variant='outline-primary'
+                    block
+                    value={person}
+                  >
                     {person.employee_id}
                     {' - '}
                     {person.first_name} {person.last_name}
@@ -129,7 +151,6 @@ export class People extends Component {
                 </Row>
               );
             }
-
             return <Fragment key={person.employee_id} />;
           })}
         </Container>
@@ -142,4 +163,4 @@ const mapStateToProps = (state) => ({
   people: state.people.people,
 });
 
-export default connect(mapStateToProps)(People);
+export default connect(mapStateToProps, { setPerson })(People);

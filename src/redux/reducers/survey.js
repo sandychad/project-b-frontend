@@ -4,6 +4,7 @@ import * as actions from '../actions/types';
 // Initialize State
 const initialState = {
   questions: [],
+  person: {},
   isLoading: false,
 };
 
@@ -20,6 +21,11 @@ export default function (state = initialState, action) {
         ...state,
         questions: action.payload,
         isLoading: false,
+      };
+    case actions.SET_PERSON:
+      return {
+        ...state,
+        person: action.payload,
       };
     default:
       return state;

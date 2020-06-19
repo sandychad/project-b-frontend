@@ -24,3 +24,12 @@ export const getQuestions = () => async (dispatch) => {
     console.error(err);
   }
 };
+
+// SET PERSON
+export const setPerson = (person) => (dispatch) => {
+  // SET PERSON
+  dispatch({
+    type: actions.SET_PERSON,
+    payload: person,
+  });
+};

@@ -9,6 +9,7 @@ import { Container } from 'react-bootstrap';
 
 // Local Components
 import People from './People';
+import Questions from './Questions';
 
 // Local Styles
 const containerStyle = {
@@ -23,6 +24,7 @@ export class Main extends Component {
         <h1>Welcome to SymScreen</h1>
         <Switch>
           <Route path='/main/people' component={People} />
+          <Route path='/main/questions' component={Questions} />
         </Switch>
       </Container>
     );
