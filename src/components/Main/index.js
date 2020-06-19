@@ -1,6 +1,9 @@
 // React
 import React, { Component } from 'react';
 
+// React Router
+import { Switch, Route } from 'react-router-dom';
+
 // Bootstrap
 import { Container } from 'react-bootstrap';
 
@@ -18,7 +21,9 @@ export class Main extends Component {
     return (
       <Container style={containerStyle}>
         <h1>Welcome to SymScreen</h1>
-        <People />
+        <Switch>
+          <Route path='/main/people' component={People} />
+        </Switch>
       </Container>
     );
   }

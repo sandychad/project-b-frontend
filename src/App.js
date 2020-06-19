@@ -5,6 +5,9 @@ import React, { Component } from 'react';
 import { Provider } from 'react-redux';
 import store from './redux/store';
 
+// React Router
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
+
 // React Bootstrap
 import { Container } from 'react-bootstrap';
 
@@ -21,10 +24,14 @@ export class App extends Component {
   render() {
     return (
       <Provider store={store}>
-        <Container>
-          <Header />
-          <Main />
-        </Container>
+        <Router>
+          <Container>
+            <Header />
+            <Switch>
+              <Route path='/main' component={Main}></Route>
+            </Switch>
+          </Container>
+        </Router>
       </Provider>
     );
   }

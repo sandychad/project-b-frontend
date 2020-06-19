@@ -10,7 +10,9 @@ import {
   Container,
   ToggleButton,
   ToggleButtonGroup,
+  Row,
   Col,
+  Button,
 } from 'react-bootstrap';
 
 const letters = [
@@ -95,8 +97,9 @@ export class People extends Component {
 
   render() {
     return (
-      <Container>
-        <Col md={4}>
+      <Container className='mt-4'>
+        <Col md={6}>
+          <h4>Please select your last initial: </h4>
           <ToggleButtonGroup type='radio' name='options'>
             {letters.map((letter, index) => (
               <ToggleButton
@@ -113,19 +116,23 @@ export class People extends Component {
             ))}
           </ToggleButtonGroup>
         </Col>
-        {this.props.people.map((person) => {
-          if (person.last_name[0] === this.state.selectedLetter) {
-            return (
-              <h4 key={person.employee_id}>
-                {person.employee_id}
-                {' - '}
-                {person.first_name} {person.last_name}
-              </h4>
-            );
-          }
+        <Container className='mt-4 text-left'>
+          {this.props.people.map((person) => {
+            if (person.last_name[0] === this.state.selectedLetter) {
+              return (
+                <Row className='mt-2 mb-2' key={person.employee_id}>
+                  <Button size='lg' variant='outline-primary' block>
+                    {person.employee_id}
+                    {' - '}
+                    {person.first_name} {person.last_name}
+                  </Button>
+                </Row>
+              );
+            }
 
-          return <Fragment key={person.employee_id} />;
-        })}
+            return <Fragment key={person.employee_id} />;
+          })}
+        </Container>
       </Container>
     );
   }
