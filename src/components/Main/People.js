@@ -102,6 +102,7 @@ export class People extends Component {
               <ToggleButton
                 size='md'
                 className='m-1'
+                variant={letter.disabled ? 'secondary' : 'primary'}
                 key={index}
                 value={letter.text}
                 disabled={letter.disabled}
