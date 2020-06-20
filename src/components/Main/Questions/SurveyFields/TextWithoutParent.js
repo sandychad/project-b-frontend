@@ -5,9 +5,9 @@ import React from 'react';
 import { Card, InputGroup, Form, Col } from 'react-bootstrap';
 
 export default function TextWithoutParent({ question }) {
-  const { id, question_text } = question;
+  const { question_text } = question;
   return (
-    <Card key={id}>
+    <Card>
       <Card.Header>
         <Card.Title>{question_text}</Card.Title>
       </Card.Header>

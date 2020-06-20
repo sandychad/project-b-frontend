@@ -5,9 +5,9 @@ import React from 'react';
 import { Card, Form } from 'react-bootstrap';
 
 export default function OptionsWithParent({ question }) {
-  const { id, question_text } = question;
+  const { question_text } = question;
   return (
-    <Card key={id}>
+    <Card>
       <Card.Body className='text-center'>
         <Card.Text>{question_text}</Card.Text>
         <Form.Group>

@@ -66,7 +66,7 @@ export class People extends Component {
   static propTypes = {
     people: PropTypes.array.isRequired,
     setPerson: PropTypes.func.isRequired,
-    city: PropTypes.string.isRequired,
+    city: PropTypes.string,
     getPeople: PropTypes.func.isRequired,
   };
 

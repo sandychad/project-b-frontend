@@ -49,20 +49,20 @@ export class Questions extends Component {
         <Container>
           <Form className='mt-4' onSubmit={this.handleSubmit}>
             {questions.map((question, index) => {
-              const { question_type, parent_question_id } = question;
+              const { id, question_type, parent_question_id } = question;
               if (parent_question_id === '0') {
                 if (question_type === 'N/A') {
-                  return <Parent question={question} />;
+                  return <Parent key={id} question={question} />;
                 } else if (question_type === 'options') {
-                  return <OptionsWithoutParent question={question} />;
+                  return <OptionsWithoutParent key={id} question={question} />;
                 } else if (question_type === 'text') {
-                  return <TextWithoutParent question={question} />;
+                  return <TextWithoutParent key={id} question={question} />;
                 } else {
                   return <Container />;
                 }
               } else {
                 if (question_type === 'options') {
-                  return <OptionsWithParent question={question} />;
+                  return <OptionsWithParent key={id} question={question} />;
                 } else {
                   return <Container />;
                 }
