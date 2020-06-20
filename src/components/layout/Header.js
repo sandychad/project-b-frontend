@@ -5,7 +5,7 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getOrgName } from '../../redux/actions/organization';
-import { getPeople } from '../../redux/actions/people';
+import { getPeople, setCity } from '../../redux/actions/people';
 
 // React Bootstrap
 import {
@@ -38,6 +38,7 @@ class Header extends Component {
     getOrgName: PropTypes.func.isRequired,
     org_name: PropTypes.string.isRequired,
     getPeople: PropTypes.func.isRequired,
+    setCity: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
@@ -50,7 +51,9 @@ class Header extends Component {
 
   handleSubmit(event) {
     event.preventDefault();
-    this.props.getPeople(this.state.searchCity);
+    const { searchCity } = this.state;
+    this.props.setCity(searchCity);
+    this.props.getPeople(searchCity);
   }
 
   render() {
@@ -90,4 +93,6 @@ const mapStateToProps = (state) => ({
   org_name: state.organization.org_name,
 });
 
-export default connect(mapStateToProps, { getOrgName, getPeople })(Header);
+export default connect(mapStateToProps, { getOrgName, getPeople, setCity })(
+  Header
+);

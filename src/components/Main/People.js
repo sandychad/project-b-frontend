@@ -5,6 +5,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { setPerson } from '../../redux/actions/survey';
+import { getPeople } from '../../redux/actions/people';
 
 // React Router
 import { Redirect } from 'react-router-dom';
@@ -65,9 +66,15 @@ export class People extends Component {
   static propTypes = {
     people: PropTypes.array.isRequired,
     setPerson: PropTypes.func.isRequired,
+    city: PropTypes.string.isRequired,
+    getPeople: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
+    const { city } = this.props;
+    if (city) {
+      this.props.getPeople(city);
+    }
     letters.map((letter) => {
       letter.disabled = true;
       return letter;
@@ -75,11 +82,11 @@ export class People extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    letters.map((letter) => {
-      letter.disabled = true;
-      return letter;
-    });
     if (prevProps.people !== this.props.people) {
+      letters.map((letter) => {
+        letter.disabled = true;
+        return letter;
+      });
       let last_names = [];
       let searchLetters = [];
       this.props.people.map((person) => {
@@ -167,6 +174,7 @@ export class People extends Component {
 
 const mapStateToProps = (state) => ({
   people: state.people.people,
+  city: state.people.city,
 });
 
-export default connect(mapStateToProps, { setPerson })(People);
+export default connect(mapStateToProps, { setPerson, getPeople })(People);

@@ -6,6 +6,7 @@ export const ORG_NAME_LOADED = 'ORG_NAME_LOADED';
 export const PEOPLE_LOADING = 'PEOPLE_LOADING';
 export const PEOPLE_LOADED = 'PEOPLE_LOADED';
 export const SET_PERSON = 'SET_PERSON';
+export const SET_CITY = 'SET_CITY';
 
 // QUESTIONS
 export const QUESTIONS_LOADING = 'QUESTIONS_LOADING';

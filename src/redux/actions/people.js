@@ -31,3 +31,11 @@ export const getPeople = (city = '') => async (dispatch) => {
     console.error(err);
   }
 };
+
+// SET CITY
+export const setCity = (city) => (dispatch) => {
+  dispatch({
+    type: actions.SET_CITY,
+    payload: city,
+  });
+};
