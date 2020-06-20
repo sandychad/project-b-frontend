@@ -67,13 +67,19 @@ export class People extends Component {
     setPerson: PropTypes.func.isRequired,
   };
 
-  componentDidUpdate(prevProps) {
-    if (prevProps.people !== this.props.people) {
-      letters.map((letter) => {
-        letter.disabled = true;
-        return letter;
-      });
+  componentDidMount() {
+    letters.map((letter) => {
+      letter.disabled = true;
+      return letter;
+    });
+  }
 
+  componentDidUpdate(prevProps) {
+    letters.map((letter) => {
+      letter.disabled = true;
+      return letter;
+    });
+    if (prevProps.people !== this.props.people) {
       let last_names = [];
       let searchLetters = [];
       this.props.people.map((person) => {
