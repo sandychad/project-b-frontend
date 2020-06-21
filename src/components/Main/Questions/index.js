@@ -110,7 +110,7 @@ export class Questions extends Component {
                 <Col className='text-right m-4'>
                   <Button
                     as={Link}
-                    to='/main/people'
+                    to='/symscreen-frontend/people'
                     variant='secondary'
                     className='mr-2'
                   >

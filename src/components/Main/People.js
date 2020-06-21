@@ -122,7 +122,7 @@ export class People extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to='/main/questions' />;
+      return <Redirect to='/symscreen-frontend/questions' />;
     }
 
     return (

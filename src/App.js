@@ -28,7 +28,7 @@ export class App extends Component {
           <Container>
             <Header />
             <Switch>
-              <Route path='/main' component={Main}></Route>
+              <Route path='/symscreen-frontend' component={Main}></Route>
             </Switch>
           </Container>
         </Router>
