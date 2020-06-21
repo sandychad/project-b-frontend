@@ -38,7 +38,7 @@ export class Questions extends Component {
     const { person, questions } = this.props;
 
     if (!person.employee_id) {
-      return <Redirect to='/symscreen-frontend/people' />;
+      return <Redirect to='/people' />;
     }
 
     let formValues = {};

@@ -23,8 +23,8 @@ export class Main extends Component {
       <Container style={containerStyle}>
         <h1>Welcome to SymScreen</h1>
         <Switch>
-          <Route path='/symscreen-frontend/people' component={People} />
-          <Route path='/symscreen-frontend/questions' component={Questions} />
+          <Route path='/people' component={People} />
+          <Route path='/questions' component={Questions} />
         </Switch>
       </Container>
     );
