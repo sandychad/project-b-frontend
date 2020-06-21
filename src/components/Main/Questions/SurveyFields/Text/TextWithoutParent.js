@@ -1,11 +1,18 @@
 // React
 import React from 'react';
 
+// Formik
+import { Field } from 'formik';
+
 // React Bootstrap
 import { Card, InputGroup, Form, Col } from 'react-bootstrap';
 
-export default function TextWithoutParent({ question }) {
+// Local Components
+import Text from './Text';
+
+export default function TextWithoutParent({ id, question, formik }) {
   const { question_text } = question;
+  const { values } = formik;
   return (
     <Card>
       <Card.Header>
@@ -14,7 +21,7 @@ export default function TextWithoutParent({ question }) {
       <Card.Body>
         <Col md={{ span: 4, offset: 4 }}>
           <InputGroup>
-            <Form.Control type='text' placeholder='100.0' />
+            <Field component={Text} name={id} values={values} />
             <InputGroup.Append>
               <InputGroup.Text>°F</InputGroup.Text>
             </InputGroup.Append>

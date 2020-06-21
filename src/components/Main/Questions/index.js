@@ -9,14 +9,17 @@ import { getQuestions } from '../../../redux/actions/survey';
 // React Router
 import { Redirect, Link } from 'react-router-dom';
 
+// Form Validation
+import { Formik } from 'formik';
+
 // Bootstrap
 import { Container, Form, Button, Col } from 'react-bootstrap';
 
 // Local Components
-import OptionsWithParent from './SurveyFields/OptionsWithParent';
-import OptionsWithoutParent from './SurveyFields/OptionsWithoutParent';
+import OptionsWithParent from './SurveyFields/Options/OptionsWithParent';
+import OptionsWithoutParent from './SurveyFields/Options/OptionsWithoutParent';
 import Parent from './SurveyFields/Parent';
-import TextWithoutParent from './SurveyFields/TextWithoutParent';
+import TextWithoutParent from './SurveyFields/Text/TextWithoutParent';
 
 export class Questions extends Component {
   static propTypes = {
@@ -31,13 +34,21 @@ export class Questions extends Component {
     this.props.getQuestions();
   }
 
-  handleSubmit() {}
-
   render() {
     const { person, questions } = this.props;
+
     if (!person.employee_id) {
       return <Redirect to='/main/people' />;
     }
+
+    let formValues = {};
+    questions.map((question) => {
+      if (question.question_type !== 'N/A') {
+        return (formValues[question.id] = '');
+      } else {
+        return (formValues[question.id] = 'N/A');
+      }
+    });
 
     return (
       <Container className='mt-4'>
@@ -47,41 +58,71 @@ export class Questions extends Component {
           {person.first_name} {person.last_name}
         </h4>
         <Container>
-          <Form className='mt-4' onSubmit={this.handleSubmit}>
-            {questions.map((question, index) => {
-              const { id, question_type, parent_question_id } = question;
-              if (parent_question_id === '0') {
-                if (question_type === 'N/A') {
-                  return <Parent key={id} question={question} />;
-                } else if (question_type === 'options') {
-                  return <OptionsWithoutParent key={id} question={question} />;
-                } else if (question_type === 'text') {
-                  return <TextWithoutParent key={id} question={question} />;
-                } else {
-                  return <Container />;
-                }
-              } else {
-                if (question_type === 'options') {
-                  return <OptionsWithParent key={id} question={question} />;
-                } else {
-                  return <Container />;
-                }
-              }
-            })}
-            <Col className='text-right m-4'>
-              <Button
-                as={Link}
-                to='/main/people'
-                variant='secondary'
-                className='mr-2'
-              >
-                Cancel
-              </Button>
-              <Button type='submit' className='mr-2'>
-                Submit
-              </Button>
-            </Col>
-          </Form>
+          <Formik
+            initialValues={formValues}
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+              console.log(values);
+            }}
+          >
+            {(formik) => (
+              <Form noValidate className='mt-4' onSubmit={formik.handleSubmit}>
+                {questions.map((question) => {
+                  const { id, question_type, parent_question_id } = question;
+                  if (parent_question_id === '0') {
+                    if (question_type === 'N/A') {
+                      return <Parent key={id} question={question} />;
+                    } else if (question_type === 'options') {
+                      return (
+                        <OptionsWithoutParent
+                          key={id}
+                          id={id}
+                          question={question}
+                          formik={formik}
+                        />
+                      );
+                    } else if (question_type === 'text') {
+                      return (
+                        <TextWithoutParent
+                          key={id}
+                          id={id}
+                          question={question}
+                          formik={formik}
+                        />
+                      );
+                    } else {
+                      return <Container />;
+                    }
+                  } else {
+                    if (question_type === 'options') {
+                      return (
+                        <OptionsWithParent
+                          key={id}
+                          id={id}
+                          question={question}
+                          formik={formik}
+                        />
+                      );
+                    } else {
+                      return <Container />;
+                    }
+                  }
+                })}
+                <Col className='text-right m-4'>
+                  <Button
+                    as={Link}
+                    to='/main/people'
+                    variant='secondary'
+                    className='mr-2'
+                  >
+                    Cancel
+                  </Button>
+                  <Button type='submit' className='mr-2'>
+                    Submit
+                  </Button>
+                </Col>
+              </Form>
+            )}
+          </Formik>
         </Container>
       </Container>
     );
