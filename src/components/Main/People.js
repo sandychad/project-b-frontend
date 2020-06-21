@@ -122,7 +122,7 @@ export class People extends Component {
 
   render() {
     if (this.state.redirect) {
-      return <Redirect to='/questions' />;
+      return <Redirect to='/main/questions' />;
     }
 
     return (

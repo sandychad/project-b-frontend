@@ -28,7 +28,7 @@ export class App extends Component {
           <Container>
             <Header />
             <Switch>
-              <Route path='/' component={Main}></Route>
+              <Route path='/main' component={Main}></Route>
             </Switch>
           </Container>
         </Router>
