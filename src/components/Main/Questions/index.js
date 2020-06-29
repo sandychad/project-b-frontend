@@ -61,7 +61,14 @@ export class Questions extends Component {
           <Formik
             initialValues={formValues}
             onSubmit={(values, { setSubmitting, resetForm }) => {
-              console.log(values);
+              setSubmitting(true);
+              const response = {
+                person_id: this.props.person.id,
+                responses: values,
+              };
+              console.log(response);
+              resetForm();
+              setSubmitting(false);
             }}
           >
             {(formik) => (
