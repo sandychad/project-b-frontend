@@ -6,6 +6,7 @@ const initialState = {
   questions: [],
   person: {},
   isLoading: false,
+  decision: {},
 };
 
 // Reducer Function (switches on action type)
@@ -26,6 +27,16 @@ export default function (state = initialState, action) {
       return {
         ...state,
         person: action.payload,
+      };
+    case actions.SUBMIT_FORM:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case actions.DECISION_LOADED:
+      return {
+        ...state,
+        decision: action.payload,
       };
     default:
       return state;

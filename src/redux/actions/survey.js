@@ -33,3 +33,24 @@ export const setPerson = (person) => (dispatch) => {
     payload: person,
   });
 };
+
+// SUBMIT FORM
+export const submitForm = (response) => async (dispatch) => {
+  try {
+    // Send Message: SUBMIT_FORM
+    dispatch({
+      type: actions.SUBMIT_FORM,
+    });
+
+    // Send POST request to /submit/ endpoint
+    const res = await api.post('/submit/', response);
+
+    // Send Message: DECISION_LOADED
+    dispatch({
+      type: actions.DECISION_LOADED,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};

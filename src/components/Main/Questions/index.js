@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getQuestions } from '../../../redux/actions/survey';
+import { getQuestions, submitForm } from '../../../redux/actions/survey';
 
 // React Router
 import { Redirect, Link } from 'react-router-dom';
@@ -26,6 +26,7 @@ export class Questions extends Component {
     questions: PropTypes.array.isRequired,
     getQuestions: PropTypes.func.isRequired,
     person: PropTypes.object.isRequired,
+    submitForm: PropTypes.func.isRequired,
   };
   componentDidMount() {
     if (this.props.questions.length > 0) {
@@ -67,6 +68,7 @@ export class Questions extends Component {
                 responses: values,
               };
               console.log(response);
+              this.props.submitForm(response);
               resetForm();
               setSubmitting(false);
             }}
@@ -141,4 +143,6 @@ const mapStateToProps = (state) => ({
   person: state.survey.person,
 });
 
-export default connect(mapStateToProps, { getQuestions })(Questions);
+export default connect(mapStateToProps, { getQuestions, submitForm })(
+  Questions
+);
