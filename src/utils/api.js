@@ -4,8 +4,8 @@ import axios from 'axios';
 // Create api object that will be used to call APIs in Redux Actions
 const api = axios.create({
   // Set Base URL to backend root
-  baseURL: 'https://dry-castle-10158.herokuapp.com/',
-  // baseURL: 'http://localhost:8000/',
+  // baseURL: 'https://dry-castle-10158.herokuapp.com/',
+  baseURL: 'http://localhost:8000/',
   // Add header for content-type for POST requests
   headers: {
     'Content-Type': 'application/json',

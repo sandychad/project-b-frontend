@@ -11,6 +11,7 @@ import { Redirect, Link } from 'react-router-dom';
 
 // Form Validation
 import { Formik } from 'formik';
+import * as Yup from 'yup';
 
 // Bootstrap
 import { Container, Form, Button, Col } from 'react-bootstrap';
@@ -20,19 +21,39 @@ import OptionsWithParent from './SurveyFields/Options/OptionsWithParent';
 import OptionsWithoutParent from './SurveyFields/Options/OptionsWithoutParent';
 import Parent from './SurveyFields/Parent';
 import TextWithoutParent from './SurveyFields/Text/TextWithoutParent';
+import Decision from './Decision';
 
 export class Questions extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      submit: false,
+      showDecision: true,
+    };
+
+    this.hideDecision = this.hideDecision.bind(this);
+  }
+
   static propTypes = {
     questions: PropTypes.array.isRequired,
     getQuestions: PropTypes.func.isRequired,
     person: PropTypes.object.isRequired,
     submitForm: PropTypes.func.isRequired,
   };
+
   componentDidMount() {
     if (this.props.questions.length > 0) {
       return;
     }
     this.props.getQuestions();
+  }
+
+  hideDecision() {
+    this.setState({ showDecision: false });
+  }
+
+  setSubmit() {
+    this.setState({ submit: true });
   }
 
   render() {
@@ -42,15 +63,29 @@ export class Questions extends Component {
       return <Redirect to='/main/people' />;
     }
 
-    let formValues = {};
-    questions.map((question) => {
-      if (question.question_type !== 'N/A') {
-        return (formValues[question.id] = '');
-      } else {
-        return (formValues[question.id] = 'N/A');
-      }
-    });
+    if (this.state.submit && !this.state.showDecision) {
+      return <Redirect to='/main/people' />;
+    }
 
+    let formValues = {};
+    let schema = {};
+    questions.map(function (question) {
+      switch (question.question_type) {
+        case 'temp':
+          formValues[question.id] = '';
+          schema[question.id] = Yup.number().required('Required');
+          break;
+        case 'options':
+        case 'text':
+          formValues[question.id] = '';
+          schema[question.id] = Yup.string().required('Required');
+          break;
+        case 'N/A':
+        default:
+          formValues[question.id] = 'N/A';
+      }
+      return question;
+    });
     return (
       <Container className='mt-4'>
         <h4>
@@ -61,14 +96,17 @@ export class Questions extends Component {
         <Container>
           <Formik
             initialValues={formValues}
+            validationSchema={Yup.object().shape(schema)}
             onSubmit={(values, { setSubmitting, resetForm }) => {
               setSubmitting(true);
+
               const response = {
                 person_id: this.props.person.id,
                 responses: values,
               };
-              console.log(response);
+
               this.props.submitForm(response);
+              this.setSubmit();
               resetForm();
               setSubmitting(false);
             }}
@@ -89,7 +127,7 @@ export class Questions extends Component {
                           formik={formik}
                         />
                       );
-                    } else if (question_type === 'text') {
+                    } else if (question_type === 'temp') {
                       return (
                         <TextWithoutParent
                           key={id}
@@ -133,6 +171,9 @@ export class Questions extends Component {
             )}
           </Formik>
         </Container>
+        {this.state.submit ? (
+          <Decision show={this.state.showDecision} onHide={this.hideDecision} />
+        ) : null}
       </Container>
     );
   }
