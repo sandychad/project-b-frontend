@@ -5,11 +5,12 @@ import React from 'react';
 import { useSelector } from 'react-redux';
 
 // React Bootstrap
-import { Modal } from 'react-bootstrap';
+import { Modal, Button } from 'react-bootstrap';
 
 export default function Decision(props) {
   const decision = useSelector((state) => state.survey.decision);
   const date = new Date(decision.timestamp);
+
   return (
     <Modal
       {...props}
@@ -17,7 +18,7 @@ export default function Decision(props) {
       aria-labelledby='contained-modal-title-vcenter'
       centered
     >
-      <Modal.Header closeButton>
+      <Modal.Header>
         <Modal.Title className='text-center'>
           Decision: {decision.person}
         </Modal.Title>
@@ -28,6 +29,11 @@ export default function Decision(props) {
         </h1>
         <h4>{date.toLocaleString()}</h4>
       </Modal.Body>
+      <Modal.Footer>
+        <Button variant='primary' onClick={() => props.onHide()}>
+          Close
+        </Button>
+      </Modal.Footer>
     </Modal>
   );
 }

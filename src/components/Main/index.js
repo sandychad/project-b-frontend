@@ -2,7 +2,11 @@
 import React, { Component } from 'react';
 
 // React Router
-import { Switch, Route } from 'react-router-dom';
+import { Switch, Route, Redirect } from 'react-router-dom';
+
+// Redux
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 // Bootstrap
 import { Container } from 'react-bootstrap';
@@ -18,7 +22,13 @@ const containerStyle = {
 };
 
 export class Main extends Component {
+  static propTypes = {
+    isAuthenticated: PropTypes.bool.isRequired,
+  };
   render() {
+    if (!this.props.isAuthenticated) {
+      return <Redirect to='/login' />;
+    }
     return (
       <Container style={containerStyle}>
         <h1>Welcome to SymScreen</h1>
@@ -26,9 +36,14 @@ export class Main extends Component {
           <Route path='/main/people' component={People} />
           <Route path='/main/questions' component={Questions} />
         </Switch>
+        <Redirect to='/main/people' />
       </Container>
     );
   }
 }
 
-export default Main;
+const mapStateToProps = (state) => ({
+  isAuthenticated: state.auth.isAuthenticated,
+});
+
+export default connect(mapStateToProps)(Main);

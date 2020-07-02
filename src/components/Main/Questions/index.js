@@ -82,7 +82,7 @@ export class Questions extends Component {
           break;
         case 'N/A':
         default:
-          formValues[question.id] = 'N/A';
+          break;
       }
       return question;
     });
@@ -163,7 +163,11 @@ export class Questions extends Component {
                   >
                     Cancel
                   </Button>
-                  <Button type='submit' className='mr-2'>
+                  <Button
+                    type='submit'
+                    className='mr-2'
+                    disabled={formik.isValid ? false : true}
+                  >
                     Submit
                   </Button>
                 </Col>

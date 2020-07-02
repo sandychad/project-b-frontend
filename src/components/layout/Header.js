@@ -6,6 +6,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getOrgName } from '../../redux/actions/organization';
 import { getPeople, setCity } from '../../redux/actions/people';
+import { logout } from '../../redux/actions/auth';
 
 // React Bootstrap
 import {
@@ -39,10 +40,14 @@ class Header extends Component {
     org_name: PropTypes.string.isRequired,
     getPeople: PropTypes.func.isRequired,
     setCity: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
+    logout: PropTypes.func.isRequired,
   };
 
   componentDidMount() {
-    this.props.getOrgName();
+    if (this.props.org_name === '') {
+      this.props.getOrgName();
+    }
   }
 
   handleChange(event) {
@@ -58,6 +63,13 @@ class Header extends Component {
 
   render() {
     const { org_name } = this.props;
+    const { isAuthenticated } = this.props.auth;
+
+    const logoutButton = (
+      <React.Fragment>
+        <Button onClick={this.props.logout}>Logout</Button>
+      </React.Fragment>
+    );
     return (
       <Navbar bg='primary' variant='dark' expand='sm' fixed='top'>
         <Navbar.Brand>SymScreen</Navbar.Brand>
@@ -84,6 +96,7 @@ class Header extends Component {
             </Container>
           </SplitButton>
         </Navbar.Collapse>
+        {isAuthenticated ? logoutButton : null}
       </Navbar>
     );
   }
@@ -91,8 +104,12 @@ class Header extends Component {
 
 const mapStateToProps = (state) => ({
   org_name: state.organization.org_name,
+  auth: state.auth,
 });
 
-export default connect(mapStateToProps, { getOrgName, getPeople, setCity })(
-  Header
-);
+export default connect(mapStateToProps, {
+  getOrgName,
+  getPeople,
+  setCity,
+  logout,
+})(Header);

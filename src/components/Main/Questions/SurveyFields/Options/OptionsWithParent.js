@@ -16,7 +16,9 @@ export default function OptionsWithParent({ id, question, formik }) {
   return (
     <Card>
       <Card.Body className='text-center'>
-        <Card.Text>{question_text}</Card.Text>
+        <Card.Text>
+          <h5>{question_text}</h5>
+        </Card.Text>
         <Form.Group value={values[id]}>
           <Field component={RadioButton} name={id} id='Yes' />
           <Field component={RadioButton} name={id} id='No' />

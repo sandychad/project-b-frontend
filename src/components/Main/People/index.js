@@ -4,8 +4,8 @@ import React, { Component, Fragment } from 'react';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setPerson } from '../../redux/actions/survey';
-import { getPeople } from '../../redux/actions/people';
+import { setPerson } from '../../../redux/actions/survey';
+import { getPeople } from '../../../redux/actions/people';
 
 // React Router
 import { Redirect } from 'react-router-dom';
