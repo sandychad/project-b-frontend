@@ -1,14 +1,14 @@
 // React
-import React from 'react';
+import React from "react";
 
 // Formik
-import { Field } from 'formik';
+import { Field } from "formik";
 
 // React Bootstrap
-import { Card, InputGroup, Col } from 'react-bootstrap';
+import { Card, InputGroup, Col } from "react-bootstrap";
 
 // Local Components
-import Text from './Text';
+import Text from "./Text";
 
 export default function TextWithoutParent({ id, question, formik }) {
   const { question_text } = question;
@@ -16,7 +16,9 @@ export default function TextWithoutParent({ id, question, formik }) {
   return (
     <Card>
       <Card.Header>
-        <Card.Title>{question_text}</Card.Title>
+        <Card.Title>
+          <h4 style={{ color: "#007bff" }}>{question_text}</h4>
+        </Card.Title>
       </Card.Header>
       <Card.Body>
         <Col md={{ span: 4, offset: 4 }}>
