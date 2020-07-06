@@ -24,3 +24,24 @@ export const getOrgName = () => async (dispatch) => {
     console.error(err);
   }
 };
+
+// GET LIST OF CITIES
+export const getCities = () => async (dispatch) => {
+  try {
+    // Send Message: CITIES_LOADING
+    dispatch({
+      type: actions.CITIES_LOADING,
+    });
+
+    // Send GET request to /cities endpoint
+    const res = await api.get('/cities/');
+
+    // Send Message: CITIES_LOADED
+    dispatch({
+      type: actions.CITIES_LOADED,
+      payload: res.data,
+    });
+  } catch (err) {
+    console.error(err);
+  }
+};

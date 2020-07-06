@@ -4,7 +4,7 @@ import axios from "axios";
 // Create api object that will be used to call APIs in Redux Actions
 const api = axios.create({
   // Heroku
-  //baseURL: 'https://dry-castle-10158.herokuapp.com/',
+  // baseURL: 'https://dry-castle-10158.herokuapp.com/',
 
   // Development
   baseURL: "http://localhost:8000/",
