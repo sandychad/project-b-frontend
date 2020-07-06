@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getOrgName } from '../../redux/actions/organization';
+import { getOrgName, getCities } from '../../redux/actions/organization';
 import { getPeople, setCity } from '../../redux/actions/people';
 import { logout } from '../../redux/actions/auth';
 
@@ -12,9 +12,9 @@ import { logout } from '../../redux/actions/auth';
 import {
   Navbar,
   SplitButton,
-  Form,
-  FormControl,
   Button,
+  ToggleButtonGroup,
+  ToggleButton,
   Container,
 } from 'react-bootstrap';
 
@@ -33,36 +33,42 @@ class Header extends Component {
     };
 
     this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
   }
   static propTypes = {
     getOrgName: PropTypes.func.isRequired,
     org_name: PropTypes.string.isRequired,
-    getPeople: PropTypes.func.isRequired,
+    getCities: PropTypes.func.isRequired,
     setCity: PropTypes.func.isRequired,
+    getPeople: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
+    cities: PropTypes.array.isRequired,
   };
 
   componentDidMount() {
     if (this.props.org_name === '') {
       this.props.getOrgName();
     }
+
+    if (this.props.cities.length === 0) {
+      this.props.getCities();
+    }
   }
 
-  handleChange(event) {
-    this.setState({ searchCity: event.target.value });
-  }
-
-  handleSubmit(event) {
-    event.preventDefault();
+  componentDidUpdate(prevState) {
     const { searchCity } = this.state;
-    this.props.setCity(searchCity);
-    this.props.getPeople(searchCity);
+    if (searchCity !== prevState.searchCity) {
+      this.props.setCity(searchCity);
+      this.props.getPeople(searchCity);
+    }
+  }
+
+  handleChange(val) {
+    this.setState({ searchCity: val });
   }
 
   render() {
-    const { org_name } = this.props;
+    const { org_name, cities } = this.props;
     const { isAuthenticated } = this.props.auth;
 
     const logoutButton = (
@@ -70,6 +76,7 @@ class Header extends Component {
         <Button onClick={this.props.logout}>Logout</Button>
       </React.Fragment>
     );
+
     return (
       <Navbar bg='primary' variant='dark' expand='sm' fixed='top'>
         <Navbar.Brand>SymScreen</Navbar.Brand>
@@ -77,22 +84,24 @@ class Header extends Component {
         <Navbar.Collapse className='justify-content-end'>
           <SplitButton alignRight variant='primary' title={org_name}>
             <Container style={containerStyle}>
-              <Form onSubmit={this.handleSubmit}>
-                <Form.Row>
-                  <FormControl
-                    type='text'
-                    value={this.state.searchCity}
-                    onChange={this.handleChange}
-                    placeholder='City'
-                    className='mr-sm-2'
-                  />
-                </Form.Row>
-                <Form.Row>
-                  <Button type='submit' variant='outline-success'>
-                    Search
-                  </Button>
-                </Form.Row>
-              </Form>
+              <ToggleButtonGroup
+                type='radio'
+                name='cities'
+                onChange={this.handleChange}
+                vertical
+              >
+                {cities.map((city, index) => (
+                  <ToggleButton
+                    size='md'
+                    className='m-1'
+                    variant='primary'
+                    key={index}
+                    value={city}
+                  >
+                    {city}
+                  </ToggleButton>
+                ))}
+              </ToggleButtonGroup>
             </Container>
           </SplitButton>
         </Navbar.Collapse>
@@ -105,11 +114,13 @@ class Header extends Component {
 const mapStateToProps = (state) => ({
   org_name: state.organization.org_name,
   auth: state.auth,
+  cities: state.organization.cities,
 });
 
 export default connect(mapStateToProps, {
   getOrgName,
   getPeople,
+  getCities,
   setCity,
   logout,
 })(Header);
