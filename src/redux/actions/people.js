@@ -17,16 +17,16 @@ export const getPeople = (city = '') => async (dispatch) => {
     // Set querystring if city was provided
     if (city !== '') {
       querystring = `?city=${city}`;
+
+      // Send GET request to /people endpoint
+      const res = await api.get(`/person${querystring}`);
+
+      // Send Message: PEOPLE_LOADED
+      dispatch({
+        type: actions.PEOPLE_LOADED,
+        payload: res.data,
+      });
     }
-
-    // Send GET request to /people endpoint
-    const res = await api.get(`/person${querystring}`);
-
-    // Send Message: PEOPLE_LOADED
-    dispatch({
-      type: actions.PEOPLE_LOADED,
-      payload: res.data,
-    });
   } catch (err) {
     console.error(err);
   }

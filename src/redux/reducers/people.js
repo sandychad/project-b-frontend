@@ -4,7 +4,7 @@ import * as actions from '../actions/types';
 // Initialize State
 const initialState = {
   people: [],
-  searchCity: '',
+  city: '',
   isLoading: false,
 };
 
