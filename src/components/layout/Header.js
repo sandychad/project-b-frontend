@@ -1,12 +1,15 @@
 // React
-import React, { Component } from 'react';
+import React, { Component } from "react";
+
+// React Router
+import { Link } from "react-router-dom";
 
 // Redux
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
-import { getOrgName, getCities } from '../../redux/actions/organization';
-import { getPeople, setCity } from '../../redux/actions/people';
-import { logout } from '../../redux/actions/auth';
+import { connect } from "react-redux";
+import PropTypes from "prop-types";
+import { getOrgName, getCities } from "../../redux/actions/organization";
+import { getPeople, setCity } from "../../redux/actions/people";
+import { logout } from "../../redux/actions/auth";
 
 // React Bootstrap
 import {
@@ -16,12 +19,12 @@ import {
   ToggleButtonGroup,
   ToggleButton,
   Container,
-} from 'react-bootstrap';
+} from "react-bootstrap";
 
 // Local Styles
 const containerStyle = {
-  width: 'auto',
-  justifyContent: 'center',
+  width: "auto",
+  justifyContent: "center",
 };
 
 // Component
@@ -29,7 +32,7 @@ class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchCity: '',
+      searchCity: "",
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -47,7 +50,7 @@ class Header extends Component {
   };
 
   componentDidMount() {
-    if (this.props.org_name === '') {
+    if (this.props.org_name === "") {
       this.props.getOrgName();
     }
 
@@ -58,7 +61,7 @@ class Header extends Component {
 
   componentDidUpdate(prevState) {
     const { searchCity } = this.state;
-    if (searchCity !== prevState.searchCity && searchCity !== '') {
+    if (searchCity !== prevState.searchCity && searchCity !== "") {
       this.props.setCity(searchCity);
       this.props.getPeople(searchCity);
     }
@@ -79,22 +82,24 @@ class Header extends Component {
     );
 
     return (
-      <Navbar bg='primary' variant='dark' expand='sm' fixed='top'>
-        <Navbar.Brand>SymScreen</Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse className='justify-content-end'>
+      <Navbar bg="primary" variant="dark" expand="sm" fixed="top">
+        <Navbar.Brand as={Link} to="/main/people">
+          SymScreen
+        </Navbar.Brand>
+        <Navbar.Toggle aria-controls="basic-navbar-nav" />
+        <Navbar.Collapse className="justify-content-end">
           <SplitButton
             alignRight
-            variant='primary'
-            title={org_name + ' | ' + (city !== '' ? city : 'Location')}
+            variant="primary"
+            title={org_name + " | " + (city !== "" ? city : "Location")}
           >
             <Container style={containerStyle}>
-              <ToggleButtonGroup type='radio' name='cities' vertical>
+              <ToggleButtonGroup type="radio" name="cities" vertical>
                 {cities.map((city, index) => (
                   <ToggleButton
-                    size='md'
-                    className='m-1'
-                    variant='primary'
+                    size="md"
+                    className="m-1"
+                    variant="primary"
                     key={index}
                     value={city}
                     onChange={this.handleChange}
