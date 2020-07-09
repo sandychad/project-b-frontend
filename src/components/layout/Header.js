@@ -43,6 +43,7 @@ class Header extends Component {
     auth: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
     cities: PropTypes.array.isRequired,
+    city: PropTypes.string.isRequired,
   };
 
   componentDidMount() {
@@ -57,18 +58,18 @@ class Header extends Component {
 
   componentDidUpdate(prevState) {
     const { searchCity } = this.state;
-    if (searchCity !== prevState.searchCity) {
+    if (searchCity !== prevState.searchCity && searchCity !== '') {
       this.props.setCity(searchCity);
       this.props.getPeople(searchCity);
     }
   }
 
-  handleChange(val) {
-    this.setState({ searchCity: val });
+  handleChange(event) {
+    this.setState({ searchCity: event.target.value });
   }
 
   render() {
-    const { org_name, cities } = this.props;
+    const { org_name, cities, city } = this.props;
     const { isAuthenticated } = this.props.auth;
 
     const logoutButton = (
@@ -82,14 +83,13 @@ class Header extends Component {
         <Navbar.Brand>SymScreen</Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Navbar.Collapse className='justify-content-end'>
-          <SplitButton alignRight variant='primary' title={org_name}>
+          <SplitButton
+            alignRight
+            variant='primary'
+            title={org_name + ' | ' + (city !== '' ? city : 'Location')}
+          >
             <Container style={containerStyle}>
-              <ToggleButtonGroup
-                type='radio'
-                name='cities'
-                onChange={this.handleChange}
-                vertical
-              >
+              <ToggleButtonGroup type='radio' name='cities' vertical>
                 {cities.map((city, index) => (
                   <ToggleButton
                     size='md'
@@ -97,6 +97,7 @@ class Header extends Component {
                     variant='primary'
                     key={index}
                     value={city}
+                    onChange={this.handleChange}
                   >
                     {city}
                   </ToggleButton>
@@ -115,6 +116,7 @@ const mapStateToProps = (state) => ({
   org_name: state.organization.org_name,
   auth: state.auth,
   cities: state.organization.cities,
+  city: state.people.city,
 });
 
 export default connect(mapStateToProps, {
