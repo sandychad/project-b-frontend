@@ -11,13 +11,7 @@ import { getPeople } from '../../../redux/actions/people';
 import { Redirect } from 'react-router-dom';
 
 // Bootstrap
-import {
-  Container,
-  Button,
-  ToggleButton,
-  ToggleButtonGroup,
-  Row,
-} from 'react-bootstrap';
+import { Container, Button, Row } from 'react-bootstrap';
 
 const letters = [
   { text: 'A', disabled: true },
@@ -59,8 +53,8 @@ export class People extends Component {
     };
 
     this.componentDidUpdate = this.componentDidUpdate.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.handleClick = this.handleClick.bind(this);
+    this.handleLetterClick = this.handleLetterClick.bind(this);
+    this.handlePersonClick = this.handlePersonClick.bind(this);
   }
   static propTypes = {
     people: PropTypes.array.isRequired,
@@ -81,14 +75,15 @@ export class People extends Component {
   }
 
   componentDidUpdate(prevProps) {
-    if (prevProps.people !== this.props.people) {
+    const { people } = this.props;
+    if (prevProps.people !== people) {
       letters.map((letter) => {
         letter.disabled = true;
         return letter;
       });
       let last_names = [];
       let searchLetters = [];
-      this.props.people.map((person) => {
+      people.map((person) => {
         last_names.push(person.last_name);
         if (!searchLetters.includes(person.last_name[0])) {
           searchLetters.push(person.last_name[0]);
@@ -110,11 +105,11 @@ export class People extends Component {
     }
   }
 
-  handleChange(val) {
-    this.setState({ selectedLetter: val });
+  handleLetterClick(event) {
+    this.setState({ selectedLetter: event.target.value });
   }
 
-  handleClick(person) {
+  handlePersonClick(person) {
     this.props.setPerson(person);
     this.setState({ redirect: true });
   }
@@ -128,96 +123,76 @@ export class People extends Component {
       <Container fluid className='mt-4 text-center'>
         <h4>Please select your last initial: </h4>
         <Row className='justify-content-center'>
-          <ToggleButtonGroup
-            type='radio'
-            name='options'
-            onChange={this.handleChange}
-          >
-            {letters.map((letter, index) =>
-              index < 7 ? (
-                <ToggleButton
-                  size='md'
-                  className='m-1'
-                  variant={letter.disabled ? 'secondary' : 'primary'}
-                  key={index}
-                  value={letter.text}
-                  disabled={letter.disabled}
-                  style={{ width: '50px' }}
-                >
-                  {letter.text}
-                </ToggleButton>
-              ) : null
-            )}
-          </ToggleButtonGroup>
+          {letters.map((letter, index) =>
+            index < 7 ? (
+              <Button
+                size='md'
+                className='m-1'
+                variant={letter.disabled ? 'secondary' : 'primary'}
+                key={index}
+                value={letter.text}
+                disabled={letter.disabled}
+                style={{ width: '50px' }}
+                onClick={(e) => this.handleLetterClick(e)}
+              >
+                {letter.text}
+              </Button>
+            ) : null
+          )}
         </Row>
         <Row className='justify-content-center'>
-          <ToggleButtonGroup
-            type='radio'
-            name='options'
-            onChange={this.handleChange}
-          >
-            {letters.map((letter, index) =>
-              index < 14 && index >= 7 ? (
-                <ToggleButton
-                  size='md'
-                  className='m-1'
-                  variant={letter.disabled ? 'secondary' : 'primary'}
-                  key={index}
-                  value={letter.text}
-                  disabled={letter.disabled}
-                  style={{ width: '50px' }}
-                >
-                  {letter.text}
-                </ToggleButton>
-              ) : null
-            )}
-          </ToggleButtonGroup>
+          {letters.map((letter, index) =>
+            index < 14 && index >= 7 ? (
+              <Button
+                size='md'
+                className='m-1'
+                variant={letter.disabled ? 'secondary' : 'primary'}
+                key={index}
+                value={letter.text}
+                disabled={letter.disabled}
+                style={{ width: '50px' }}
+                onClick={(e) => this.handleLetterClick(e)}
+              >
+                {letter.text}
+              </Button>
+            ) : null
+          )}
         </Row>
         <Row className='justify-content-center'>
-          <ToggleButtonGroup
-            type='radio'
-            name='options'
-            onChange={this.handleChange}
-          >
-            {letters.map((letter, index) =>
-              index < 21 && index >= 14 ? (
-                <ToggleButton
-                  size='md'
-                  className='m-1'
-                  variant={letter.disabled ? 'secondary' : 'primary'}
-                  key={index}
-                  value={letter.text}
-                  disabled={letter.disabled}
-                  style={{ width: '50px' }}
-                >
-                  {letter.text}
-                </ToggleButton>
-              ) : null
-            )}
-          </ToggleButtonGroup>
+          {letters.map((letter, index) =>
+            index < 21 && index >= 14 ? (
+              <Button
+                size='md'
+                className='m-1'
+                variant={letter.disabled ? 'secondary' : 'primary'}
+                key={index}
+                value={letter.text}
+                disabled={letter.disabled}
+                style={{ width: '50px' }}
+                onClick={(e) => this.handleLetterClick(e)}
+              >
+                {letter.text}
+              </Button>
+            ) : null
+          )}
         </Row>
         <Row className='justify-content-center'>
-          <ToggleButtonGroup
-            type='radio'
-            name='options'
-            onChange={this.handleChange}
-          >
-            {letters.map((letter, index) =>
-              index >= 21 ? (
-                <ToggleButton
-                  size='md'
-                  className='m-1'
-                  variant={letter.disabled ? 'secondary' : 'primary'}
-                  key={index}
-                  value={letter.text}
-                  disabled={letter.disabled}
-                  style={{ width: '50px' }}
-                >
-                  {letter.text}
-                </ToggleButton>
-              ) : null
-            )}
-          </ToggleButtonGroup>
+          {letters.map((letter, index) =>
+            index >= 21 ? (
+              <Button
+                size='md'
+                className='m-1'
+                variant={letter.disabled ? 'secondary' : 'primary'}
+                key={index}
+                value={letter.text}
+                disabled={letter.disabled}
+                style={{ width: '50px' }}
+                onClick={(e) => this.handleLetterClick(e)}
+              >
+                {letter.text}
+              </Button>
+            ) : null
+          )}
         </Row>
         <Container className='mt-4 text-left'>
           {this.props.people.map((person) => {
@@ -225,7 +200,7 @@ export class People extends Component {
               return (
                 <Row className='mt-2 mb-2' key={person.employee_id}>
                   <Button
-                    onClick={() => this.handleClick(person)}
+                    onClick={() => this.handlePersonClick(person)}
                     size='lg'
                     variant='outline-primary'
                     block
