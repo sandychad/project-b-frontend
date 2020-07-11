@@ -16,8 +16,6 @@ import {
   Navbar,
   SplitButton,
   Button,
-  ToggleButtonGroup,
-  ToggleButton,
   Container,
   Dropdown,
 } from 'react-bootstrap';
@@ -36,7 +34,7 @@ class Header extends Component {
       searchCity: '',
     };
 
-    this.handleChange = this.handleChange.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
   static propTypes = {
     getOrgName: PropTypes.func.isRequired,
@@ -68,12 +66,8 @@ class Header extends Component {
     }
   }
 
-  handleChange(event) {
-    this.setState({ searchCity: event.target.value });
-  }
-
   handleClick(event) {
-    this.Container.cities.Collapse();
+    this.setState({ searchCity: event.target.value });
   }
 
   render() {
@@ -99,24 +93,20 @@ class Header extends Component {
             title={org_name + ' | ' + (city !== '' ? city : 'Location')}
           >
             <Container style={containerStyle} name='ct'>
-              <ToggleButtonGroup type='radio' name='cities' vertical>
-                {/* <Dropdown.Menu> */}
-                {cities.map((city, index) => (
-                  <ToggleButton
-                    //<Dropdown.Item
-                    size='md'
-                    className='m-1'
-                    variant='primary'
-                    key={index}
-                    value={city}
-                    onChange={this.handleChange}
-                  >
-                    {city}
-                    {/* </Dropdown.Item> */}
-                  </ToggleButton>
-                ))}
-              </ToggleButtonGroup>
-              {/* </Dropdown.Menu> */}
+              {cities.map((city, index) => (
+                <Dropdown.Item
+                  as={Button}
+                  size='md'
+                  className='m-1'
+                  variant='primary'
+                  key={index}
+                  value={city}
+                  active={this.state.searchCity === city ? true : false}
+                  onClick={(e) => this.handleClick(e)}
+                >
+                  {city}
+                </Dropdown.Item>
+              ))}
             </Container>
           </SplitButton>
         </Navbar.Collapse>
