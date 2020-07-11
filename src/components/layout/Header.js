@@ -20,6 +20,9 @@ import {
   Dropdown,
 } from 'react-bootstrap';
 
+// Logo
+import logo from './assets/SymScreenLogo.JPG';
+
 // Local Styles
 const containerStyle = {
   width: 'auto',
@@ -83,10 +86,10 @@ class Header extends Component {
     return (
       <Navbar bg='primary' variant='dark' expand='sm' fixed='top'>
         <Navbar.Brand as={Link} to='/main/people'>
-          SymScreen
+          <img src={logo} height='30' alt='SymScreen' />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
-        <Navbar.Collapse className='justify-content-end' id='navbarCollapse'>
+        <Navbar.Collapse className='justify-content-end'>
           <SplitButton
             alignRight
             variant='primary'
