@@ -34,6 +34,15 @@ export const setPerson = (person) => (dispatch) => {
   });
 };
 
+// Helper function - today's date
+const today = () => {
+  const now = new Date();
+  const todaysDay = now.getDate();
+  const todaysMonth = now.getMonth();
+  const todaysYear = now.getFullYear();
+  return `${todaysYear}-${todaysMonth + 1}-${todaysDay}`;
+};
+
 // SUBMIT FORM
 export const submitForm = (response) => async (dispatch) => {
   try {
@@ -41,6 +50,9 @@ export const submitForm = (response) => async (dispatch) => {
     dispatch({
       type: actions.SUBMIT_FORM,
     });
+
+    // Add date
+    response['date'] = today();
 
     // Send POST request to /submit/ endpoint
     const res = await api.post('/submit/', response);
