@@ -37,6 +37,7 @@ export default function (state = initialState, action) {
       return {
         ...state,
         decision: action.payload,
+        isLoading: false,
       };
     default:
       return state;
