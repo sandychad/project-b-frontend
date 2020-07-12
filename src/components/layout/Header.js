@@ -36,6 +36,7 @@ class Header extends Component {
     super(props);
     this.state = {
       searchCity: '',
+      pathName: '',
     };
 
     this.handleClick = this.handleClick.bind(this);
@@ -60,6 +61,7 @@ class Header extends Component {
     if (this.props.cities.length === 0) {
       this.props.getCities();
     }
+    this.setState({ pathName: window.location.pathname });
   }
 
   componentDidUpdate(prevState) {
@@ -67,6 +69,10 @@ class Header extends Component {
     if (searchCity !== prevState.searchCity && searchCity !== '') {
       this.props.setCity(searchCity);
       this.props.getPeople(searchCity);
+    }
+
+    if (this.state.pathName !== window.location.pathname) {
+      this.setState({ pathName: window.location.pathname });
     }
   }
 
@@ -100,6 +106,7 @@ class Header extends Component {
             alignRight
             variant='primary'
             title={org_name + ' | ' + (city !== '' ? city : 'Location')}
+            disabled={this.state.pathName === '/main/people' ? false : true}
           >
             <Container style={containerStyle} name='ct'>
               {cities.map((city, index) => (
