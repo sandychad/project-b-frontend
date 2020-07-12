@@ -21,6 +21,7 @@ import { Container } from 'react-bootstrap';
 import Header from './components/layout/Header';
 import Main from './components/Main';
 import Login from './components/Login';
+import About from './components/About';
 
 // Local Styles
 import './css/App.css';
@@ -37,6 +38,7 @@ export class App extends Component {
             <Header />
             <Switch>
               <Route path='/login' component={Login} />
+              <Route path='/about' component={About} />
               <Route path='/main' component={Main} />
             </Switch>
             <Redirect to='/login' />

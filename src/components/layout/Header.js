@@ -2,7 +2,7 @@
 import React, { Component } from 'react';
 
 // React Router
-import { Link } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 // Redux
 import { connect } from 'react-redux';
@@ -14,6 +14,7 @@ import { logout } from '../../redux/actions/auth';
 // React Bootstrap
 import {
   Navbar,
+  Nav,
   SplitButton,
   Button,
   Container,
@@ -89,6 +90,11 @@ class Header extends Component {
           <img src={logo} height='30' alt='SymScreen' />
         </Navbar.Brand>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
+        <Nav className='mr-auto'>
+          <Nav.Link as={NavLink} to='/about'>
+            About
+          </Nav.Link>
+        </Nav>
         <Navbar.Collapse className='justify-content-end'>
           <SplitButton
             alignRight
