@@ -44,8 +44,8 @@ export const setCity = (city) => (dispatch) => {
 };
 
 // CLEAR CITY
-export const clearCity = () => (dispatch) => {
+export const clearCityAndPeople = () => (dispatch) => {
   dispatch({
-    type: actions.CLEAR_CITY,
+    type: actions.CLEAR_CITY_AND_PEOPLE,
   });
 };

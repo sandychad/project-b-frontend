@@ -27,10 +27,11 @@ export default function (state = initialState, action) {
         ...state,
         city: action.payload,
       };
-    case actions.CLEAR_CITY:
+    case actions.CLEAR_CITY_AND_PEOPLE:
       return {
         ...state,
         city: '',
+        people: [],
       };
     default:
       return state;

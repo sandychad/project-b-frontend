@@ -8,7 +8,11 @@ import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getOrgName, getCities } from '../../redux/actions/organization';
-import { getPeople, setCity, clearCity } from '../../redux/actions/people';
+import {
+  getPeople,
+  setCity,
+  clearCityAndPeople,
+} from '../../redux/actions/people';
 import { logout } from '../../redux/actions/auth';
 
 // React Bootstrap
@@ -46,7 +50,7 @@ class Header extends Component {
     org_name: PropTypes.string.isRequired,
     getCities: PropTypes.func.isRequired,
     setCity: PropTypes.func.isRequired,
-    clearCity: PropTypes.func.isRequired,
+    clearCityAndPeople: PropTypes.func.isRequired,
     getPeople: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
@@ -78,7 +82,7 @@ class Header extends Component {
 
   handleLogout(event) {
     this.setState({ searchCity: '' });
-    this.props.clearCity();
+    this.props.clearCityAndPeople();
     this.props.logout();
   }
 
@@ -148,6 +152,6 @@ export default connect(mapStateToProps, {
   getPeople,
   getCities,
   setCity,
-  clearCity,
+  clearCityAndPeople,
   logout,
 })(Header);
