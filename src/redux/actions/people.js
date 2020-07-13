@@ -1,8 +1,9 @@
 // Action Types
 import * as actions from './types';
 
-// Import pre-configured API
+// Helper Functions
 import api from '../../utils/api';
+import { today } from '../../utils/today';
 
 // GET PEOPLE
 export const getPeople = (city = '') => async (dispatch) => {
@@ -12,11 +13,13 @@ export const getPeople = (city = '') => async (dispatch) => {
       type: actions.PEOPLE_LOADING,
     });
 
-    let querystring = '';
+    const todaysDate = today();
+
+    let querystring = `?date=${todaysDate}`;
 
     // Set querystring if city was provided
     if (city !== '') {
-      querystring = `?city=${city}`;
+      querystring += `&city=${city}`;
 
       // Send GET request to /people endpoint
       const res = await api.get(`/person${querystring}`);
@@ -37,5 +40,12 @@ export const setCity = (city) => (dispatch) => {
   dispatch({
     type: actions.SET_CITY,
     payload: city,
+  });
+};
+
+// CLEAR CITY
+export const clearCity = () => (dispatch) => {
+  dispatch({
+    type: actions.CLEAR_CITY,
   });
 };

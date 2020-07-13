@@ -8,7 +8,7 @@ import { Link, NavLink } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { getOrgName, getCities } from '../../redux/actions/organization';
-import { getPeople, setCity } from '../../redux/actions/people';
+import { getPeople, setCity, clearCity } from '../../redux/actions/people';
 import { logout } from '../../redux/actions/auth';
 
 // React Bootstrap
@@ -46,6 +46,7 @@ class Header extends Component {
     org_name: PropTypes.string.isRequired,
     getCities: PropTypes.func.isRequired,
     setCity: PropTypes.func.isRequired,
+    clearCity: PropTypes.func.isRequired,
     getPeople: PropTypes.func.isRequired,
     auth: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
@@ -54,7 +55,9 @@ class Header extends Component {
   };
 
   componentDidMount() {
-    this.props.getOrgName();
+    if (this.props.org_name === '') {
+      this.props.getOrgName();
+    }
 
     if (this.props.cities.length === 0) {
       this.props.getCities();
@@ -73,13 +76,19 @@ class Header extends Component {
     this.setState({ searchCity: event.target.value });
   }
 
+  handleLogout(event) {
+    this.setState({ searchCity: '' });
+    this.props.clearCity();
+    this.props.logout();
+  }
+
   render() {
     const { org_name, cities, city } = this.props;
     const { isAuthenticated } = this.props.auth;
 
     const logoutButton = (
       <React.Fragment>
-        <Button onClick={this.props.logout}>Logout</Button>
+        <Button onClick={(e) => this.handleLogout(e)}>Logout</Button>
       </React.Fragment>
     );
 
@@ -139,5 +148,6 @@ export default connect(mapStateToProps, {
   getPeople,
   getCities,
   setCity,
+  clearCity,
   logout,
 })(Header);

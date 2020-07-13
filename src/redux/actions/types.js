@@ -9,6 +9,7 @@ export const PEOPLE_LOADING = 'PEOPLE_LOADING';
 export const PEOPLE_LOADED = 'PEOPLE_LOADED';
 export const SET_PERSON = 'SET_PERSON';
 export const SET_CITY = 'SET_CITY';
+export const CLEAR_CITY = 'CLEAR_CITY';
 
 // SURVEY
 export const QUESTIONS_LOADING = 'QUESTIONS_LOADING';

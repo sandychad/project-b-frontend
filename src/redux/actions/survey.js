@@ -1,7 +1,8 @@
 // Action Types
 import * as actions from './types';
 
-// Import pre-configured API
+// Helper functions
+import { today } from '../../utils/today';
 import api from '../../utils/api';
 
 // GET QUESTIONS
@@ -32,15 +33,6 @@ export const setPerson = (person) => (dispatch) => {
     type: actions.SET_PERSON,
     payload: person,
   });
-};
-
-// Helper function - today's date
-const today = () => {
-  const now = new Date();
-  const todaysDay = now.getDate();
-  const todaysMonth = now.getMonth();
-  const todaysYear = now.getFullYear();
-  return `${todaysYear}-${todaysMonth + 1}-${todaysDay}`;
 };
 
 // SUBMIT FORM

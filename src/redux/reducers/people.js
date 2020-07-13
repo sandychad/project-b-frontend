@@ -27,6 +27,11 @@ export default function (state = initialState, action) {
         ...state,
         city: action.payload,
       };
+    case actions.CLEAR_CITY:
+      return {
+        ...state,
+        city: '',
+      };
     default:
       return state;
   }
