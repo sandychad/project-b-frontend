@@ -117,6 +117,13 @@ export class People extends Component {
     this.setState({ redirect: true });
   }
 
+  componentWillUnmount() {
+    letters.map((letter) => {
+      letter.disabled = true;
+      return letter;
+    });
+  }
+
   render() {
     if (this.state.redirect) {
       return <Redirect to='/main/questions' />;
