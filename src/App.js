@@ -35,7 +35,7 @@ export class App extends Component {
       <Provider store={store}>
         <Router>
           <Container>
-            <Header />
+            <Route path='/' component={Header} />
             <Switch>
               <Route path='/login' component={Login} />
               <Route path='/about' component={About} />
