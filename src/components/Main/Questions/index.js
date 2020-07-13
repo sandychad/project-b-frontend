@@ -22,6 +22,7 @@ import OptionsWithoutParent from './SurveyFields/Options/OptionsWithoutParent';
 import Parent from './SurveyFields/Parent';
 import TextWithoutParent from './SurveyFields/Text/TextWithoutParent';
 import Decision from './Decision';
+import { Loading } from '../../common/Loading';
 
 export class Questions extends Component {
   constructor(props) {
@@ -93,88 +94,96 @@ export class Questions extends Component {
           {' - '}
           {person.first_name} {person.last_name}
         </h4>
-        <Container>
-          <Formik
-            initialValues={formValues}
-            validationSchema={Yup.object().shape(schema)}
-            onSubmit={(values, { setSubmitting, resetForm }) => {
-              setSubmitting(true);
+        {questions ? (
+          <Container>
+            <Formik
+              initialValues={formValues}
+              validationSchema={Yup.object().shape(schema)}
+              onSubmit={(values, { setSubmitting, resetForm }) => {
+                setSubmitting(true);
 
-              const response = {
-                person_id: this.props.person.id,
-                responses: values,
-              };
+                const response = {
+                  person_id: this.props.person.id,
+                  responses: values,
+                };
 
-              this.props.submitForm(response);
-              this.setSubmit();
-              resetForm();
-              setSubmitting(false);
-            }}
-          >
-            {(formik) => (
-              <Form noValidate className='mt-4' onSubmit={formik.handleSubmit}>
-                {questions.map((question) => {
-                  const { id, question_type, parent_question_id } = question;
-                  if (parent_question_id === '0') {
-                    if (question_type === 'N/A') {
-                      return <Parent key={id} question={question} />;
-                    } else if (question_type === 'options') {
-                      return (
-                        <OptionsWithoutParent
-                          key={id}
-                          id={id}
-                          question={question}
-                          formik={formik}
-                        />
-                      );
-                    } else if (question_type === 'temp') {
-                      return (
-                        <TextWithoutParent
-                          key={id}
-                          id={id}
-                          question={question}
-                          formik={formik}
-                        />
-                      );
+                this.props.submitForm(response);
+                this.setSubmit();
+                resetForm();
+                setSubmitting(false);
+              }}
+            >
+              {(formik) => (
+                <Form
+                  noValidate
+                  className='mt-4'
+                  onSubmit={formik.handleSubmit}
+                >
+                  {questions.map((question) => {
+                    const { id, question_type, parent_question_id } = question;
+                    if (parent_question_id === '0') {
+                      if (question_type === 'N/A') {
+                        return <Parent key={id} question={question} />;
+                      } else if (question_type === 'options') {
+                        return (
+                          <OptionsWithoutParent
+                            key={id}
+                            id={id}
+                            question={question}
+                            formik={formik}
+                          />
+                        );
+                      } else if (question_type === 'temp') {
+                        return (
+                          <TextWithoutParent
+                            key={id}
+                            id={id}
+                            question={question}
+                            formik={formik}
+                          />
+                        );
+                      } else {
+                        return <Container />;
+                      }
                     } else {
-                      return <Container />;
+                      if (question_type === 'options') {
+                        return (
+                          <OptionsWithParent
+                            key={id}
+                            id={id}
+                            question={question}
+                            formik={formik}
+                          />
+                        );
+                      } else {
+                        return <Container />;
+                      }
                     }
-                  } else {
-                    if (question_type === 'options') {
-                      return (
-                        <OptionsWithParent
-                          key={id}
-                          id={id}
-                          question={question}
-                          formik={formik}
-                        />
-                      );
-                    } else {
-                      return <Container />;
-                    }
-                  }
-                })}
-                <Col className='text-right m-4'>
-                  <Button
-                    as={Link}
-                    to='/main/people'
-                    variant='secondary'
-                    className='mr-2'
-                  >
-                    Cancel
-                  </Button>
-                  <Button
-                    type='submit'
-                    className='mr-2'
-                    disabled={formik.isValid ? false : true}
-                  >
-                    Submit
-                  </Button>
-                </Col>
-              </Form>
-            )}
-          </Formik>
-        </Container>
+                  })}
+                  <Col className='text-right m-4'>
+                    <Button
+                      as={Link}
+                      to='/main/people'
+                      variant='secondary'
+                      className='mr-2'
+                    >
+                      Cancel
+                    </Button>
+                    <Button
+                      type='submit'
+                      className='mr-2'
+                      disabled={formik.isValid ? false : true}
+                    >
+                      Submit
+                    </Button>
+                  </Col>
+                </Form>
+              )}
+            </Formik>
+          </Container>
+        ) : (
+          <Loading />
+        )}
         {this.state.submit ? (
           <Decision show={this.state.showDecision} onHide={this.hideDecision} />
         ) : null}

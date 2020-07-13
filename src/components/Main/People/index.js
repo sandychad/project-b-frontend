@@ -13,6 +13,9 @@ import { Redirect } from 'react-router-dom';
 // Bootstrap
 import { Container, Button, Row } from 'react-bootstrap';
 
+// Local Components
+import { Loading } from '../../common/Loading';
+
 const letters = [
   { text: 'A', disabled: true },
   { text: 'B', disabled: true },
@@ -121,101 +124,108 @@ export class People extends Component {
 
     return (
       <Container fluid className='mt-4 text-center'>
-        <h4>Please select your last initial: </h4>
-        <Row className='justify-content-center'>
-          {letters.map((letter, index) =>
-            index < 7 ? (
-              <Button
-                size='md'
-                className='m-1'
-                variant={letter.disabled ? 'secondary' : 'primary'}
-                key={index}
-                value={letter.text}
-                disabled={letter.disabled}
-                style={{ width: '50px' }}
-                onClick={(e) => this.handleLetterClick(e)}
-              >
-                {letter.text}
-              </Button>
-            ) : null
-          )}
-        </Row>
-        <Row className='justify-content-center'>
-          {letters.map((letter, index) =>
-            index < 14 && index >= 7 ? (
-              <Button
-                size='md'
-                className='m-1'
-                variant={letter.disabled ? 'secondary' : 'primary'}
-                key={index}
-                value={letter.text}
-                disabled={letter.disabled}
-                style={{ width: '50px' }}
-                onClick={(e) => this.handleLetterClick(e)}
-              >
-                {letter.text}
-              </Button>
-            ) : null
-          )}
-        </Row>
-        <Row className='justify-content-center'>
-          {letters.map((letter, index) =>
-            index < 21 && index >= 14 ? (
-              <Button
-                size='md'
-                className='m-1'
-                variant={letter.disabled ? 'secondary' : 'primary'}
-                key={index}
-                value={letter.text}
-                disabled={letter.disabled}
-                style={{ width: '50px' }}
-                onClick={(e) => this.handleLetterClick(e)}
-              >
-                {letter.text}
-              </Button>
-            ) : null
-          )}
-        </Row>
-        <Row className='justify-content-center'>
-          {letters.map((letter, index) =>
-            index >= 21 ? (
-              <Button
-                size='md'
-                className='m-1'
-                variant={letter.disabled ? 'secondary' : 'primary'}
-                key={index}
-                value={letter.text}
-                disabled={letter.disabled}
-                style={{ width: '50px' }}
-                onClick={(e) => this.handleLetterClick(e)}
-              >
-                {letter.text}
-              </Button>
-            ) : null
-          )}
-        </Row>
-        <Container className='mt-4 text-left'>
-          {this.props.people.map((person) => {
-            if (person.last_name[0] === this.state.selectedLetter) {
-              return (
-                <Row className='mt-2 mb-2' key={person.employee_id}>
+        {this.props.people ? (
+          <Fragment>
+            <h4>Please select your last initial: </h4>
+            <Row className='justify-content-center'>
+              {letters.map((letter, index) =>
+                index < 7 ? (
                   <Button
-                    onClick={() => this.handlePersonClick(person)}
-                    size='lg'
-                    variant='outline-primary'
-                    block
-                    value={person}
+                    size='md'
+                    className='m-1'
+                    variant={letter.disabled ? 'secondary' : 'primary'}
+                    key={index}
+                    value={letter.text}
+                    disabled={letter.disabled}
+                    style={{ width: '50px' }}
+                    onClick={(e) => this.handleLetterClick(e)}
                   >
-                    {person.employee_id}
-                    {' - '}
-                    {person.first_name} {person.last_name}
+                    {letter.text}
                   </Button>
-                </Row>
-              );
-            }
-            return <Fragment key={person.employee_id} />;
-          })}
-        </Container>
+                ) : null
+              )}
+            </Row>
+            <Row className='justify-content-center'>
+              {letters.map((letter, index) =>
+                index < 14 && index >= 7 ? (
+                  <Button
+                    size='md'
+                    className='m-1'
+                    variant={letter.disabled ? 'secondary' : 'primary'}
+                    key={index}
+                    value={letter.text}
+                    disabled={letter.disabled}
+                    style={{ width: '50px' }}
+                    onClick={(e) => this.handleLetterClick(e)}
+                  >
+                    {letter.text}
+                  </Button>
+                ) : null
+              )}
+            </Row>
+            <Row className='justify-content-center'>
+              {letters.map((letter, index) =>
+                index < 21 && index >= 14 ? (
+                  <Button
+                    size='md'
+                    className='m-1'
+                    variant={letter.disabled ? 'secondary' : 'primary'}
+                    key={index}
+                    value={letter.text}
+                    disabled={letter.disabled}
+                    style={{ width: '50px' }}
+                    onClick={(e) => this.handleLetterClick(e)}
+                  >
+                    {letter.text}
+                  </Button>
+                ) : null
+              )}
+            </Row>
+            <Row className='justify-content-center'>
+              {letters.map((letter, index) =>
+                index >= 21 ? (
+                  <Button
+                    size='md'
+                    className='m-1'
+                    variant={letter.disabled ? 'secondary' : 'primary'}
+                    key={index}
+                    value={letter.text}
+                    disabled={letter.disabled}
+                    style={{ width: '50px' }}
+                    onClick={(e) => this.handleLetterClick(e)}
+                  >
+                    {letter.text}
+                  </Button>
+                ) : null
+              )}
+            </Row>
+
+            <Container className='mt-4 text-left'>
+              {this.props.people.map((person) => {
+                if (person.last_name[0] === this.state.selectedLetter) {
+                  return (
+                    <Row className='mt-2 mb-2' key={person.employee_id}>
+                      <Button
+                        onClick={() => this.handlePersonClick(person)}
+                        size='lg'
+                        variant='outline-primary'
+                        block
+                        value={person}
+                      >
+                        {person.employee_id}
+                        {' - '}
+                        {person.first_name} {person.last_name}
+                      </Button>
+                    </Row>
+                  );
+                }
+                return <Fragment key={person.employee_id} />;
+              })}
+            </Container>
+          </Fragment>
+        ) : (
+          <Loading />
+        )}
       </Container>
     );
   }
