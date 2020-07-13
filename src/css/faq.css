@@ -1,0 +1,84 @@
+/* reset */
+ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+ul.a {
+  list-style-type: square;
+  margin: 20px auto;
+  padding: 20px;
+}
+#box {
+  border: 1px solid;
+  padding: 10px;
+  box-shadow: 5px 10px #888888;
+}
+input[type='checkbox'] {
+  display: none;
+}
+
+/* style */
+.ss-color {
+  color: #007bff;
+}
+.ss-container {
+  width: 800px;
+  margin: 20px auto;
+  font-family: 'Segoe UI';
+}
+
+.ss-container label {
+  display: block;
+  position: relative;
+  cursor: pointer;
+  font-size: 18px;
+  font-weight: bold;
+  padding: 10px 20px;
+  color: #aaa;
+  background-color: #eee;
+  border-bottom: 1px solid #ddd;
+
+  -webkit-transition: all 0.2s ease;
+  -moz-transition: all 0.2s ease;
+  -ms-transition: all 0.2s ease;
+  -o-transition: all 0.2s ease;
+  transition: all 0.2s ease;
+}
+
+.ss-container label:after {
+  content: '';
+  width: 0;
+  height: 0;
+  border-top: 8px solid #aaa;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid transparent;
+  border-left: 6px solid transparent;
+  position: absolute;
+  right: 10px;
+  top: 16px;
+}
+
+.ss-container input:checked + label,
+.ss-container label:hover {
+  background-color: #ddd;
+  color: #222;
+}
+
+.ss-container input:checked + label:after {
+  border-top: 8px solid transparent;
+  border-right: 6px solid transparent;
+  border-bottom: 8px solid #222;
+  border-left: 6px solid transparent;
+  top: 6px;
+}
+
+.ss-content {
+  padding: 0 20px 20px;
+  display: none;
+}
+
+.ss-container input:checked ~ .ss-content {
+  display: block;
+}
