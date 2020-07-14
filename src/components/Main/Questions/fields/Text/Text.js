@@ -1,8 +1,8 @@
 // React
-import React from "react";
+import React from 'react';
 
 // React Bootstrap
-import { Form } from "react-bootstrap";
+import { Form } from 'react-bootstrap';
 
 export default function RadioButton({
   field: { name, onChange, onBlur },
@@ -12,9 +12,9 @@ export default function RadioButton({
 }) {
   return (
     <Form.Control
-      type="text"
+      type='number'
       id={id}
-      placeholder="<Enter temperature>"
+      placeholder='<Enter temperature>'
       name={name}
       value={values[id]}
       onChange={onChange}
