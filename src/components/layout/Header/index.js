@@ -23,7 +23,7 @@ import CityDropdown from './CityDropdown';
 import LogoutButton from './LogoutButton';
 
 // Logo
-import logo from '../assets/SymScreenLogo.JPG';
+import logo from './assets/SymScreenLogo.JPG';
 
 // Component
 class Header extends Component {
