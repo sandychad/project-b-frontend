@@ -7,22 +7,19 @@ import PropTypes from 'prop-types';
 import { getQuestions, submitForm } from '../../../redux/actions/survey';
 
 // React Router
-import { Redirect, Link } from 'react-router-dom';
+import { Redirect } from 'react-router-dom';
 
 // Form Validation
 import { Formik } from 'formik';
-import * as Yup from 'yup';
 
 // Bootstrap
-import { Container, Form, Button, Col } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 // Local Components
-import OptionsWithParent from './SurveyFields/Options/OptionsWithParent';
-import OptionsWithoutParent from './SurveyFields/Options/OptionsWithoutParent';
-import Parent from './SurveyFields/Parent';
-import TextWithoutParent from './SurveyFields/Text/TextWithoutParent';
 import Decision from './Decision';
 import { Loading } from '../../common/Loading';
+import Survey from './Survey';
+import { getFormSchema } from './helpers';
 
 export class Questions extends Component {
   constructor(props) {
@@ -43,6 +40,7 @@ export class Questions extends Component {
   };
 
   componentDidMount() {
+    // Get questions once
     if (this.props.questions.length > 0) {
       return;
     }
@@ -50,142 +48,69 @@ export class Questions extends Component {
   }
 
   hideDecision() {
+    // Closing of decision
     this.setState({ showDecision: false });
   }
 
   setSubmit() {
+    // Set submit flag
     this.setState({ submit: true });
   }
 
   render() {
-    const { person, questions } = this.props;
+    const { submit, showDecision } = this.state;
+    const { person, questions, submitForm } = this.props;
+    const { id, employee_id, first_name, last_name } = person;
 
+    const mainPath = '/main/people';
+
+    // Redirect if no person (erroneously typed /main/questions without using People search)
     if (!person.employee_id) {
-      return <Redirect to='/main/people' />;
+      return <Redirect to={mainPath} />;
     }
 
+    // Redirect if successful submit + decision closed
     if (this.state.submit && !this.state.showDecision) {
-      return <Redirect to='/main/people' />;
+      return <Redirect to={mainPath} />;
     }
 
-    let formValues = {};
-    let schema = {};
-    questions.map(function (question) {
-      switch (question.question_type) {
-        case 'temp':
-          formValues[question.id] = '';
-          schema[question.id] = Yup.number().required('Required');
-          break;
-        case 'options':
-        case 'text':
-          formValues[question.id] = '';
-          schema[question.id] = Yup.string().required('Required');
-          break;
-        case 'N/A':
-        default:
-          break;
-      }
-      return question;
-    });
+    // Generate formValues and schema based on questions (see ./helpers.js)
+    const { formValues, schema } = getFormSchema(questions);
+
     return (
       <Container className='mt-4'>
         <h4>
-          {person.employee_id}
+          {employee_id}
           {' - '}
-          {person.first_name} {person.last_name}
+          {first_name} {last_name}
         </h4>
         {questions ? (
           <Container>
             <Formik
               initialValues={formValues}
-              validationSchema={Yup.object().shape(schema)}
+              validationSchema={schema}
               onSubmit={(values, { setSubmitting, resetForm }) => {
                 setSubmitting(true);
 
                 const response = {
-                  person_id: this.props.person.id,
+                  person_id: id,
                   responses: values,
                 };
 
-                this.props.submitForm(response);
+                submitForm(response);
                 this.setSubmit();
                 resetForm();
                 setSubmitting(false);
               }}
             >
-              {(formik) => (
-                <Form
-                  noValidate
-                  className='mt-4'
-                  onSubmit={formik.handleSubmit}
-                >
-                  {questions.map((question) => {
-                    const { id, question_type, parent_question_id } = question;
-                    if (parent_question_id === '0') {
-                      if (question_type === 'N/A') {
-                        return <Parent key={id} question={question} />;
-                      } else if (question_type === 'options') {
-                        return (
-                          <OptionsWithoutParent
-                            key={id}
-                            id={id}
-                            question={question}
-                            formik={formik}
-                          />
-                        );
-                      } else if (question_type === 'temp') {
-                        return (
-                          <TextWithoutParent
-                            key={id}
-                            id={id}
-                            question={question}
-                            formik={formik}
-                          />
-                        );
-                      } else {
-                        return <Container />;
-                      }
-                    } else {
-                      if (question_type === 'options') {
-                        return (
-                          <OptionsWithParent
-                            key={id}
-                            id={id}
-                            question={question}
-                            formik={formik}
-                          />
-                        );
-                      } else {
-                        return <Container />;
-                      }
-                    }
-                  })}
-                  <Col className='text-right m-4'>
-                    <Button
-                      as={Link}
-                      to='/main/people'
-                      variant='secondary'
-                      className='mr-2'
-                    >
-                      Cancel
-                    </Button>
-                    <Button
-                      type='submit'
-                      className='mr-2'
-                      disabled={formik.isValid ? false : true}
-                    >
-                      Submit
-                    </Button>
-                  </Col>
-                </Form>
-              )}
+              {(formik) => <Survey questions={questions} formik={formik} />}
             </Formik>
           </Container>
         ) : (
           <Loading />
         )}
-        {this.state.submit ? (
-          <Decision show={this.state.showDecision} onHide={this.hideDecision} />
+        {submit ? (
+          <Decision show={showDecision} onHide={this.hideDecision} />
         ) : null}
       </Container>
     );
