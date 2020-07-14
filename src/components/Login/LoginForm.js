@@ -5,23 +5,32 @@ import React from 'react';
 import { Container, Form, Col, Button } from 'react-bootstrap';
 
 export default function LoginForm({ formik }) {
+  const {
+    handleBlur,
+    handleChange,
+    handleSubmit,
+    values,
+    errors,
+    touched,
+  } = formik;
+
   return (
     <Container fluid>
       <h2 className='text-center mt-4'>Login</h2>
-      <Form noValidate onSubmit={formik.handleSubmit}>
+      <Form noValidate onSubmit={handleSubmit}>
         <Form.Group as={Col} md={{ span: 4, offset: 4 }}>
           <Form.Label>Email</Form.Label>
           <Form.Control
             type='email'
             placeholder='joe@example.com'
             name='email'
-            value={formik.values.email}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            isInvalid={formik.touched.email && !!formik.errors.email}
+            value={values.email}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            isInvalid={touched.email && !!errors.email}
           />
           <Form.Control.Feedback type='invalid' tooltip='true'>
-            {formik.errors.email}
+            {errors.email}
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md={{ span: 4, offset: 4 }}>
@@ -30,13 +39,13 @@ export default function LoginForm({ formik }) {
             type='password'
             name='password'
             placeholder='Strong Password'
-            value={formik.values.password}
-            onChange={formik.handleChange}
-            onBlur={formik.handleBlur}
-            isInvalid={formik.touched.password && !!formik.errors.password}
+            value={values.password}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            isInvalid={touched.password && !!errors.password}
           />
           <Form.Control.Feedback type='invalid' tooltip='true'>
-            {formik.errors.password}
+            {errors.password}
           </Form.Control.Feedback>
         </Form.Group>
         <Form.Group as={Col} md={{ span: 2, offset: 7 }}>

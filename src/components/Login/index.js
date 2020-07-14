@@ -19,6 +19,10 @@ import { Container } from 'react-bootstrap';
 // Local Components
 import LoginForm from './LoginForm';
 
+const containerStyle = {
+  marginTop: '7rem',
+};
+
 class Login extends Component {
   // Define Prop Types
   static propTypes = {
@@ -26,20 +30,21 @@ class Login extends Component {
     isAuthenticated: PropTypes.bool.isRequired,
   };
   render() {
-    if (this.props.isAuthenticated) {
-      return <Redirect to='/main' />;
+    const { login, isAuthenticated } = this.props;
+
+    const mainPath = '/main';
+
+    if (isAuthenticated) {
+      return <Redirect to={mainPath} />;
     }
     return (
-      <Container
-        style={{
-          marginTop: '7rem',
-        }}
-      >
+      <Container style={containerStyle}>
         <Formik
           validationSchema={schema}
           onSubmit={(values, { setSubmitting, resetForm }) => {
+            const { email, password } = values;
             setSubmitting(true);
-            this.props.login(values.email, values.password);
+            login(email, password);
             resetForm();
             setSubmitting(false);
           }}

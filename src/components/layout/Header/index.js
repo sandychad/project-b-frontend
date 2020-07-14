@@ -51,9 +51,11 @@ class Header extends Component {
   }
 
   handleClick(event) {
+    const { setCity, getPeople } = this.props;
     const searchCity = event.target.value;
-    this.props.setCity(searchCity);
-    this.props.getPeople(searchCity);
+
+    setCity(searchCity);
+    getPeople(searchCity);
   }
 
   handleLogout() {
@@ -64,6 +66,7 @@ class Header extends Component {
   render() {
     const { org_name, cities, city } = this.props;
     const { isAuthenticated } = this.props.auth;
+    const { pathname } = this.props.location;
 
     const peopleSearchPath = '/main/people';
     const aboutPath = '/about';
@@ -83,9 +86,7 @@ class Header extends Component {
             alignRight
             variant='primary'
             title={org_name + ' | ' + (city !== '' ? city : 'Location')}
-            disabled={
-              this.props.location.pathname === peopleSearchPath ? false : true
-            }
+            disabled={pathname === peopleSearchPath ? false : true}
           >
             <CityDropdown
               cities={cities}

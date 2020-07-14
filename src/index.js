@@ -6,7 +6,7 @@ import ReactDOM from 'react-dom';
 import 'bootstrap/dist/css/bootstrap.min.css';
 
 // Local Components
-import App from './App';
+import App from './components/App';
 import * as serviceWorker from './utils/serviceWorker';
 
 // Local Styles

@@ -3,8 +3,8 @@ import React, { Component } from 'react';
 
 // Redux Provider + Store + Actions
 import { Provider } from 'react-redux';
-import store from './redux/store';
-import { loadUser } from './redux/actions/auth';
+import store from '../redux/store';
+import { loadUser } from '../redux/actions/auth';
 
 // React Router
 import {
@@ -18,13 +18,10 @@ import {
 import { Container } from 'react-bootstrap';
 
 // Local Components
-import Header from './components/layout/Header';
-import Main from './components/Main';
-import Login from './components/Login';
-import About from './components/About';
-
-// Local Styles
-import './css/App.css';
+import Header from './layout/Header';
+import Main from './Main';
+import Login from './Login';
+import About from './About';
 
 export class App extends Component {
   componentDidMount() {

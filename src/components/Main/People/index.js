@@ -86,7 +86,9 @@ export class People extends Component {
   // When user clicks on person,
   // sets person + redirect in state and triggers re-render + redirect to /main/questions
   handlePersonClick(person) {
-    this.props.setPerson(person);
+    const { setPerson } = this.props;
+
+    setPerson(person);
     this.setState({ redirect: true });
   }
 
