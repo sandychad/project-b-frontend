@@ -11,45 +11,24 @@ import { getPeople } from '../../../redux/actions/people';
 import { Redirect } from 'react-router-dom';
 
 // Bootstrap
-import { Container, Button, Row } from 'react-bootstrap';
+import { Container } from 'react-bootstrap';
 
 // Local Components
 import { Loading } from '../../common/Loading';
-
-const letters = [
-  { text: 'A', disabled: true },
-  { text: 'B', disabled: true },
-  { text: 'C', disabled: true },
-  { text: 'D', disabled: true },
-  { text: 'E', disabled: true },
-  { text: 'F', disabled: true },
-  { text: 'G', disabled: true },
-  { text: 'H', disabled: true },
-  { text: 'I', disabled: true },
-  { text: 'J', disabled: true },
-  { text: 'K', disabled: true },
-  { text: 'L', disabled: true },
-  { text: 'M', disabled: true },
-  { text: 'N', disabled: true },
-  { text: 'O', disabled: true },
-  { text: 'P', disabled: true },
-  { text: 'Q', disabled: true },
-  { text: 'R', disabled: true },
-  { text: 'S', disabled: true },
-  { text: 'T', disabled: true },
-  { text: 'U', disabled: true },
-  { text: 'V', disabled: true },
-  { text: 'W', disabled: true },
-  { text: 'X', disabled: true },
-  { text: 'Y', disabled: true },
-  { text: 'Z', disabled: true },
-];
+import {
+  getLetters,
+  disableLetters,
+  getSearchLettersFromPeople,
+  enableLetters,
+} from './helpers';
+import LastNameSearch from './LastNameSearch';
+import PeopleButtonList from './PeopleButtonList';
+let letters = getLetters();
 
 export class People extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      lastNames: [],
       availableLetters: [],
       selectedLetter: '',
       redirect: false,
@@ -67,168 +46,80 @@ export class People extends Component {
   };
 
   componentDidMount() {
-    const { city } = this.props;
+    const { city, getPeople } = this.props;
+
+    // Search if city set
     if (city) {
-      this.props.getPeople(city);
+      getPeople(city);
     }
-    letters.map((letter) => {
-      letter.disabled = true;
-      return letter;
-    });
+
+    // Disable all letters
+    letters = disableLetters(letters);
   }
 
   componentDidUpdate(prevProps) {
+    // Update Logic for when people changes (i.e. new city search)
     const { people } = this.props;
+
     if (prevProps.people !== people) {
-      letters.map((letter) => {
-        letter.disabled = true;
-        return letter;
-      });
-      let last_names = [];
-      let searchLetters = [];
-      people.map((person) => {
-        last_names.push(person.last_name);
-        if (!searchLetters.includes(person.last_name[0])) {
-          searchLetters.push(person.last_name[0]);
-        }
-        searchLetters = searchLetters.sort();
-        return this.setState({
-          lastNames: last_names,
-          availableLetters: searchLetters,
-          selectedLetter: searchLetters[0],
-        });
+      // Disable all letters
+      letters = disableLetters(letters);
+
+      // Get available letters and set in state
+      const searchLetters = getSearchLettersFromPeople(people);
+      this.setState({
+        availableLetters: searchLetters,
+        selectedLetter: searchLetters[0],
       });
 
-      letters.map((letter) => {
-        if (searchLetters.includes(letter.text)) {
-          letter.disabled = false;
-        }
-        return letter;
-      });
+      // Enable necessary letters
+      letters = enableLetters(letters, searchLetters);
     }
   }
 
+  // When user clicks on letter,
+  // sets selectedLetter in state and triggers re-render as a result
   handleLetterClick(event) {
     this.setState({ selectedLetter: event.target.value });
   }
 
+  // When user clicks on person,
+  // sets person + redirect in state and triggers re-render + redirect to /main/questions
   handlePersonClick(person) {
     this.props.setPerson(person);
     this.setState({ redirect: true });
   }
 
+  // Cleanup code when component unmounts
+  // Disables all letters
   componentWillUnmount() {
-    letters.map((letter) => {
-      letter.disabled = true;
-      return letter;
-    });
+    letters = disableLetters(letters);
   }
 
   render() {
+    const { people } = this.props;
+    const { selectedLetter } = this.state;
+    const { handleLetterClick, handlePersonClick } = this;
+
+    // Handling of Redirect once person is selected
     if (this.state.redirect) {
       return <Redirect to='/main/questions' />;
     }
 
     return (
       <Container fluid className='mt-4 text-center'>
-        {this.props.people ? (
+        {people ? (
           <Fragment>
-            <h4>Please select your last initial: </h4>
-            <Row className='justify-content-center'>
-              {letters.map((letter, index) =>
-                index < 7 ? (
-                  <Button
-                    size='md'
-                    className='m-1'
-                    variant={letter.disabled ? 'secondary' : 'primary'}
-                    key={index}
-                    value={letter.text}
-                    disabled={letter.disabled}
-                    style={{ width: '50px' }}
-                    onClick={(e) => this.handleLetterClick(e)}
-                  >
-                    {letter.text}
-                  </Button>
-                ) : null
-              )}
-            </Row>
-            <Row className='justify-content-center'>
-              {letters.map((letter, index) =>
-                index < 14 && index >= 7 ? (
-                  <Button
-                    size='md'
-                    className='m-1'
-                    variant={letter.disabled ? 'secondary' : 'primary'}
-                    key={index}
-                    value={letter.text}
-                    disabled={letter.disabled}
-                    style={{ width: '50px' }}
-                    onClick={(e) => this.handleLetterClick(e)}
-                  >
-                    {letter.text}
-                  </Button>
-                ) : null
-              )}
-            </Row>
-            <Row className='justify-content-center'>
-              {letters.map((letter, index) =>
-                index < 21 && index >= 14 ? (
-                  <Button
-                    size='md'
-                    className='m-1'
-                    variant={letter.disabled ? 'secondary' : 'primary'}
-                    key={index}
-                    value={letter.text}
-                    disabled={letter.disabled}
-                    style={{ width: '50px' }}
-                    onClick={(e) => this.handleLetterClick(e)}
-                  >
-                    {letter.text}
-                  </Button>
-                ) : null
-              )}
-            </Row>
-            <Row className='justify-content-center'>
-              {letters.map((letter, index) =>
-                index >= 21 ? (
-                  <Button
-                    size='md'
-                    className='m-1'
-                    variant={letter.disabled ? 'secondary' : 'primary'}
-                    key={index}
-                    value={letter.text}
-                    disabled={letter.disabled}
-                    style={{ width: '50px' }}
-                    onClick={(e) => this.handleLetterClick(e)}
-                  >
-                    {letter.text}
-                  </Button>
-                ) : null
-              )}
-            </Row>
+            <LastNameSearch
+              letters={letters}
+              handleLetterClick={(e) => handleLetterClick(e)}
+            />
 
-            <Container className='mt-4 text-left'>
-              {this.props.people.map((person) => {
-                if (person.last_name[0] === this.state.selectedLetter) {
-                  return (
-                    <Row className='mt-2 mb-2' key={person.employee_id}>
-                      <Button
-                        onClick={() => this.handlePersonClick(person)}
-                        size='lg'
-                        variant='outline-primary'
-                        block
-                        value={person}
-                      >
-                        {person.employee_id}
-                        {' - '}
-                        {person.first_name} {person.last_name}
-                      </Button>
-                    </Row>
-                  );
-                }
-                return <Fragment key={person.employee_id} />;
-              })}
-            </Container>
+            <PeopleButtonList
+              people={people}
+              selectedLetter={selectedLetter}
+              handlePersonClick={(person) => handlePersonClick(person)}
+            />
           </Fragment>
         ) : (
           <Loading />

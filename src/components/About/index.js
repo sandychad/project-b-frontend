@@ -82,7 +82,7 @@ export class About extends Component {
         <ul className='ss-container'>
           <li className='ss-items'>
             <input type='checkbox' name='ac' id='a1' />
-            <label for='a1'>What is SymScreen?</label>
+            <label htmlFor='a1'>What is SymScreen?</label>
             <div className='ss-content'>
               <p>
                 SymScreen is a Cloud-based platform to track Covid-19 Symptoms
@@ -96,7 +96,7 @@ export class About extends Component {
 
           <li className='ss-items'>
             <input type='checkbox' name='ac' id='a2' />
-            <label for='a2'>How does it work?</label>
+            <label htmlFor='a2'>How does it work?</label>
             <div className='ss-content'>
               <p>
                 Employer sets up a tracking station with a thermometer and a
@@ -109,7 +109,7 @@ export class About extends Component {
 
           <li className='ss-items'>
             <input type='checkbox' name='ac' id='a3' />
-            <label for='a3'>How long does it take to enter data?</label>
+            <label htmlFor='a3'>How long does it take to enter data?</label>
             <div className='ss-content'>
               <p>
                 Within 30 sec, the end-to-end process including measuring
@@ -121,7 +121,7 @@ export class About extends Component {
 
           <li className='ss-items'>
             <input type='checkbox' name='ac' id='a4' />
-            <label for='a4'>How much does it cost?</label>
+            <label htmlFor='a4'>How much does it cost?</label>
             <div className='ss-content'>
               <p>
                 Please contact{' '}
