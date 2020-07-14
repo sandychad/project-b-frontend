@@ -7,13 +7,13 @@ import { Link, NavLink } from 'react-router-dom';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getOrgName, getCities } from '../../redux/actions/organization';
+import { getOrgName, getCities } from '../../../redux/actions/organization';
 import {
   getPeople,
   setCity,
   clearCityAndPeople,
-} from '../../redux/actions/people';
-import { logout } from '../../redux/actions/auth';
+} from '../../../redux/actions/people';
+import { logout } from '../../../redux/actions/auth';
 
 // React Bootstrap
 import {
@@ -25,21 +25,17 @@ import {
   Dropdown,
 } from 'react-bootstrap';
 
-// Logo
-import logo from './assets/SymScreenLogo.JPG';
+// Local Components
+import CityDropdown from './CityDropdown';
 
-// Local Styles
-const containerStyle = {
-  width: 'auto',
-  justifyContent: 'center',
-};
+// Logo
+import logo from '../assets/SymScreenLogo.JPG';
 
 // Component
 class Header extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      searchCity: '',
       pathName: window.location.pathname,
     };
 
@@ -68,20 +64,21 @@ class Header extends Component {
     }
   }
 
-  componentDidUpdate(prevState) {
-    const { searchCity } = this.state;
-    if (searchCity !== prevState.searchCity && searchCity !== '') {
-      this.props.setCity(searchCity);
-      this.props.getPeople(searchCity);
-    }
-  }
+  // componentDidUpdate(prevState) {
+  //   if (searchCity !== prevState.searchCity && searchCity !== '') {
+  //     this.props.setCity(searchCity);
+  //     this.props.getPeople(searchCity);
+  //   }
+  // }
 
   handleClick(event) {
-    this.setState({ searchCity: event.target.value });
+    const searchCity = event.target.value;
+    this.props.setCity(searchCity);
+    this.props.getPeople(searchCity);
+    // event.preventDefault();
   }
 
   handleLogout(event) {
-    this.setState({ searchCity: '' });
     this.props.clearCityAndPeople();
     this.props.logout();
   }
@@ -116,22 +113,11 @@ class Header extends Component {
               this.props.location.pathname === '/main/people' ? false : true
             }
           >
-            <Container style={containerStyle} name='ct'>
-              {cities.map((city, index) => (
-                <Dropdown.Item
-                  as={Button}
-                  size='md'
-                  className='m-1'
-                  variant='primary'
-                  key={index}
-                  value={city}
-                  active={this.state.searchCity === city ? true : false}
-                  onClick={(e) => this.handleClick(e)}
-                >
-                  {city}
-                </Dropdown.Item>
-              ))}
-            </Container>
+            <CityDropdown
+              cities={cities}
+              searchCity={city}
+              handleClick={this.handleClick}
+            />
           </SplitButton>
         </Navbar.Collapse>
         {isAuthenticated ? logoutButton : null}
