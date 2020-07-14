@@ -24,7 +24,7 @@ export class CityDropdown extends Component {
             key={index}
             value={city}
             active={searchCity === city ? true : false}
-            onClick={(e) => handleClick(e)}
+            onClick={handleClick}
           >
             {city}
           </Dropdown.Item>

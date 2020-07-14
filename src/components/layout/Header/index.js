@@ -16,41 +16,27 @@ import {
 import { logout } from '../../../redux/actions/auth';
 
 // React Bootstrap
-import {
-  Navbar,
-  Nav,
-  SplitButton,
-  Button,
-  Container,
-  Dropdown,
-} from 'react-bootstrap';
+import { Navbar, Nav, SplitButton } from 'react-bootstrap';
 
 // Local Components
 import CityDropdown from './CityDropdown';
+import LogoutButton from './LogoutButton';
 
 // Logo
 import logo from '../assets/SymScreenLogo.JPG';
 
 // Component
 class Header extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      pathName: window.location.pathname,
-    };
-
-    this.handleClick = this.handleClick.bind(this);
-  }
   static propTypes = {
     getOrgName: PropTypes.func.isRequired,
-    org_name: PropTypes.string.isRequired,
     getCities: PropTypes.func.isRequired,
     setCity: PropTypes.func.isRequired,
     clearCityAndPeople: PropTypes.func.isRequired,
     getPeople: PropTypes.func.isRequired,
-    auth: PropTypes.object.isRequired,
     logout: PropTypes.func.isRequired,
+    auth: PropTypes.object.isRequired,
     cities: PropTypes.array.isRequired,
+    org_name: PropTypes.string.isRequired,
     city: PropTypes.string.isRequired,
   };
 
@@ -64,21 +50,13 @@ class Header extends Component {
     }
   }
 
-  // componentDidUpdate(prevState) {
-  //   if (searchCity !== prevState.searchCity && searchCity !== '') {
-  //     this.props.setCity(searchCity);
-  //     this.props.getPeople(searchCity);
-  //   }
-  // }
-
   handleClick(event) {
     const searchCity = event.target.value;
     this.props.setCity(searchCity);
     this.props.getPeople(searchCity);
-    // event.preventDefault();
   }
 
-  handleLogout(event) {
+  handleLogout() {
     this.props.clearCityAndPeople();
     this.props.logout();
   }
@@ -87,20 +65,16 @@ class Header extends Component {
     const { org_name, cities, city } = this.props;
     const { isAuthenticated } = this.props.auth;
 
-    const logoutButton = (
-      <React.Fragment>
-        <Button onClick={(e) => this.handleLogout(e)}>Logout</Button>
-      </React.Fragment>
-    );
+    const peopleSearchPath = '/main/people';
+    const aboutPath = '/about';
 
     return (
       <Navbar bg='primary' variant='dark' expand='sm' fixed='top'>
-        <Navbar.Brand as={Link} to='/main/people'>
+        <Navbar.Brand as={Link} to={peopleSearchPath}>
           <img src={logo} height='30' alt='SymScreen' />
         </Navbar.Brand>
-        <Navbar.Toggle aria-controls='basic-navbar-nav' />
         <Nav className='mr-auto'>
-          <Nav.Link as={NavLink} to='/about'>
+          <Nav.Link as={NavLink} to={aboutPath}>
             About
           </Nav.Link>
         </Nav>
@@ -110,17 +84,20 @@ class Header extends Component {
             variant='primary'
             title={org_name + ' | ' + (city !== '' ? city : 'Location')}
             disabled={
-              this.props.location.pathname === '/main/people' ? false : true
+              this.props.location.pathname === peopleSearchPath ? false : true
             }
           >
             <CityDropdown
               cities={cities}
               searchCity={city}
-              handleClick={this.handleClick}
+              handleClick={(e) => this.handleClick(e)}
             />
           </SplitButton>
+          {isAuthenticated ? (
+            <LogoutButton handleLogout={() => this.handleLogout()} />
+          ) : null}
         </Navbar.Collapse>
-        {isAuthenticated ? logoutButton : null}
+        <Navbar.Toggle aria-controls='basic-navbar-nav' />
       </Navbar>
     );
   }
