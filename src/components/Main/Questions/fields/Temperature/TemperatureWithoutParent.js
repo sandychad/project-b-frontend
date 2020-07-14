@@ -1,29 +1,29 @@
 // React
-import React from "react";
+import React from 'react';
 
 // Formik
-import { Field } from "formik";
+import { Field } from 'formik';
 
 // React Bootstrap
-import { Card, InputGroup, Col } from "react-bootstrap";
+import { Card, InputGroup, Col } from 'react-bootstrap';
 
 // Local Components
-import Text from "./Text";
+import Temp from './Temperature';
 
-export default function TextWithoutParent({ id, question, formik }) {
+export default function TemperatureWithoutParent({ id, question, formik }) {
   const { question_text } = question;
   const { values } = formik;
   return (
     <Card>
       <Card.Header>
         <Card.Title>
-          <h4 style={{ color: "#007bff" }}>{question_text}</h4>
+          <h4 style={{ color: '#007bff' }}>{question_text}</h4>
         </Card.Title>
       </Card.Header>
       <Card.Body>
         <Col md={{ span: 4, offset: 4 }}>
           <InputGroup>
-            <Field component={Text} name={id} values={values} />
+            <Field component={Temp} name={id} values={values} />
             <InputGroup.Append>
               <InputGroup.Text>°F</InputGroup.Text>
             </InputGroup.Append>

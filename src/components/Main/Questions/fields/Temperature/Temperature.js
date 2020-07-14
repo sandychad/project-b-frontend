@@ -4,7 +4,7 @@ import React from 'react';
 // React Bootstrap
 import { Form } from 'react-bootstrap';
 
-export default function RadioButton({
+export default function Temperature({
   field: { name, onChange, onBlur },
   values,
   id,

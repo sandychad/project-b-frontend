@@ -11,7 +11,7 @@ import { Container, Form, Button, Col } from 'react-bootstrap';
 import OptionsWithParent from './fields/Options/OptionsWithParent';
 import OptionsWithoutParent from './fields/Options/OptionsWithoutParent';
 import Parent from './fields/Parent';
-import TextWithoutParent from './fields/Text/TextWithoutParent';
+import TemperatureWithoutParent from './fields/Temperature/TemperatureWithoutParent';
 
 export class Survey extends Component {
   render() {
@@ -37,7 +37,7 @@ export class Survey extends Component {
               );
             } else if (question_type === 'temp') {
               return (
-                <TextWithoutParent
+                <TemperatureWithoutParent
                   key={id}
                   id={id}
                   question={question}
