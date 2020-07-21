@@ -22,6 +22,7 @@ import Header from './layout/Header';
 import Main from './Main';
 import Login from './Login';
 import About from './About';
+import Home from './Home';
 
 export class App extends Component {
   componentDidMount() {
@@ -34,11 +35,12 @@ export class App extends Component {
           <Container>
             <Route path='/' component={Header} />
             <Switch>
+              <Route exact path='/' component={Home} />
               <Route path='/login' component={Login} />
               <Route path='/about' component={About} />
               <Route path='/main' component={Main} />
             </Switch>
-            <Redirect to='/login' />
+            <Redirect to='/' />
           </Container>
         </Router>
       </Provider>

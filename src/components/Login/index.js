@@ -13,7 +13,7 @@ import { login } from '../../redux/actions/auth';
 import { Formik } from 'formik';
 import schema from './validation';
 
-// Bootstraip
+// Bootstrap
 import { Container } from 'react-bootstrap';
 
 // Local Components

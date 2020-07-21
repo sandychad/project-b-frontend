@@ -20,6 +20,7 @@ import { Navbar, Nav, SplitButton } from 'react-bootstrap';
 
 // Local Components
 import CityDropdown from './CityDropdown';
+import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
 
 // Logo
@@ -68,15 +69,19 @@ class Header extends Component {
     const { isAuthenticated } = this.props.auth;
     const { pathname } = this.props.location;
 
-    const peopleSearchPath = '/main/people';
+    const homePath = '/';
+    const surveyPath = '/main/people';
     const aboutPath = '/about';
 
     return (
       <Navbar bg='primary' variant='dark' expand='sm' fixed='top'>
-        <Navbar.Brand as={Link} to={peopleSearchPath}>
+        <Navbar.Brand as={Link} to={homePath}>
           <img src={logo} height='30' alt='SymScreen' />
         </Navbar.Brand>
         <Nav className='mr-auto'>
+          <Nav.Link as={NavLink} to={surveyPath}>
+            Survey
+          </Nav.Link>
           <Nav.Link as={NavLink} to={aboutPath}>
             About
           </Nav.Link>
@@ -86,7 +91,7 @@ class Header extends Component {
             alignRight
             variant='primary'
             title={org_name + ' | ' + (city !== '' ? city : 'Location')}
-            disabled={pathname === peopleSearchPath ? false : true}
+            disabled={pathname === surveyPath ? false : true}
           >
             <CityDropdown
               cities={cities}
@@ -96,7 +101,9 @@ class Header extends Component {
           </SplitButton>
           {isAuthenticated ? (
             <LogoutButton handleLogout={() => this.handleLogout()} />
-          ) : null}
+          ) : (
+            <LoginButton />
+          )}
         </Navbar.Collapse>
         <Navbar.Toggle aria-controls='basic-navbar-nav' />
       </Navbar>

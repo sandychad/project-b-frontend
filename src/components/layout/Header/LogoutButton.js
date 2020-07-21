@@ -1,19 +1,16 @@
 // React
-import React, { Component, Fragment } from 'react';
+import React from 'react';
 
-// React Bootstrap
+// Bootstrap
 import { Button } from 'react-bootstrap';
 
-export class LogoutButton extends Component {
-  render() {
-    const { handleLogout } = this.props;
-
-    return (
-      <Fragment>
-        <Button onClick={handleLogout}>Logout</Button>
-      </Fragment>
-    );
-  }
-}
+const LogoutButton = (props) => {
+  const { handleLogout } = props;
+  return (
+    <React.Fragment>
+      <Button onClick={handleLogout}>Logout</Button>
+    </React.Fragment>
+  );
+};
 
 export default LogoutButton;
