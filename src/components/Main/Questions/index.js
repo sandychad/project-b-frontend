@@ -20,6 +20,7 @@ import Decision from './Decision';
 import { Loading } from '../../common/Loading';
 import Survey from './Survey';
 import { getFormSchema } from './helpers';
+import * as paths from '../../../utils/paths';
 
 export class Questions extends Component {
   constructor(props) {
@@ -62,16 +63,14 @@ export class Questions extends Component {
     const { person, questions, submitForm } = this.props;
     const { id, employee_id, first_name, last_name } = person;
 
-    const mainPath = '/main/people';
-
     // Redirect if no person (erroneously typed /main/questions without using People search)
     if (!person.employee_id) {
-      return <Redirect to={mainPath} />;
+      return <Redirect to={paths.PEOPLE_SEARCH_PATH} />;
     }
 
     // Redirect if successful submit + decision closed
     if (this.state.submit && !this.state.showDecision) {
-      return <Redirect to={mainPath} />;
+      return <Redirect to={paths.PEOPLE_SEARCH_PATH} />;
     }
 
     // Generate formValues and schema based on questions (see ./helpers.js)

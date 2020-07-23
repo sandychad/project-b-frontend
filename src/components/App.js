@@ -7,12 +7,7 @@ import store from '../redux/store';
 import { loadUser } from '../redux/actions/auth';
 
 // React Router
-import {
-  BrowserRouter as Router,
-  Switch,
-  Route,
-  Redirect,
-} from 'react-router-dom';
+import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
 
 // React Bootstrap
 import { Container } from 'react-bootstrap';
@@ -23,6 +18,8 @@ import Main from './Main';
 import Login from './Login';
 import About from './About';
 import Home from './Home';
+import Dashboard from './Dashboard';
+import * as paths from '../utils/paths';
 
 export class App extends Component {
   componentDidMount() {
@@ -33,14 +30,14 @@ export class App extends Component {
       <Provider store={store}>
         <Router>
           <Container>
-            <Route path='/' component={Header} />
+            <Route path={paths.HOME_PATH} component={Header} />
             <Switch>
-              <Route exact path='/' component={Home} />
-              <Route path='/login' component={Login} />
-              <Route path='/about' component={About} />
-              <Route path='/main' component={Main} />
+              <Route exact path={paths.HOME_PATH} component={Home} />
+              <Route path={paths.ABOUT_PATH} component={About} />
+              <Route path={paths.LOGIN_PATH} component={Login} />
+              <Route path={paths.SURVEY_PATH} component={Main} />
+              <Route path={paths.DASHBOARD_PATH} component={Dashboard} />
             </Switch>
-            <Redirect to='/' />
           </Container>
         </Router>
       </Provider>

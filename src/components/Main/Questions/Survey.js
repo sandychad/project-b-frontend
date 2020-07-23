@@ -12,6 +12,7 @@ import OptionsWithParent from './fields/Options/OptionsWithParent';
 import OptionsWithoutParent from './fields/Options/OptionsWithoutParent';
 import Parent from './fields/Parent';
 import TemperatureWithoutParent from './fields/Temperature/TemperatureWithoutParent';
+import * as paths from '../../../utils/paths';
 
 export class Survey extends Component {
   render() {
@@ -65,7 +66,7 @@ export class Survey extends Component {
         <Col className='text-right m-4'>
           <Button
             as={Link}
-            to='/main/people'
+            to={paths.PEOPLE_SEARCH_PATH}
             variant='secondary'
             className='mr-2'
           >

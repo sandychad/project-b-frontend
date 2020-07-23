@@ -16,7 +16,6 @@ export default function LoginForm({ formik }) {
 
   return (
     <Container fluid>
-      <h2 className='text-center mt-4'>Login</h2>
       <Form noValidate onSubmit={handleSubmit}>
         <Form.Group as={Col} md={{ span: 4, offset: 4 }}>
           <Form.Label>Email</Form.Label>

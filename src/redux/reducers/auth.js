@@ -7,6 +7,7 @@ const initialState = {
   isAuthenticated: false,
   isLoading: false,
   user: null,
+  errors: {},
 };
 
 // Reducer Function (switches on action type)
@@ -31,9 +32,19 @@ export default function (state = initialState, action) {
         ...action.payload,
         isAuthenticated: true,
         isLoading: false,
+        errors: {},
       };
     case actions.LOGOUT_SUCCESS:
     case actions.AUTH_ERROR:
+      localStorage.removeItem('token');
+      return {
+        ...state,
+        auth_token: null,
+        user: null,
+        isAuthenticated: false,
+        isLoading: false,
+        errors: {},
+      };
     case actions.LOGIN_FAILURE:
       localStorage.removeItem('token');
       return {
@@ -42,6 +53,7 @@ export default function (state = initialState, action) {
         user: null,
         isAuthenticated: false,
         isLoading: false,
+        errors: action.payload,
       };
     default:
       return state;

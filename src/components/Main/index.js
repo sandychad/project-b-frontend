@@ -14,6 +14,7 @@ import { Container } from 'react-bootstrap';
 // Local Components
 import People from './People';
 import Questions from './Questions';
+import * as paths from '../../utils/paths';
 
 // Local Styles
 const containerStyle = {
@@ -27,16 +28,16 @@ export class Main extends Component {
   };
   render() {
     if (!this.props.isAuthenticated) {
-      return <Redirect to='/login' />;
+      return <Redirect to={paths.LOGIN_PATH} />;
     }
     return (
       <Container style={containerStyle}>
         <h2 style={{ textAlign: 'center' }}>COVID-19 Health Survey</h2>
         <Switch>
-          <Route path='/main/people' component={People} />
-          <Route path='/main/questions' component={Questions} />
+          <Route path={paths.PEOPLE_SEARCH_PATH} component={People} />
+          <Route path={paths.SURVEY_QUESTIONS_PATH} component={Questions} />
         </Switch>
-        <Redirect to='/main/people' />
+        <Redirect to={paths.PEOPLE_SEARCH_PATH} />
       </Container>
     );
   }

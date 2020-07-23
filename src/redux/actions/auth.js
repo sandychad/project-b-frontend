@@ -29,7 +29,7 @@ export const sendUserRequest = async (dispatch, getState) => {
 
   // Attempt Request using Try-Catch
   try {
-    const res = await api.get('/auth/users/me/', config);
+    const res = await api.get('/auth/person', config);
     dispatch({
       type: actions.USER_LOADED,
       payload: res.data,
@@ -61,7 +61,7 @@ export const login = (email, password) => async (dispatch, getState) => {
 
   // Attempt Request using Try-Catch
   try {
-    const res = await api.post('/auth/token/login/', body);
+    const res = await api.post('/auth/login', body);
 
     dispatch({
       type: actions.LOGIN_SUCCESS,
@@ -69,11 +69,12 @@ export const login = (email, password) => async (dispatch, getState) => {
     });
   } catch (err) {
     // Error Handeling
-    console.error(err);
+    console.error(err.response);
+    dispatch({
+      type: actions.LOGIN_FAILURE,
+      payload: err.response.data,
+    });
   }
-
-  // Send User Request
-  sendUserRequest(dispatch, getState);
 };
 
 // LOGOUT USER
@@ -83,7 +84,7 @@ export const logout = () => async (dispatch, getState) => {
 
   // Attempt Request using Try-Catch
   try {
-    await api.post('/auth/token/logout/', null, config);
+    await api.post('/auth/logout', null, config);
     dispatch({
       type: actions.LOGOUT_SUCCESS,
     });

@@ -22,6 +22,7 @@ import { Navbar, Nav, SplitButton } from 'react-bootstrap';
 import CityDropdown from './CityDropdown';
 import LoginButton from './LoginButton';
 import LogoutButton from './LogoutButton';
+import * as paths from '../../../utils/paths';
 
 // Logo
 import logo from './assets/SymScreenLogo.JPG';
@@ -69,20 +70,13 @@ class Header extends Component {
     const { isAuthenticated } = this.props.auth;
     const { pathname } = this.props.location;
 
-    const homePath = '/';
-    const surveyPath = '/main/people';
-    const aboutPath = '/about';
-
     return (
       <Navbar bg='primary' variant='dark' expand='sm' fixed='top'>
-        <Navbar.Brand as={Link} to={homePath}>
+        <Navbar.Brand as={Link} to={paths.HOME_PATH}>
           <img src={logo} height='30' alt='SymScreen' />
         </Navbar.Brand>
         <Nav className='mr-auto'>
-          <Nav.Link as={NavLink} to={surveyPath}>
-            Survey
-          </Nav.Link>
-          <Nav.Link as={NavLink} to={aboutPath}>
+          <Nav.Link as={NavLink} to={paths.ABOUT_PATH}>
             About
           </Nav.Link>
         </Nav>
@@ -91,7 +85,7 @@ class Header extends Component {
             alignRight
             variant='primary'
             title={org_name + ' | ' + (city !== '' ? city : 'Location')}
-            disabled={pathname === surveyPath ? false : true}
+            disabled={pathname === paths.PEOPLE_SEARCH_PATH ? false : true}
           >
             <CityDropdown
               cities={cities}

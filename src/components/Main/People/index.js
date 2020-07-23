@@ -23,6 +23,7 @@ import {
 } from './helpers';
 import LastNameSearch from './LastNameSearch';
 import PeopleButtonList from './PeopleButtonList';
+import * as paths from '../../../utils/paths';
 let letters = getLetters();
 
 export class People extends Component {
@@ -105,7 +106,7 @@ export class People extends Component {
 
     // Handling of Redirect once person is selected
     if (this.state.redirect) {
-      return <Redirect to='/main/questions' />;
+      return <Redirect to={paths.SURVEY_QUESTIONS_PATH} />;
     }
 
     return (
