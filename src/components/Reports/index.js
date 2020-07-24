@@ -10,6 +10,8 @@ import { Container } from 'react-bootstrap';
 
 // Local components
 import DailySurveyResult from './DailySurveyResult';
+import SurveyStatus from './SurveyStatus';
+import EmployeeTempResults from './EmployeeTempResults';
 
 // Local Styles
 const containerStyle = {
@@ -21,7 +23,18 @@ export class Reports extends Component {
   render() {
     return (
       <Container style={containerStyle}>
+        <h2 class='text-center'>Daily Survey Results</h2>
         <DailySurveyResult />
+
+        <h2 class='text-center'>Survey Status</h2>
+        <SurveyStatus />
+
+        <h2 class='text-center'>Survey Status</h2>
+
+        <h2 class='text-center'>Employee Temperature Results</h2>
+        <EmployeeTempResults />
+
+        <h2 class='text-center'>Survey Status</h2>
       </Container>
     );
   }
