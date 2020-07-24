@@ -10,3 +10,6 @@ export const DASHBOARD_PATH = '/dashboard';
 export const SURVEY_PATH = '/survey';
 export const PEOPLE_SEARCH_PATH = '/survey/people';
 export const SURVEY_QUESTIONS_PATH = '/survey/questions';
+
+// Reports
+export const REPORTS_PATH = '/reports';

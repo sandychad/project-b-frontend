@@ -19,6 +19,7 @@ import Login from './Login';
 import About from './About';
 import Home from './Home';
 import Dashboard from './Dashboard';
+import Reports from './Reports';
 import * as paths from '../utils/paths';
 
 export class App extends Component {
@@ -37,6 +38,7 @@ export class App extends Component {
               <Route path={paths.LOGIN_PATH} component={Login} />
               <Route path={paths.SURVEY_PATH} component={Main} />
               <Route path={paths.DASHBOARD_PATH} component={Dashboard} />
+              <Route path={paths.REPORTS_PATH} component={Reports} />
             </Switch>
           </Container>
         </Router>
