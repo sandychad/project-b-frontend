@@ -1,43 +1,71 @@
 import React, { PureComponent } from 'react';
 import {
-  ScatterChart,
-  Scatter,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
+  Legend,
+  ReferenceLine,
 } from 'recharts';
 
 const data = [
-  { x: 100, y: 200, z: 200 },
-  { x: 120, y: 100, z: 260 },
-  { x: 170, y: 300, z: 400 },
-  { x: 140, y: 250, z: 280 },
-  { x: 150, y: 400, z: 500 },
-  { x: 110, y: 280, z: 200 },
+  {
+    name: 'Page A',
+    pv: 2400,
+  },
+  {
+    name: 'Page B',
+    pv: 1398,
+  },
+  {
+    name: 'Page C',
+    pv: 9800,
+  },
+  {
+    name: 'Page D',
+    pv: 3908,
+  },
+  {
+    name: 'Page E',
+    pv: 4800,
+  },
+  {
+    name: 'Page F',
+    pv: 3800,
+  },
+  {
+    name: 'Page G',
+    pv: 4300,
+  },
 ];
 
 export default class EmployeeTempResults extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/uLysj0u2/';
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/wpfnfmh7/';
 
   render() {
     return (
-      <ScatterChart
-        width={400}
-        height={400}
+      <LineChart
+        width={500}
+        height={300}
+        data={data}
         margin={{
           top: 20,
-          right: 20,
-          bottom: 20,
+          right: 50,
           left: 20,
+          bottom: 5,
         }}
       >
-        <CartesianGrid />
-        <XAxis type='number' dataKey='x' name='stature' unit='cm' />
-        <YAxis type='number' dataKey='y' name='weight' unit='kg' />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-        <Scatter name='A school' data={data} fill='#8884d8' />
-      </ScatterChart>
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='name' />
+        <YAxis />
+        <Tooltip />
+        <Legend />
+        <ReferenceLine y={4800} label='Upper Limit' stroke='red' />
+        <ReferenceLine y={1398} label='Lower Limit' stroke='green' />
+        <Line type='monotone' dataKey='pv' stroke='#8884d8' />
+      </LineChart>
     );
   }
 }
