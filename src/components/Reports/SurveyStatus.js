@@ -13,50 +13,50 @@ import {
 const data = [
   {
     name: 'Page A',
-    uv: 4000,
-    pv: 2400,
+    Pass: 4000,
+    Fail: 2400,
     amt: 2400,
   },
   {
     name: 'Page B',
-    uv: 3000,
-    pv: 1398,
+    Pass: 3000,
+    Fail: 1398,
     amt: 2210,
   },
   {
     name: 'Page C',
-    uv: 2000,
-    pv: 9800,
+    Pass: 2000,
+    Fail: 9800,
     amt: 2290,
   },
   {
     name: 'Page D',
-    uv: 2780,
-    pv: 3908,
+    Pass: 2780,
+    Fail: 3908,
     amt: 2000,
   },
   {
     name: 'Page E',
-    uv: 1890,
-    pv: 4800,
+    Pass: 1890,
+    Fail: 4800,
     amt: 2181,
   },
   {
     name: 'Page F',
-    uv: 2390,
-    pv: 3800,
+    Pass: 2390,
+    Fail: 3800,
     amt: 2500,
   },
   {
     name: 'Page G',
-    uv: 3490,
-    pv: 4300,
+    Pass: 3490,
+    Fail: 4300,
     amt: 2100,
   },
 ];
 
 export default class SurveyStatus extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/9hjfkp73/';
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/90v76x08/';
 
   render() {
     return (
@@ -76,9 +76,8 @@ export default class SurveyStatus extends PureComponent {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Bar dataKey='pv' stackId='a' fill='#8884d8' />
-        <Bar dataKey='amt' stackId='a' fill='#82ca9d' />
-        <Bar dataKey='uv' fill='#ffc658' />
+        <Bar dataKey='Fail' stackId='a' fill='#8884d8' />
+        <Bar dataKey='Pass' stackId='a' fill='#82ca9d' />
       </BarChart>
     );
   }
