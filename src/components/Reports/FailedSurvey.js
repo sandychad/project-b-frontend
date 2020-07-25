@@ -1,7 +1,8 @@
 import React, { PureComponent } from 'react';
 import {
-  LineChart,
-  Line,
+  BarChart,
+  Bar,
+  Cell,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -54,17 +55,17 @@ const data = [
   },
 ];
 
-export default class DailySurveyResult extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
+export default class FailedSurvey extends PureComponent {
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/9hjfkp73/';
 
   render() {
     return (
-      <LineChart
+      <BarChart
         width={500}
         height={300}
         data={data}
         margin={{
-          top: 5,
+          top: 20,
           right: 30,
           left: 20,
           bottom: 5,
@@ -75,21 +76,10 @@ export default class DailySurveyResult extends PureComponent {
         <YAxis />
         <Tooltip />
         <Legend />
-        <Line
-          type='monotone'
-          dataKey='pv'
-          stroke='#8884d8'
-          activeDot={{ r: 8 }}
-          strokeDasharray='3 4 5 1'
-        />
-        <Line type='monotone' dataKey='uv' stroke='#82ca9d' />
-        <Line
-          type='monotone'
-          dataKey='amt'
-          stroke='red'
-          strokeDasharray='3 4 5 2'
-        />
-      </LineChart>
+        <Bar dataKey='pv' stackId='a' fill='#8884d8' />
+        <Bar dataKey='amt' stackId='a' fill='#82ca9d' />
+        <Bar dataKey='uv' fill='#ffc658' />
+      </BarChart>
     );
   }
 }
