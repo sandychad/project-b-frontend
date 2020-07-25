@@ -1,5 +1,5 @@
 // React
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 // Redux
 import { connect } from 'react-redux';
@@ -10,6 +10,7 @@ import { getData } from '../../redux/actions/data';
 import { Container } from 'react-bootstrap';
 
 // Local components
+import Loading from '../common/Loading';
 import DailySurveyResult from './DailySurveyResult';
 import SurveyStatus from './SurveyStatus';
 import EmployeeTempResults from './EmployeeTempResults';
@@ -26,6 +27,7 @@ export class Reports extends Component {
   static propTypes = {
     dailySurveyData: PropTypes.array.isRequired,
     getData: PropTypes.func.isRequired,
+    isLoading: PropTypes.bool.isRequired,
   };
 
   componentDidMount() {
@@ -35,24 +37,32 @@ export class Reports extends Component {
   }
 
   render() {
-    const { dailySurveyData } = this.props;
+    const { dailySurveyData, isLoading } = this.props;
 
     return (
       <Container style={containerStyle}>
-        <h2 class='text-center'>Survey Status - Bar Chart</h2>
-        <SurveyStatus data={dailySurveyData} />
+        {isLoading ? (
+          <Loading />
+        ) : (
+          <Fragment>
+            <h2 class='text-center'>Survey Status - Bar Chart</h2>
+            <SurveyStatus data={dailySurveyData} />
 
-        <h2 class='text-center'>Daily Survey Results - Line Chart</h2>
-        <DailySurveyResult data={dailySurveyData} />
+            <h2 class='text-center'>Daily Survey Results - Line Chart</h2>
+            <DailySurveyResult data={dailySurveyData} />
 
-        <h2 class='text-center'>Failed Surveys</h2>
-        <FailedSurvey />
+            <h2 class='text-center'>Failed Surveys</h2>
+            <FailedSurvey />
 
-        <h2 class='text-center'>Employee Temperature Results - Scatter Plot</h2>
-        <EmployeeTempResults />
+            <h2 class='text-center'>
+              Employee Temperature Results - Scatter Plot
+            </h2>
+            <EmployeeTempResults />
 
-        <h2 class='text-center'>AverageTemperature</h2>
-        <AverageTemperature />
+            <h2 class='text-center'>AverageTemperature</h2>
+            <AverageTemperature />
+          </Fragment>
+        )}
       </Container>
     );
   }
@@ -60,6 +70,7 @@ export class Reports extends Component {
 
 const mapStateToProps = (state) => ({
   dailySurveyData: state.data.dailySurveyData,
+  isLoading: state.data.isLoading,
 });
 
 export default connect(mapStateToProps, { getData })(Reports);
