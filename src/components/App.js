@@ -14,7 +14,7 @@ import { Container } from 'react-bootstrap';
 
 // Local Components
 import Header from './layout/Header';
-import Main from './Main';
+import Survey from './Survey';
 import Login from './Login';
 import About from './About';
 import Home from './Home';
@@ -36,7 +36,7 @@ export class App extends Component {
               <Route exact path={paths.HOME_PATH} component={Home} />
               <Route path={paths.ABOUT_PATH} component={About} />
               <Route path={paths.LOGIN_PATH} component={Login} />
-              <Route path={paths.SURVEY_PATH} component={Main} />
+              <Route path={paths.SURVEY_PATH} component={Survey} />
               <Route path={paths.DASHBOARD_PATH} component={Dashboard} />
               <Route path={paths.REPORTS_PATH} component={Reports} />
             </Switch>
