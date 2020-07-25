@@ -15,6 +15,8 @@ import SurveyStatus from './SurveyStatus';
 import EmployeeTempResults from './EmployeeTempResults';
 import FailedSurvey from './FailedSurvey';
 import AverageTemperature from './AverageTemperature';
+import WeeklySurveyCount from './WeeklySurveyCount';
+import WeeklyTemperatureTrend from './WeeklyTemperatureTrend';
 
 // Local Styles
 const containerStyle = {
@@ -41,18 +43,26 @@ export class Reports extends Component {
       <Container style={containerStyle}>
         <h2 class='text-center'>Survey Status - Bar Chart</h2>
         <SurveyStatus data={dailySurveyData} />
-
+        <br /> <br />
         <h2 class='text-center'>Daily Survey Results - Line Chart</h2>
         <DailySurveyResult data={dailySurveyData} />
-
+        <br /> <br />
         <h2 class='text-center'>Failed Surveys</h2>
         <FailedSurvey />
-
+        <br /> <br />
         <h2 class='text-center'>Employee Temperature Results - Scatter Plot</h2>
         <EmployeeTempResults />
-
+        <br /> <br />
         <h2 class='text-center'>AverageTemperature</h2>
         <AverageTemperature />
+        <br /> <br />
+        <h2 class='text-center'>Weekly Survey Count - Single Line Chart</h2>
+        <WeeklySurveyCount />
+        <br /> <br />
+        <h2 class='text-center'>
+          Weekly Temperature Trend - Single Line Chart
+        </h2>
+        <WeeklyTemperatureTrend />
       </Container>
     );
   }

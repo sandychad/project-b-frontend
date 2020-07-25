@@ -8,6 +8,8 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  Text,
+  Label,
 } from 'recharts';
 
 // const data = [
@@ -61,23 +63,43 @@ export default class SurveyStatus extends PureComponent {
   render() {
     const { data } = this.props;
 
+    const getPercent = (value, total) => {
+      const ratio = total > 0 ? value / total : 0;
+
+      return toPercent(ratio, 2);
+    };
+
+    const toPercent = (decimal, fixed = 0) =>
+      `${(decimal * 100).toFixed(fixed)}%`;
+
     return (
       <BarChart
-        width={500}
-        height={300}
+        width={800}
+        height={500}
         data={data}
         margin={{
           top: 20,
           right: 30,
           left: 20,
-          bottom: 5,
+          bottom: 65,
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' />
-        <YAxis />
+        <XAxis
+          dataKey='name'
+          angle='-295'
+          tickMargin='40'
+          position='center'
+        ></XAxis>
+        <YAxis
+          label={{
+            value: 'Survey Pass Percentage',
+            angle: -90,
+            position: 'center',
+          }}
+        />
         <Tooltip />
-        <Legend />
+        <Legend verticalAlign='top' height={50} />
         <Bar dataKey='pass' stackId='a' fill='#82ca9d' />
         <Bar dataKey='fail' stackId='a' fill='#8884d8' />
       </BarChart>
