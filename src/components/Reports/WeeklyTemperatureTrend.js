@@ -7,6 +7,7 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ReferenceLine,
 } from 'recharts';
 
 const data = [
@@ -61,6 +62,7 @@ export default class WeeklyTemperatureTrend extends PureComponent {
         <YAxis />
         <Tooltip />
         <Legend />
+        <ReferenceLine y={2390} label='100.4' stroke='green' />
         <Line
           type='monotone'
           dataKey='uv'
