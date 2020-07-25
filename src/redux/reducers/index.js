@@ -6,6 +6,7 @@ import people from './people';
 import organization from './organization';
 import survey from './survey';
 import auth from './auth';
+import data from './data';
 
 // Combine reducers into a single export
 export default combineReducers({
@@ -13,4 +14,5 @@ export default combineReducers({
   organization,
   survey,
   auth,
+  data,
 });
