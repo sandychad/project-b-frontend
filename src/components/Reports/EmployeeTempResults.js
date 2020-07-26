@@ -64,12 +64,17 @@ export default class EmployeeTempResults extends PureComponent {
           angle='-60'
           tickMargin='40'
           position='left'
+          padding={{ left: 30, right: 30 }}
+          label={{
+            value: 'Employee ID',
+            position: 'insideBottom',
+          }}
         />
         <YAxis
           label={{
             value: 'Temperature',
             angle: -90,
-            position: 'insideLeft',
+            position: 'Bottom',
           }}
         />
         <Tooltip />

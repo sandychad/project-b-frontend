@@ -62,7 +62,7 @@ export default class WeeklySurveyCount extends PureComponent {
           label={{
             value: 'Survey Count',
             angle: -90,
-            position: 'insideLeft',
+            position: 'left',
           }}
         />
         <Tooltip />

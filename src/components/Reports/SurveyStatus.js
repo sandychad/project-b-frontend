@@ -8,6 +8,7 @@ import {
   Legend,
   Text,
   Label,
+  Tooltip,
   CustomizedLegend,
 } from 'recharts';
 
@@ -70,6 +71,7 @@ export default class SurveyStatus extends PureComponent {
             tickFormatter: { toPercent },
           }}
         />
+        <Tooltip />
         <Legend verticalAlign='top' height={50} />} />
         <Bar dataKey='pass' stackId='a' fill='#82ca9d' />
         <Bar dataKey='fail' stackId='a' fill='#8884d8' />
