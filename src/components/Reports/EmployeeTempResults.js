@@ -13,31 +13,31 @@ import {
 const data = [
   {
     name: 'Page A',
-    pv: 2400,
+    EmployeeID: 2400,
   },
   {
     name: 'Page B',
-    pv: 1398,
+    EmployeeID: 1398,
   },
   {
     name: 'Page C',
-    pv: 9800,
+    EmployeeID: 9800,
   },
   {
     name: 'Page D',
-    pv: 3908,
+    EmployeeID: 3908,
   },
   {
     name: 'Page E',
-    pv: 4800,
+    EmployeeID: 4800,
   },
   {
     name: 'Page F',
-    pv: 3800,
+    EmployeeID: 3800,
   },
   {
     name: 'Page G',
-    pv: 4300,
+    EmployeeID: 4300,
   },
 ];
 
@@ -47,24 +47,38 @@ export default class EmployeeTempResults extends PureComponent {
   render() {
     return (
       <LineChart
-        width={500}
-        height={300}
+        width={800}
+        height={500}
         data={data}
         margin={{
           top: 20,
-          right: 50,
+          right: 30,
           left: 20,
-          bottom: 5,
+          bottom: 65,
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' />
-        <YAxis />
+        <XAxis dataKey='name' angle='-60' tickMargin='40' position='left' />
+        <YAxis
+          label={{
+            value: 'Temperature',
+            angle: -90,
+            position: 'insideLeft',
+          }}
+        />
         <Tooltip />
-        <Legend />
-        <ReferenceLine y={4800} label='Upper Limit' stroke='red' />
-        <ReferenceLine y={1398} label='Lower Limit' stroke='green' />
-        <Line type='monotone' dataKey='pv' stroke='#8884d8' />
+        <Legend verticalAlign='top' height={50} />
+        <ReferenceLine
+          y={4800}
+          label={{ position: 'top', value: 'Upper Limit' }}
+          stroke='red'
+        />
+        <ReferenceLine
+          y={1398}
+          label={{ position: 'bottom', value: 'Lower Limit' }}
+          stroke='green'
+        />
+        <Line type='monotone' dataKey='EmployeeID' stroke='#8884d8' />
       </LineChart>
     );
   }

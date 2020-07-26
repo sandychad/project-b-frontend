@@ -40,28 +40,34 @@ export class Reports extends Component {
     const { dailySurveyData } = this.props;
 
     return (
-      <Container style={containerStyle}>
+      <Container style={containerStyle} fluid='md'>
         <h2 class='text-center'>Survey Status - Bar Chart</h2>
+        <br />
         <SurveyStatus data={dailySurveyData} />
         <br /> <br />
         <h2 class='text-center'>Daily Survey Results - Line Chart</h2>
+        <br />
         <DailySurveyResult data={dailySurveyData} />
         <br /> <br />
         <h2 class='text-center'>Failed Surveys</h2>
         <FailedSurvey />
         <br /> <br />
         <h2 class='text-center'>Employee Temperature Results - Scatter Plot</h2>
+        <br />
         <EmployeeTempResults />
         <br /> <br />
         <h2 class='text-center'>AverageTemperature</h2>
+        <br />
         <AverageTemperature />
         <br /> <br />
         <h2 class='text-center'>Weekly Survey Count - Single Line Chart</h2>
+        <br />
         <WeeklySurveyCount />
         <br /> <br />
         <h2 class='text-center'>
           Weekly Temperature Trend - Single Line Chart
         </h2>
+        <br />
         <WeeklyTemperatureTrend />
       </Container>
     );

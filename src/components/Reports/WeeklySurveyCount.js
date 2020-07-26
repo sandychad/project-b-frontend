@@ -46,21 +46,27 @@ export default class WeeklySurveyCount extends PureComponent {
   render() {
     return (
       <LineChart
-        width={500}
-        height={300}
+        width={800}
+        height={500}
         data={data}
         margin={{
-          top: 5,
+          top: 20,
           right: 30,
           left: 20,
-          bottom: 5,
+          bottom: 65,
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' />
-        <YAxis />
+        <XAxis dataKey='name' angle='-60' tickMargin='40' position='left' />
+        <YAxis
+          label={{
+            value: 'Survey Count',
+            angle: -90,
+            position: 'insideLeft',
+          }}
+        />
         <Tooltip />
-        <Legend />
+        <Legend verticalAlign='top' height={50} />
         <Line
           type='monotone'
           dataKey='uv'
