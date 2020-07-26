@@ -4,7 +4,8 @@ import * as actions from '../actions/types';
 // Initialize State
 const initialState = {
   isLoading: false,
-  dailySurveyData: [],
+  passFailData: [],
+  tempData: [],
 };
 
 // Reducer Function (switches on action type)
@@ -19,7 +20,8 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        dailySurveyData: action.payload,
+        passFailData: action.payload.passFailData,
+        tempData: action.payload.tempData,
       };
     default:
       return state;

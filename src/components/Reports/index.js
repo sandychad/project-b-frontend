@@ -27,7 +27,8 @@ const containerStyle = {
 
 export class Reports extends Component {
   static propTypes = {
-    dailySurveyData: PropTypes.array.isRequired,
+    passFailData: PropTypes.array.isRequired,
+    tempData: PropTypes.array.isRequired,
     getData: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
   };
@@ -39,7 +40,7 @@ export class Reports extends Component {
   }
 
   render() {
-    const { dailySurveyData, isLoading } = this.props;
+    const { passFailData, tempData, isLoading } = this.props;
 
     return (
       <Container style={containerStyle} fluid='md'>
@@ -49,11 +50,11 @@ export class Reports extends Component {
           <Fragment>
             <h2 class='text-center'>Survey Status - Bar Chart</h2>
             <br />
-            <SurveyStatus data={dailySurveyData} />
+            <SurveyStatus data={passFailData} />
             <br /> <br />
             <h2 class='text-center'>Daily Survey Results - Line Chart</h2>
             <br />
-            <DailySurveyResult data={dailySurveyData} />
+            <DailySurveyResult data={passFailData} />
             <br /> <br />
             <h2 class='text-center'>Failed Surveys</h2>
             <FailedSurvey />
@@ -62,7 +63,7 @@ export class Reports extends Component {
               Employee Temperature Results - Scatter Plot
             </h2>
             <br />
-            <EmployeeTempResults />
+            <EmployeeTempResults data={tempData} />
             <br /> <br />
             <h2 class='text-center'>AverageTemperature</h2>
             <br />
@@ -85,7 +86,8 @@ export class Reports extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  dailySurveyData: state.data.dailySurveyData,
+  passFailData: state.data.passFailData,
+  tempData: state.data.tempData,
   isLoading: state.data.isLoading,
 });
 

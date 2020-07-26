@@ -17,11 +17,19 @@ export const getData = () => async (dispatch) => {
 
     let querystring = `?date=${todaysDate}`;
 
-    const res = await api.get(`/data/survey-by-location${querystring}`);
-
+    const passFailData = await api.get(
+      `/data/pass-fail-by-location${querystring}`
+    );
+    const tempData = await api.get(
+      `/data/temp-by-date-location${querystring}&city=Paris`
+    );
+    const res = {
+      passFailData: passFailData.data,
+      tempData: tempData.data,
+    };
     dispatch({
       type: actions.DATA_LOADED,
-      payload: res.data,
+      payload: res,
     });
   } catch (err) {
     console.error(err);

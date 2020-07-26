@@ -10,41 +10,42 @@ import {
   ReferenceLine,
 } from 'recharts';
 
-const data = [
-  {
-    name: 'Page A',
-    EmployeeID: 2400,
-  },
-  {
-    name: 'Page B',
-    EmployeeID: 1398,
-  },
-  {
-    name: 'Page C',
-    EmployeeID: 9800,
-  },
-  {
-    name: 'Page D',
-    EmployeeID: 3908,
-  },
-  {
-    name: 'Page E',
-    EmployeeID: 4800,
-  },
-  {
-    name: 'Page F',
-    EmployeeID: 3800,
-  },
-  {
-    name: 'Page G',
-    EmployeeID: 4300,
-  },
-];
+// const data = [
+//   {
+//     name: 'Page A',
+//     EmployeeID: 2400,
+//   },
+//   {
+//     name: 'Page B',
+//     EmployeeID: 1398,
+//   },
+//   {
+//     name: 'Page C',
+//     EmployeeID: 9800,
+//   },
+//   {
+//     name: 'Page D',
+//     EmployeeID: 3908,
+//   },
+//   {
+//     name: 'Page E',
+//     EmployeeID: 4800,
+//   },
+//   {
+//     name: 'Page F',
+//     EmployeeID: 3800,
+//   },
+//   {
+//     name: 'Page G',
+//     EmployeeID: 4300,
+//   },
+// ];
 
 export default class EmployeeTempResults extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/wpfnfmh7/';
 
   render() {
+    const { data } = this.props;
     return (
       <LineChart
         width={800}
@@ -58,7 +59,12 @@ export default class EmployeeTempResults extends PureComponent {
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' angle='-60' tickMargin='40' position='left' />
+        <XAxis
+          dataKey='Employee ID'
+          angle='-60'
+          tickMargin='40'
+          position='left'
+        />
         <YAxis
           label={{
             value: 'Temperature',
@@ -69,16 +75,16 @@ export default class EmployeeTempResults extends PureComponent {
         <Tooltip />
         <Legend verticalAlign='top' height={50} />
         <ReferenceLine
-          y={4800}
+          y={104}
           label={{ position: 'top', value: 'Upper Limit' }}
           stroke='red'
         />
         <ReferenceLine
-          y={1398}
+          y={96}
           label={{ position: 'bottom', value: 'Lower Limit' }}
           stroke='green'
         />
-        <Line type='monotone' dataKey='EmployeeID' stroke='#8884d8' />
+        <Line type='monotone' dataKey='Temperature' stroke='#8884d8' />
       </LineChart>
     );
   }
