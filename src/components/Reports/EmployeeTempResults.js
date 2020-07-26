@@ -1,43 +1,85 @@
 import React, { PureComponent } from 'react';
 import {
-  ScatterChart,
-  Scatter,
+  LineChart,
+  Line,
   XAxis,
   YAxis,
   CartesianGrid,
   Tooltip,
+  Legend,
+  ReferenceLine,
 } from 'recharts';
 
 const data = [
-  { x: 100, y: 200, z: 200 },
-  { x: 120, y: 100, z: 260 },
-  { x: 170, y: 300, z: 400 },
-  { x: 140, y: 250, z: 280 },
-  { x: 150, y: 400, z: 500 },
-  { x: 110, y: 280, z: 200 },
+  {
+    name: 'Page A',
+    EmployeeID: 2400,
+  },
+  {
+    name: 'Page B',
+    EmployeeID: 1398,
+  },
+  {
+    name: 'Page C',
+    EmployeeID: 9800,
+  },
+  {
+    name: 'Page D',
+    EmployeeID: 3908,
+  },
+  {
+    name: 'Page E',
+    EmployeeID: 4800,
+  },
+  {
+    name: 'Page F',
+    EmployeeID: 3800,
+  },
+  {
+    name: 'Page G',
+    EmployeeID: 4300,
+  },
 ];
 
 export default class EmployeeTempResults extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/uLysj0u2/';
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/wpfnfmh7/';
 
   render() {
     return (
-      <ScatterChart
-        width={400}
-        height={400}
+      <LineChart
+        width={800}
+        height={500}
+        data={data}
         margin={{
           top: 20,
-          right: 20,
-          bottom: 20,
+          right: 30,
           left: 20,
+          bottom: 65,
         }}
       >
-        <CartesianGrid />
-        <XAxis type='number' dataKey='x' name='stature' unit='cm' />
-        <YAxis type='number' dataKey='y' name='weight' unit='kg' />
-        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-        <Scatter name='A school' data={data} fill='#8884d8' />
-      </ScatterChart>
+        <CartesianGrid strokeDasharray='3 3' />
+        <XAxis dataKey='name' angle='-60' tickMargin='40' position='left' />
+        <YAxis
+          label={{
+            value: 'Temperature',
+            angle: -90,
+            position: 'insideLeft',
+          }}
+        />
+        <Tooltip />
+        <Legend verticalAlign='top' height={50} />
+        <ReferenceLine
+          y={4800}
+          label={{ position: 'top', value: 'Upper Limit' }}
+          stroke='red'
+        />
+        <ReferenceLine
+          y={1398}
+          label={{ position: 'bottom', value: 'Lower Limit' }}
+          stroke='green'
+        />
+        <Line type='monotone' dataKey='EmployeeID' stroke='#8884d8' />
+      </LineChart>
     );
   }
 }

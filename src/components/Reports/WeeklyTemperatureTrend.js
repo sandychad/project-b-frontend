@@ -7,18 +7,48 @@ import {
   CartesianGrid,
   Tooltip,
   Legend,
+  ReferenceLine,
 } from 'recharts';
 
-export default class DailySurveyResult extends PureComponent {
+const data = [
+  {
+    name: 'Page A',
+    uv: 4000,
+  },
+  {
+    name: 'Page B',
+    uv: 3000,
+  },
+  {
+    name: 'Page C',
+    uv: 2000,
+  },
+  {
+    name: 'Page D',
+    uv: 2780,
+  },
+  {
+    name: 'Page E',
+    uv: 1890,
+  },
+  {
+    name: 'Page F',
+    uv: 2390,
+  },
+  {
+    name: 'Page G',
+    uv: 3490,
+  },
+];
+
+export default class WeeklyTemperatureTrend extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
   render() {
-    const { data } = this.props;
-
     return (
       <LineChart
         width={800}
-        height={400}
+        height={500}
         data={data}
         margin={{
           top: 20,
@@ -31,26 +61,19 @@ export default class DailySurveyResult extends PureComponent {
         <XAxis dataKey='name' angle='-60' tickMargin='40' position='left' />
         <YAxis
           label={{
-            value: 'Number Of Employees',
+            value: 'Temperature',
             angle: -90,
             position: 'insideLeft',
           }}
         />
         <Tooltip />
         <Legend verticalAlign='top' height={50} />
+        <ReferenceLine y={2390} label='100.4' stroke='green' />
         <Line
           type='monotone'
-          dataKey='total'
+          dataKey='uv'
           stroke='#8884d8'
           activeDot={{ r: 8 }}
-          strokeDasharray='3 4 5 1'
-        />
-        <Line type='monotone' dataKey='pass' stroke='#82ca9d' />
-        <Line
-          type='monotone'
-          dataKey='fail'
-          stroke='red'
-          strokeDasharray='3 4 5 2'
         />
       </LineChart>
     );
