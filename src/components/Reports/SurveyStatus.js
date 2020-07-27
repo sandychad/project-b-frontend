@@ -56,7 +56,7 @@ export default class SurveyStatus extends PureComponent {
           bottom: 65,
         }}
       >
-        <CartesianGrid strokeDasharray='5 5' />
+        <CartesianGrid strokeDasharray='3 3' />
         <XAxis
           dataKey='name'
           angle='-60'
@@ -64,6 +64,8 @@ export default class SurveyStatus extends PureComponent {
           position='left'
         ></XAxis>
         <YAxis
+          type='number'
+          unit='%'
           label={{
             value: 'Survey Pass Percentage',
             angle: -90,
@@ -73,8 +75,8 @@ export default class SurveyStatus extends PureComponent {
         />
         <Tooltip />
         <Legend verticalAlign='top' height={50} />} />
-        <Bar dataKey='pass' stackId='a' fill='#82ca9d' />
-        <Bar dataKey='fail' stackId='a' fill='#8884d8' />
+        <Bar dataKey='pass' stackId='a' fill='#82ca9d' legendType='star' />
+        <Bar dataKey='fail' stackId='a' fill='#8884d8' legendType='star' />
       </BarChart>
     );
   }

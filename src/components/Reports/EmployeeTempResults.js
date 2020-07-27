@@ -64,7 +64,7 @@ export default class EmployeeTempResults extends PureComponent {
           angle='-60'
           tickMargin='40'
           position='left'
-          padding={{ left: 30, right: 30 }}
+          padding={{ left: 50, right: 50 }}
           label={{
             value: 'Employee ID',
             position: 'insideBottom',
@@ -74,7 +74,7 @@ export default class EmployeeTempResults extends PureComponent {
           label={{
             value: 'Temperature',
             angle: -90,
-            position: 'Bottom',
+            position: 'insideLeft',
           }}
         />
         <Tooltip />
