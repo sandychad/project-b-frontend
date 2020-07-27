@@ -7,7 +7,7 @@ const api = axios.create({
   // baseURL: 'https://dry-castle-10158.herokuapp.com/',
 
   // Development
-  baseURL: process.env.BACKEND_PATH,
+  baseURL: process.env.REACT_APP_BACKEND_PATH,
 
   // Add header for content-type for POST requests
   headers: {
