@@ -18,10 +18,10 @@ export const getData = () => async (dispatch) => {
     let querystring = `?date=${todaysDate}`;
 
     const passFailData = await api.get(
-      `/data/pass-fail-by-location${querystring}`
+      `data/daily-survey-status-line-by-location${querystring}`
     );
     const tempData = await api.get(
-      `/data/temp-by-date-location${querystring}&city=Paris`
+      `/data/employee-temp-by-location${querystring}`
     );
     const res = {
       passFailData: passFailData.data,
