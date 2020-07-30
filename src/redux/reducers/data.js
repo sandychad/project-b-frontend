@@ -4,8 +4,13 @@ import * as actions from '../actions/types';
 // Initialize State
 const initialState = {
   isLoading: false,
-  passFailData: [],
-  tempData: [],
+  avgTempByLocation: [],
+  dailySurveyStatusByLocation: [],
+  dailySurveyStatusLineByLocation: [],
+  employeeTempByLocation: [],
+  failedSurveyCountByDate: [],
+  weeklySurveyCountByLocation: [],
+  weeklyTempTrendByLocation: [],
 };
 
 // Reducer Function (switches on action type)
@@ -20,8 +25,14 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: false,
-        passFailData: action.payload.passFailData,
-        tempData: action.payload.tempData,
+        avgTempByLocation: action.payload.avgTempByLocation,
+        dailySurveyStatusByLocation: action.payload.dailySurveyStatusByLocation,
+        dailySurveyStatusLineByLocation:
+          action.payload.dailySurveyStatusLineByLocation,
+        employeeTempByLocation: action.payload.employeeTempByLocation,
+        failedSurveyCountByDate: action.payload.failedSurveyCountByDate,
+        weeklySurveyCountByLocation: action.payload.weeklySurveyCountByLocation,
+        weeklyTempTrendByLocation: action.payload.weeklyTempTrendByLocation,
       };
     default:
       return state;

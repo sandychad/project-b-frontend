@@ -27,10 +27,15 @@ const containerStyle = {
 
 export class Reports extends Component {
   static propTypes = {
-    passFailData: PropTypes.array.isRequired,
-    tempData: PropTypes.array.isRequired,
     getData: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
+    avgTempByLocation: PropTypes.array.isRequired,
+    dailySurveyStatusByLocation: PropTypes.array.isRequired,
+    dailySurveyStatusLineByLocation: PropTypes.array.isRequired,
+    employeeTempByLocation: PropTypes.array.isRequired,
+    failedSurveyCountByDate: PropTypes.array.isRequired,
+    weeklySurveyCountByLocation: PropTypes.array.isRequired,
+    weeklyTempTrendByLocation: PropTypes.array.isRequired,
   };
 
   componentDidMount() {
@@ -40,7 +45,16 @@ export class Reports extends Component {
   }
 
   render() {
-    const { passFailData, tempData, isLoading } = this.props;
+    const {
+      isLoading,
+      avgTempByLocation,
+      dailySurveyStatusByLocation,
+      dailySurveyStatusLineByLocation,
+      employeeTempByLocation,
+      failedSurveyCountByDate,
+      weeklySurveyCountByLocation,
+      weeklyTempTrendByLocation,
+    } = this.props;
 
     return (
       <Container style={containerStyle} fluid='md'>
@@ -50,28 +64,29 @@ export class Reports extends Component {
           <Fragment>
             <h2 class='text-center'>Survey Status - Bar Chart</h2>
             <br />
-            <SurveyStatus data={passFailData} />
+            <SurveyStatus data={dailySurveyStatusByLocation} />
             <br /> <br />
             <h2 class='text-center'>Daily Survey Results - Line Chart</h2>
             <br />
-            <DailySurveyResult data={passFailData} />
+            <DailySurveyResult data={dailySurveyStatusLineByLocation} />
             <br /> <br />
             <h2 class='text-center'>Failed Surveys</h2>
-            <FailedSurvey />
+            <br />
+            <FailedSurvey data={failedSurveyCountByDate} />
             <br /> <br />
             <h2 class='text-center'>
               Employee Temperature Results - Scatter Plot
             </h2>
             <br />
-            <EmployeeTempResults data={tempData} />
+            <EmployeeTempResults data={employeeTempByLocation} />
             <br /> <br />
             <h2 class='text-center'>AverageTemperature</h2>
             <br />
-            <AverageTemperature />
+            <AverageTemperature data={avgTempByLocation} />
             <br /> <br />
             <h2 class='text-center'>Weekly Survey Count - Single Line Chart</h2>
             <br />
-            <WeeklySurveyCount />
+            <WeeklySurveyCount data={weeklySurveyCountByLocation} />
             <br /> <br />
             <h2 class='text-center'>
               Weekly Temperature Trend - Single Line Chart
@@ -86,9 +101,14 @@ export class Reports extends Component {
 }
 
 const mapStateToProps = (state) => ({
-  passFailData: state.data.passFailData,
-  tempData: state.data.tempData,
   isLoading: state.data.isLoading,
+  avgTempByLocation: state.data.avgTempByLocation,
+  dailySurveyStatusByLocation: state.data.dailySurveyStatusByLocation,
+  dailySurveyStatusLineByLocation: state.data.dailySurveyStatusLineByLocation,
+  employeeTempByLocation: state.data.employeeTempByLocation,
+  failedSurveyCountByDate: state.data.failedSurveyCountByDate,
+  weeklySurveyCountByLocation: state.data.weeklySurveyCountByLocation,
+  weeklyTempTrendByLocation: state.data.weeklyTempTrendByLocation,
 });
 
 export default connect(mapStateToProps, { getData })(Reports);

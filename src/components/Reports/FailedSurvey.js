@@ -5,13 +5,26 @@ export default class FailedSurvey extends Component {
   render() {
     const { data } = this.props;
     return (
-      <div className='App'>
-        <tr>
-          <td></td>
-          <td></td>
-          <td></td>
-        </tr>
-      </div>
+      <Table striped bordered hover>
+        <thead>
+          <tr>
+            <th>Date</th>
+            <th>City</th>
+            <th>Employee ID</th>
+            <th>Name</th>
+            <th>Decision</th>
+          </tr>
+        </thead>
+        {data.map((row) => (
+          <tr>
+            <td>{row[0]}</td>
+            <td>{row[1]}</td>
+            <td>{row[2]}</td>
+            <td>{row[3]}</td>
+            <td>{row[4]}</td>
+          </tr>
+        ))}
+      </Table>
     );
   }
 }

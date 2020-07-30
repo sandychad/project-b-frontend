@@ -9,41 +9,43 @@ import {
   Legend,
 } from 'recharts';
 
-const data = [
-  {
-    name: 'Page A',
-    uv: 4000,
-  },
-  {
-    name: 'Page B',
-    uv: 3000,
-  },
-  {
-    name: 'Page C',
-    uv: 2000,
-  },
-  {
-    name: 'Page D',
-    uv: 2780,
-  },
-  {
-    name: 'Page E',
-    uv: 1890,
-  },
-  {
-    name: 'Page F',
-    uv: 2390,
-  },
-  {
-    name: 'Page G',
-    uv: 3490,
-  },
-];
+// const data = [
+//   {
+//     name: 'Page A',
+//     uv: 4000,
+//   },
+//   {
+//     name: 'Page B',
+//     uv: 3000,
+//   },
+//   {
+//     name: 'Page C',
+//     uv: 2000,
+//   },
+//   {
+//     name: 'Page D',
+//     uv: 2780,
+//   },
+//   {
+//     name: 'Page E',
+//     uv: 1890,
+//   },
+//   {
+//     name: 'Page F',
+//     uv: 2390,
+//   },
+//   {
+//     name: 'Page G',
+//     uv: 3490,
+//   },
+// ];
 
 export default class WeeklySurveyCount extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/xqjtetw0/';
 
   render() {
+    const { data } = this.props;
+
     return (
       <LineChart
         width={800}
@@ -58,7 +60,7 @@ export default class WeeklySurveyCount extends PureComponent {
       >
         <CartesianGrid strokeDasharray='10 10' />
         <XAxis
-          dataKey='weeklong'
+          dataKey='date'
           name='7 days'
           angle='-60'
           tickMargin='40'
@@ -74,9 +76,9 @@ export default class WeeklySurveyCount extends PureComponent {
         />
         <Tooltip />
         <Legend verticalAlign='top' height={50} />
+
         <Line
           type='monotone'
-          dataKey='uv'
           name='Weekly Survey Count'
           stroke='#8884d8'
           activeDot={{ r: 8 }}

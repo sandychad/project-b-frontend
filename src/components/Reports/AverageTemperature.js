@@ -10,19 +10,21 @@ import {
   Legend,
 } from 'recharts';
 
-const data = [
-  { Location: 100, avgTemperature: 200, avgtemptoday: 200 },
-  { Location: 120, avgTemperature: 100, avgtemptoday: 260 },
-  { Location: 170, avgTemperature: 300, avgtemptoday: 400 },
-  { Location: 140, avgTemperature: 250, avgtemptoday: 280 },
-  { Location: 150, avgTemperature: 400, avgtemptoday: 500 },
-  { Location: 110, avgTemperature: 280, avgtemptoday: 200 },
-];
+// const data = [
+//   { Location: 100, avgTemperature: 200, avgtemptoday: 200 },
+//   { Location: 120, avgTemperature: 100, avgtemptoday: 260 },
+//   { Location: 170, avgTemperature: 300, avgtemptoday: 400 },
+//   { Location: 140, avgTemperature: 250, avgtemptoday: 280 },
+//   { Location: 150, avgTemperature: 400, avgtemptoday: 500 },
+//   { Location: 110, avgTemperature: 280, avgtemptoday: 200 },
+// ];
 
 export default class AverageTemperature extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/3mw50Lc9/';
 
   render() {
+    const { data } = this.props;
+
     return (
       <ScatterChart
         width={800}
@@ -36,8 +38,7 @@ export default class AverageTemperature extends PureComponent {
       >
         <CartesianGrid />
         <XAxis
-          type='number'
-          dataKey='Location'
+          dataKey='location'
           name='Location'
           angle='-60'
           tickMargin='40'
