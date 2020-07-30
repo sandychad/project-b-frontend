@@ -56,9 +56,16 @@ export default class WeeklySurveyCount extends PureComponent {
           bottom: 65,
         }}
       >
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' angle='-60' tickMargin='40' position='left' />
+        <CartesianGrid strokeDasharray='10 10' />
+        <XAxis
+          dataKey='weeklong'
+          name='7 days'
+          angle='-60'
+          tickMargin='40'
+          position='left'
+        />
         <YAxis
+          dataKey='surveycount'
           label={{
             value: 'Survey Count',
             angle: -90,
@@ -70,6 +77,7 @@ export default class WeeklySurveyCount extends PureComponent {
         <Line
           type='monotone'
           dataKey='uv'
+          name='Weekly Survey Count'
           stroke='#8884d8'
           activeDot={{ r: 8 }}
         />

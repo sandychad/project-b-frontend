@@ -18,7 +18,7 @@ export default class DailySurveyResult extends PureComponent {
     return (
       <LineChart
         width={800}
-        height={400}
+        height={600}
         data={data}
         margin={{
           top: 20,
@@ -28,7 +28,7 @@ export default class DailySurveyResult extends PureComponent {
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' angle='-60' tickMargin='40' position='left' />
+        <XAxis dataKey='location' angle='-60' tickMargin='40' position='left' />
         <YAxis
           label={{
             value: 'Number Of Employees',

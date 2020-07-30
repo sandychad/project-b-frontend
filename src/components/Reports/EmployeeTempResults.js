@@ -1,7 +1,7 @@
 import React, { PureComponent } from 'react';
 import {
-  LineChart,
-  Line,
+  ScatterChart,
+  Scatter,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -10,44 +10,23 @@ import {
   ReferenceLine,
 } from 'recharts';
 
-// const data = [
-//   {
-//     name: 'Page A',
-//     EmployeeID: 2400,
-//   },
-//   {
-//     name: 'Page B',
-//     EmployeeID: 1398,
-//   },
-//   {
-//     name: 'Page C',
-//     EmployeeID: 9800,
-//   },
-//   {
-//     name: 'Page D',
-//     EmployeeID: 3908,
-//   },
-//   {
-//     name: 'Page E',
-//     EmployeeID: 4800,
-//   },
-//   {
-//     name: 'Page F',
-//     EmployeeID: 3800,
-//   },
-//   {
-//     name: 'Page G',
-//     EmployeeID: 4300,
-//   },
-// ];
-
-export default class EmployeeTempResults extends PureComponent {
-  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/wpfnfmh7/';
+/* const data = [
+  { x: 100, y: 200, z: 200 },
+  { x: 120, y: 100, z: 260 },
+  { x: 170, y: 300, z: 400 },
+  { x: 140, y: 250, z: 280 },
+  { x: 150, y: 400, z: 500 },
+  { x: 110, y: 280, z: 200 },
+];
+ */
+export default class Example extends PureComponent {
+  static jsfiddleUrl = 'https://jsfiddle.net/alidingling/uLysj0u2/';
 
   render() {
     const { data } = this.props;
+
     return (
-      <LineChart
+      <ScatterChart
         width={800}
         height={500}
         data={data}
@@ -58,26 +37,23 @@ export default class EmployeeTempResults extends PureComponent {
           bottom: 65,
         }}
       >
-        <CartesianGrid strokeDasharray='3 3' />
+        <CartesianGrid />
         <XAxis
           dataKey='Employee ID'
           angle='-60'
           tickMargin='40'
           position='left'
           padding={{ left: 50, right: 50 }}
-          label={{
-            value: 'Employee ID',
-            position: 'insideBottom',
-          }}
         />
         <YAxis
+          dataKey='Temperature'
           label={{
             value: 'Temperature',
             angle: -90,
             position: 'insideLeft',
           }}
         />
-        <Tooltip />
+        <Tooltip cursor={{ strokeDasharray: '10 10' }} />
         <Legend verticalAlign='top' height={50} />
         <ReferenceLine
           y={104}
@@ -89,8 +65,13 @@ export default class EmployeeTempResults extends PureComponent {
           label={{ position: 'bottom', value: 'Lower Limit' }}
           stroke='green'
         />
-        <Line type='monotone' dataKey='Temperature' stroke='#8884d8' />
-      </LineChart>
+        <Scatter
+          data={data}
+          fill='#8884d8'
+          type='monotone'
+          dataKey='Location'
+        />
+      </ScatterChart>
     );
   }
 }

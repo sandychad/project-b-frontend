@@ -13,3 +13,6 @@ export const SURVEY_QUESTIONS_PATH = '/survey/questions';
 
 // Reports
 export const REPORTS_PATH = '/reports';
+
+// User Management
+// export const USER_MANAGEMENT_PATH = '/usermanagement';

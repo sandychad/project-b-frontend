@@ -16,7 +16,7 @@ import {
 import { logout } from '../../../redux/actions/auth';
 
 // React Bootstrap
-import { Navbar, Nav, SplitButton } from 'react-bootstrap';
+import { Navbar, Nav, SplitButton, NavDropdown } from 'react-bootstrap';
 
 // Local Components
 import CityDropdown from './CityDropdown';
@@ -79,6 +79,17 @@ class Header extends Component {
           <Nav.Link as={NavLink} to={paths.ABOUT_PATH}>
             About
           </Nav.Link>
+          <NavDropdown title='App' id='basic-nav-dropdown'>
+            <NavDropdown.Item as={NavLink} to={paths.SURVEY_PATH}>
+              Survey
+            </NavDropdown.Item>
+            <NavDropdown.Item as={NavLink} to={paths.REPORTS_PATH}>
+              Reports
+            </NavDropdown.Item>
+            {/* <NavDropdown.Item as={NavLink} to={paths.USERMANAGEMENT_PATH}>
+              User Management
+            </NavDropdown.Item> */}
+          </NavDropdown>
         </Nav>
         <Navbar.Collapse className='justify-content-end'>
           <SplitButton

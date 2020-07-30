@@ -58,8 +58,9 @@ export default class WeeklyTemperatureTrend extends PureComponent {
         }}
       >
         <CartesianGrid strokeDasharray='3 3' />
-        <XAxis dataKey='name' angle='-60' tickMargin='40' position='left' />
+        <XAxis dataKey='weeklong' angle='-60' tickMargin='40' position='left' />
         <YAxis
+          dataKey='avgtemperature'
           label={{
             value: 'Temperature',
             angle: -90,
@@ -72,6 +73,7 @@ export default class WeeklyTemperatureTrend extends PureComponent {
         <Line
           type='monotone'
           dataKey='uv'
+          name='Weekly Temperature Trend'
           stroke='#8884d8'
           activeDot={{ r: 8 }}
         />
