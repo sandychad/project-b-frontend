@@ -57,7 +57,7 @@ export default class AverageTemperature extends PureComponent {
         />
         <ZAxis
           type='number'
-          dataKey='avgtemptoday'
+          dataKey='totalpeople'
           range={[60, 400]}
           // name='Average Temperature'
         />

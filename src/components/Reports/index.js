@@ -84,7 +84,7 @@ export class Reports extends Component {
             <br />
             <AverageTemperature data={avgTempByLocation} />
             <br /> <br />
-            <h2 class='text-center'>Weekly Survey Count - Single Line Chart</h2>
+            {/* <h2 class='text-center'>Weekly Survey Count - Single Line Chart</h2>
             <br />
             <WeeklySurveyCount data={weeklySurveyCountByLocation} />
             <br /> <br />
@@ -92,7 +92,7 @@ export class Reports extends Component {
               Weekly Temperature Trend - Single Line Chart
             </h2>
             <br />
-            <WeeklyTemperatureTrend />
+            <WeeklyTemperatureTrend /> */}
           </Fragment>
         )}
       </Container>
