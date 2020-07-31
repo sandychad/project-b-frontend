@@ -6,10 +6,7 @@ import {
   YAxis,
   CartesianGrid,
   Legend,
-  Text,
-  Label,
   Tooltip,
-  CustomizedLegend,
 } from 'recharts';
 
 export default class SurveyStatus extends PureComponent {

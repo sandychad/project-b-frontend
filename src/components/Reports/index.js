@@ -16,8 +16,8 @@ import SurveyStatus from './SurveyStatus';
 import EmployeeTempResults from './EmployeeTempResults';
 import FailedSurvey from './FailedSurvey';
 import AverageTemperature from './AverageTemperature';
-import WeeklySurveyCount from './WeeklySurveyCount';
-import WeeklyTemperatureTrend from './WeeklyTemperatureTrend';
+//import WeeklySurveyCount from './WeeklySurveyCount';
+//import WeeklyTemperatureTrend from './WeeklyTemperatureTrend';
 
 // Local Styles
 const containerStyle = {
@@ -34,8 +34,8 @@ export class Reports extends Component {
     dailySurveyStatusLineByLocation: PropTypes.array.isRequired,
     employeeTempByLocation: PropTypes.array.isRequired,
     failedSurveyCountByDate: PropTypes.array.isRequired,
-    weeklySurveyCountByLocation: PropTypes.array.isRequired,
-    weeklyTempTrendByLocation: PropTypes.array.isRequired,
+    //weeklySurveyCountByLocation: PropTypes.array.isRequired,
+    //weeklyTempTrendByLocation: PropTypes.array.isRequired,
   };
 
   componentDidMount() {
@@ -52,8 +52,8 @@ export class Reports extends Component {
       dailySurveyStatusLineByLocation,
       employeeTempByLocation,
       failedSurveyCountByDate,
-      weeklySurveyCountByLocation,
-      weeklyTempTrendByLocation,
+      //weeklySurveyCountByLocation,
+      //weeklyTempTrendByLocation,
     } = this.props;
 
     return (

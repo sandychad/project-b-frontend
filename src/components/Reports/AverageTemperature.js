@@ -10,15 +10,6 @@ import {
   Legend,
 } from 'recharts';
 
-// const data = [
-//   { Location: 100, avgTemperature: 200, avgtemptoday: 200 },
-//   { Location: 120, avgTemperature: 100, avgtemptoday: 260 },
-//   { Location: 170, avgTemperature: 300, avgtemptoday: 400 },
-//   { Location: 140, avgTemperature: 250, avgtemptoday: 280 },
-//   { Location: 150, avgTemperature: 400, avgtemptoday: 500 },
-//   { Location: 110, avgTemperature: 280, avgtemptoday: 200 },
-// ];
-
 export default class AverageTemperature extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/3mw50Lc9/';
 
@@ -49,7 +40,8 @@ export default class AverageTemperature extends PureComponent {
           type='number'
           dataKey='avgTemperature'
           name='Average Temperature'
-          domain={[90, 106]}
+          domain={[94, 106]}
+          unit='°F'
           label={{
             value: 'Average Temperature',
             angle: -90,
@@ -59,7 +51,7 @@ export default class AverageTemperature extends PureComponent {
         <ZAxis
           type='number'
           dataKey='totalpeople'
-          range={[60, 400]}
+          range={[100, 400]}
           name='Total People'
         />
         <Tooltip cursor={{ strokeDasharray: '10 10' }} />
