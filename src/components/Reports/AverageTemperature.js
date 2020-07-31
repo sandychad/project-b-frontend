@@ -49,6 +49,7 @@ export default class AverageTemperature extends PureComponent {
           type='number'
           dataKey='avgTemperature'
           name='Average Temperature'
+          domain={[90, 106]}
           label={{
             value: 'Average Temperature',
             angle: -90,
@@ -59,7 +60,7 @@ export default class AverageTemperature extends PureComponent {
           type='number'
           dataKey='totalpeople'
           range={[60, 400]}
-          // name='Average Temperature'
+          name='Total People'
         />
         <Tooltip cursor={{ strokeDasharray: '10 10' }} />
         <Legend verticalAlign='top' height={50} />

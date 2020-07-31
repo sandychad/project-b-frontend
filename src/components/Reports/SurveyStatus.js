@@ -49,8 +49,20 @@ export default class SurveyStatus extends PureComponent {
         />
         <Tooltip />
         <Legend verticalAlign='top' height={50} />
-        <Bar dataKey='pass' stackId='a' fill='#82ca9d' legendType='star' />
-        <Bar dataKey='fail' stackId='a' fill='#8884d8' legendType='star' />
+        <Bar
+          dataKey='pass'
+          stackId='a'
+          fill='#82ca9d'
+          legendType='star'
+          unit='%'
+        />
+        <Bar
+          dataKey='fail'
+          stackId='a'
+          fill='#8884d8'
+          legendType='star'
+          unit='%'
+        />
       </BarChart>
     );
   }

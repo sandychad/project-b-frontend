@@ -38,6 +38,7 @@ export default class Example extends PureComponent {
         />
         <YAxis
           dataKey='Temperature'
+          domain={[90, 110]}
           label={{
             value: 'Temperature',
             angle: -90,
