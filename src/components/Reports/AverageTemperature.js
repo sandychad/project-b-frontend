@@ -18,7 +18,7 @@ export default class AverageTemperature extends PureComponent {
 
     return (
       <ScatterChart
-        width={800}
+        width={1000}
         height={600}
         margin={{
           top: 20,
@@ -51,10 +51,10 @@ export default class AverageTemperature extends PureComponent {
         <ZAxis
           type='number'
           dataKey='totalpeople'
-          range={[100, 400]}
+          range={[100, 1000]}
           name='Total People'
         />
-        <Tooltip cursor={{ strokeDasharray: '10 10' }} />
+        <Tooltip cursor={{ strokeDasharray: '3 3' }} />
         <Legend verticalAlign='top' height={50} />
         <Scatter
           name='Average Temperature'
@@ -66,52 +66,3 @@ export default class AverageTemperature extends PureComponent {
     );
   }
 }
-
-/*  render() {
-    return (
-      <ScatterChart
-        width={800}
-        height={500}
-        margin={{
-          top: 20,
-          right: 30,
-          left: 20,
-          bottom: 65,
-        }}
-      >
-        <CartesianGrid />
-        <XAxis
-          type='number'
-          dataKey='Location'
-          name='Location'
-          angle='-60'
-          tickMargin='40'
-          position='left'
-        />
-        <YAxis
-          dataKey='avgTemperature'
-          label={{
-            value: 'Average Temperature',
-            angle: -90,
-            position: 'insideLeft',
-          }}
-        />
-        <ZAxis
-          type='number'
-          dataKey='avgtemptoday'
-          range={[60, 300]}
-          name='Average Temperature Today'
-        />
-        <Tooltip cursor={{ strokeDasharray: '6 6' }} />
-        <Legend verticalAlign='top' height={50} />
-        <Scatter
-          name='Average Temperature'
-          //          data={data}
-          fill='#8884d8'
-          shape='star'
-        />
-      </ScatterChart>
-    );
-  }
-}
- */

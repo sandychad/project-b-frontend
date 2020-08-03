@@ -48,8 +48,8 @@ export default class WeeklySurveyCount extends PureComponent {
 
     return (
       <LineChart
-        width={800}
-        height={500}
+        width={1000}
+        height={600}
         data={data}
         margin={{
           top: 20,
@@ -58,7 +58,7 @@ export default class WeeklySurveyCount extends PureComponent {
           bottom: 65,
         }}
       >
-        <CartesianGrid strokeDasharray='10 10' />
+        <CartesianGrid strokeDasharray='3 3' />
         <XAxis
           dataKey='date'
           name='7 days'

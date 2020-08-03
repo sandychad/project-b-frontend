@@ -17,7 +17,7 @@ export class Home extends Component {
       <Container style={containerStyle}>
         <div className='ss-container'>
           <h3 className='ss-color'>SymScreen – How It Works?</h3>
-          <div class='text-left'>
+          <div className='text-left'>
             <h4>Overview</h4>
             <p>
               <b>- Build a safe workplace</b> by pre-screening employees before
@@ -48,8 +48,8 @@ export class Home extends Component {
             <p>Employee selects their name</p>
             <p>Enters temperature, answers few questions, and submits survey</p>
           </div>
-          <div class='text-left'>
-            <h3 class={'text-left text-primary'}>Contact</h3>
+          <div className='text-left'>
+            <h3 className={'text-left text-primary'}>Contact</h3>
             <p>
               <b>Sales:</b>{' '}
               <a href='mailto:sales@symscreen.com'>sales@symscreen.com</a>

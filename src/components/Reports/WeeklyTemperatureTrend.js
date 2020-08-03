@@ -47,8 +47,8 @@ export default class WeeklyTemperatureTrend extends PureComponent {
   render() {
     return (
       <LineChart
-        width={800}
-        height={500}
+        width={1000}
+        height={600}
         data={data}
         margin={{
           top: 20,
