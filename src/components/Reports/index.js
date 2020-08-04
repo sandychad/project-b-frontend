@@ -61,7 +61,7 @@ export class Reports extends Component {
         {isLoading ? (
           <Loading />
         ) : (
-          <Fragment className='center'>
+          <Fragment>
             <h2 className='text-center'>Survey Status - Bar Chart</h2>
             <br />
             <SurveyStatus data={dailySurveyStatusByLocation} />
