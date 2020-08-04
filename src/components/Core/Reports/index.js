@@ -57,7 +57,7 @@ export class Reports extends Component {
     } = this.props;
 
     return (
-      <Container style={containerStyle} fluid='md'>
+      <Container style={containerStyle} className='justify-content-md-center'>
         {isLoading ? (
           <Loading />
         ) : (
