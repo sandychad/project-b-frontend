@@ -12,7 +12,7 @@ import OptionsWithParent from './fields/Options/OptionsWithParent';
 import OptionsWithoutParent from './fields/Options/OptionsWithoutParent';
 import Parent from './fields/Parent';
 import TemperatureWithoutParent from './fields/Temperature/TemperatureWithoutParent';
-import * as paths from '../../../utils/paths';
+import * as paths from '../../../../utils/paths';
 
 export class Survey extends Component {
   render() {

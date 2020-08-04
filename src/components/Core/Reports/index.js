@@ -4,13 +4,13 @@ import React, { Component, Fragment } from 'react';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getData } from '../../redux/actions/data';
+import { getData } from '../../../redux/actions/data';
 
 // Bootstrap
 import { Container } from 'react-bootstrap';
 
 // Local components
-import Loading from '../common/Loading';
+import Loading from '../../common/Loading';
 import DailySurveyResult from './DailySurveyResult';
 import SurveyStatus from './SurveyStatus';
 import EmployeeTempResults from './EmployeeTempResults';

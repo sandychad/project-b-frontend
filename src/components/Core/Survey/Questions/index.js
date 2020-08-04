@@ -4,7 +4,7 @@ import React, { Component } from 'react';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { getQuestions, submitForm } from '../../../redux/actions/survey';
+import { getQuestions, submitForm } from '../../../../redux/actions/survey';
 
 // React Router
 import { Redirect } from 'react-router-dom';
@@ -17,10 +17,10 @@ import { Container } from 'react-bootstrap';
 
 // Local Components
 import Decision from './Decision';
-import { Loading } from '../../common/Loading';
+import { Loading } from '../../../common/Loading';
 import Survey from './Survey';
 import { getFormSchema } from './helpers';
-import * as paths from '../../../utils/paths';
+import * as paths from '../../../../utils/paths';
 
 export class Questions extends Component {
   constructor(props) {

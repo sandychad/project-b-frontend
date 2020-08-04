@@ -67,7 +67,7 @@ class Header extends Component {
 
   render() {
     const { org_name, cities, city } = this.props;
-    const { isAuthenticated } = this.props.auth;
+    const { isAuthenticated, user } = this.props.auth;
     const { pathname } = this.props.location;
 
     return (
@@ -79,17 +79,25 @@ class Header extends Component {
           <Nav.Link as={NavLink} to={paths.ABOUT_PATH}>
             About
           </Nav.Link>
-          <NavDropdown title='App' id='basic-nav-dropdown'>
-            <NavDropdown.Item as={NavLink} to={paths.SURVEY_PATH}>
-              Survey
-            </NavDropdown.Item>
-            <NavDropdown.Item as={NavLink} to={paths.REPORTS_PATH}>
-              Reports
-            </NavDropdown.Item>
-            {/* <NavDropdown.Item as={NavLink} to={paths.USERMANAGEMENT_PATH}>
-              User Management
-            </NavDropdown.Item> */}
-          </NavDropdown>
+          {user ? (
+            <NavDropdown title='App' id='basic-nav-dropdown'>
+              {user.role.includes('Location Security') ? (
+                <NavDropdown.Item as={NavLink} to={paths.SURVEY_PATH}>
+                  Survey
+                </NavDropdown.Item>
+              ) : null}
+              {user.role.includes('COVID Admin') ? (
+                <NavDropdown.Item as={NavLink} to={paths.REPORTS_PATH}>
+                  Reports
+                </NavDropdown.Item>
+              ) : null}
+              {user.role.includes('System Admin') ? (
+                <NavDropdown.Item as={NavLink} to={paths.USER_MANAGEMENT_PATH}>
+                  Users
+                </NavDropdown.Item>
+              ) : null}
+            </NavDropdown>
+          ) : null}
         </Nav>
         <Navbar.Collapse className='justify-content-end'>
           <SplitButton

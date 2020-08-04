@@ -8,7 +8,7 @@ import { useSelector } from 'react-redux';
 import { Modal, Button } from 'react-bootstrap';
 
 // Local Components
-import { Loading } from '../../common/Loading';
+import { Loading } from '../../../common/Loading';
 
 export default function Decision(props) {
   const decision = useSelector((state) => state.survey.decision);

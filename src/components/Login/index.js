@@ -19,6 +19,7 @@ import { Container } from 'react-bootstrap';
 // Local Components
 import LoginForm from './LoginForm';
 import ErrorMessage from '../common/ErrorMessage';
+import * as paths from '../../utils/paths';
 
 const containerStyle = {
   marginTop: '7rem',
@@ -34,10 +35,8 @@ class Login extends Component {
   render() {
     const { login, isAuthenticated, errors } = this.props;
 
-    const dashboardPath = '/dashboard';
-
     if (isAuthenticated) {
-      return <Redirect to={dashboardPath} />;
+      return <Redirect to={paths.APP_PATH} />;
     }
     return (
       <Container style={containerStyle}>

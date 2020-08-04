@@ -14,7 +14,7 @@ import { Container } from 'react-bootstrap';
 // Local Components
 import People from './People';
 import Questions from './Questions';
-import * as paths from '../../utils/paths';
+import * as paths from '../../../utils/paths';
 
 // Local Styles
 const containerStyle = {

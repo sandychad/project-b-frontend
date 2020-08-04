@@ -4,8 +4,8 @@ import React, { Component, Fragment } from 'react';
 // Redux
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
-import { setPerson } from '../../../redux/actions/survey';
-import { getPeople } from '../../../redux/actions/people';
+import { setPerson } from '../../../../redux/actions/survey';
+import { getPeople } from '../../../../redux/actions/people';
 
 // React Router
 import { Redirect } from 'react-router-dom';
@@ -14,7 +14,7 @@ import { Redirect } from 'react-router-dom';
 import { Container } from 'react-bootstrap';
 
 // Local Components
-import { Loading } from '../../common/Loading';
+import { Loading } from '../../../common/Loading';
 import {
   getLetters,
   disableLetters,
@@ -23,7 +23,7 @@ import {
 } from './helpers';
 import LastNameSearch from './LastNameSearch';
 import PeopleButtonList from './PeopleButtonList';
-import * as paths from '../../../utils/paths';
+import * as paths from '../../../../utils/paths';
 let letters = getLetters();
 
 export class People extends Component {
