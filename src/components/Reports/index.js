@@ -62,33 +62,33 @@ export class Reports extends Component {
           <Loading />
         ) : (
           <Fragment>
-            <h2 class='text-center'>Survey Status - Bar Chart</h2>
+            <h2 className='text-center'>Survey Status - Bar Chart</h2>
             <br />
             <SurveyStatus data={dailySurveyStatusByLocation} />
             <br /> <br />
-            <h2 class='text-center'>Daily Survey Results - Line Chart</h2>
+            <h2 className='text-center'>Daily Survey Results - Line Chart</h2>
             <br />
             <DailySurveyResult data={dailySurveyStatusLineByLocation} />
             <br /> <br />
-            <h2 class='text-center'>Failed Surveys</h2>
+            <h2 className='text-center'>Failed Surveys</h2>
             <br />
             <FailedSurvey data={failedSurveyCountByDate} />
             <br /> <br />
-            <h2 class='text-center'>
+            <h2 className='text-center'>
               Employee Temperature Results - Scatter Plot
             </h2>
             <br />
             <EmployeeTempResults data={employeeTempByLocation} />
             <br /> <br />
-            <h2 class='text-center'>AverageTemperature</h2>
+            <h2 className='text-center'>AverageTemperature</h2>
             <br />
             <AverageTemperature data={avgTempByLocation} />
             <br /> <br />
-            {/* <h2 class='text-center'>Weekly Survey Count - Single Line Chart</h2>
+            {/* <h2 className='text-center'>Weekly Survey Count - Single Line Chart</h2>
             <br />
             <WeeklySurveyCount data={weeklySurveyCountByLocation} />
             <br /> <br />
-            <h2 class='text-center'>
+            <h2 className='text-center'>
               Weekly Temperature Trend - Single Line Chart
             </h2>
             <br />

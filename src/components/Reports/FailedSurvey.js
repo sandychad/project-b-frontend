@@ -15,15 +15,17 @@ export default class FailedSurvey extends Component {
             <th>Decision</th>
           </tr>
         </thead>
-        {data.map((row) => (
-          <tr>
-            <td>{row[0]}</td>
-            <td>{row[1]}</td>
-            <td>{row[2]}</td>
-            <td>{row[3]}</td>
-            <td>{row[4]}</td>
-          </tr>
-        ))}
+        <tbody>
+          {data.map((row) => (
+            <tr key={row[2]}>
+              <td>{row[0]}</td>
+              <td>{row[1]}</td>
+              <td>{row[2]}</td>
+              <td>{row[3]}</td>
+              <td>{row[4]}</td>
+            </tr>
+          ))}
+        </tbody>
       </Table>
     );
   }
