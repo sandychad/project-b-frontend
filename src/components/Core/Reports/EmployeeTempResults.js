@@ -4,6 +4,7 @@ import {
   Scatter,
   XAxis,
   YAxis,
+  //ZAxis,
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
@@ -19,13 +20,38 @@ const colors = scaleOrdinal(schemeCategory10).range();
 export default class Example extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/9Lfxjjty/';
 
+  state = {
+    opacity: {
+      City: 1,
+
+      //      fail: 1,
+    },
+  };
+
+  handleMouseEnter = (o) => {
+    const { dataKey } = o;
+    const { opacity } = this.state;
+
+    this.setState({
+      opacity: { ...opacity, [dataKey]: 0.5 },
+    });
+  };
+
+  handleMouseLeave = (o) => {
+    const { dataKey } = o;
+    const { opacity } = this.state;
+
+    this.setState({
+      opacity: { ...opacity, [dataKey]: 1 },
+    });
+  };
+
   render() {
+    const { opacity } = this.state;
     const { data } = this.props;
     return (
       <ResponsiveContainer width={'100%'} height={600}>
         <ScatterChart
-          width={1000}
-          height={500}
           data={data}
           margin={{
             top: 20,
@@ -37,8 +63,8 @@ export default class Example extends PureComponent {
           <CartesianGrid />
           <XAxis
             dataKey='Employee ID'
-            angle='-60'
-            tickMargin='40'
+            angle={-60}
+            tickMargin={40}
             position='left'
             padding={{ left: 50, right: 50 }}
           />
@@ -52,8 +78,15 @@ export default class Example extends PureComponent {
               position: 'insideLeft',
             }}
           />
-          <Legend verticalAlign='top' height={50} layout='vertical' />
-          <Tooltip cursor={{ strokeDasharray: '1 1' }} />
+          {/* <ZAxis dataKey='City' name='City' />  */}
+          <Legend
+            verticalAlign='top'
+            height={50}
+            layout='vertical'
+            onMouseEnter={this.handleMouseEnter}
+            onMouseLeave={this.handleMouseLeave}
+          />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <ReferenceLine
             y={104}
             label={{ position: 'top', value: 'Upper Limit' }}
@@ -65,10 +98,12 @@ export default class Example extends PureComponent {
             stroke='green'
           />
           <Scatter
-            //dataKey='Location'
+            //            name='City'
             data={data}
+            dataKey='City'
+            strokeOpacity={opacity.City}
+            shape='wye'
             fill='#8884d8'
-            name='Locatoion by color'
           >
             {data.map((entry, index) => (
               <Cell

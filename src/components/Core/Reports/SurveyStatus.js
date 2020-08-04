@@ -29,7 +29,7 @@ export default class SurveyStatus extends PureComponent {
           }}
         >
           <CartesianGrid strokeDasharray='3 3' />
-          <XAxis dataKey='location' tickMargin='40' angle='-60' position='left'>
+          <XAxis dataKey='location' tickMargin={40} angle={-60} position='left'>
             <label position='insideBottomRight' dy={10} dx={20} />
           </XAxis>
           <YAxis
@@ -41,7 +41,7 @@ export default class SurveyStatus extends PureComponent {
               position: 'insideLeft',
             }}
           />
-          <Tooltip />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <Legend verticalAlign='top' height={50} />
           <Bar
             dataKey='pass'

@@ -30,9 +30,8 @@ export default class AverageTemperature extends PureComponent {
           <CartesianGrid />
           <XAxis
             dataKey='location'
-            name='Location'
-            angle='-60'
-            tickMargin='40'
+            angle={-60}
+            tickMargin={40}
             position='left'
             padding={{ left: 50, right: 50 }}
           />

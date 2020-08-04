@@ -5,6 +5,7 @@ import {
   XAxis,
   YAxis,
   CartesianGrid,
+  ResponsiveContainer,
   Tooltip,
   Legend,
 } from 'recharts';
@@ -47,43 +48,43 @@ export default class WeeklySurveyCount extends PureComponent {
     const { data } = this.props;
 
     return (
-      <LineChart
-        width={1000}
-        height={600}
-        data={data}
-        margin={{
-          top: 20,
-          right: 30,
-          left: 20,
-          bottom: 65,
-        }}
-      >
-        <CartesianGrid strokeDasharray='3 3' />
-        <XAxis
-          dataKey='date'
-          name='7 days'
-          angle='-60'
-          tickMargin='40'
-          position='left'
-        />
-        <YAxis
-          dataKey='surveycount'
-          label={{
-            value: 'Survey Count',
-            angle: -90,
-            position: 'left',
+      <ResponsiveContainer width={'100%'} height={600}>
+        <LineChart
+          data={data}
+          margin={{
+            top: 20,
+            right: 30,
+            left: 20,
+            bottom: 65,
           }}
-        />
-        <Tooltip />
-        <Legend verticalAlign='top' height={50} />
+        >
+          <CartesianGrid strokeDasharray='3 3' />
+          <XAxis
+            dataKey='date'
+            name='7 days'
+            angle={-60}
+            tickMargin={40}
+            position='left'
+          />
+          <YAxis
+            dataKey='surveycount'
+            label={{
+              value: 'Survey Count',
+              angle: -90,
+              position: 'left',
+            }}
+          />
+          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+          <Legend verticalAlign='top' height={50} />
 
-        <Line
-          type='monotone'
-          name='Weekly Survey Count'
-          stroke='#8884d8'
-          activeDot={{ r: 8 }}
-        />
-      </LineChart>
+          <Line
+            type='monotone'
+            name='Weekly Survey Count'
+            stroke='#8884d8'
+            activeDot={{ r: 8 }}
+          />
+        </LineChart>
+      </ResponsiveContainer>
     );
   }
 }
