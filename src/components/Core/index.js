@@ -27,7 +27,7 @@ const redirectPath = (user) => {
 
 export class Core extends Component {
   static propTypes = {
-    user: PropTypes.object.isRequired,
+    user: PropTypes.object,
   };
   render() {
     if (this.props.user) {
