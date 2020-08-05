@@ -24,6 +24,7 @@ const ChooseDate = (props) => {
     <Container className='text-right'>
       <DatePicker
         selected={dateObjectFromString(props.date)}
+        maxDate={new Date()}
         onChange={(date) => props.setDate(date)}
         dateFormat='yyyy-MM-dd'
       />
