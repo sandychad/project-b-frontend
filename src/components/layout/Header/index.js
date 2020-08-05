@@ -100,18 +100,26 @@ class Header extends Component {
           ) : null}
         </Nav>
         <Navbar.Collapse className='justify-content-end'>
-          <SplitButton
-            alignRight
-            variant='primary'
-            title={org_name + ' | ' + (city !== '' ? city : 'Location')}
-            disabled={pathname === paths.PEOPLE_SEARCH_PATH ? false : true}
-          >
-            <CityDropdown
-              cities={cities}
-              searchCity={city}
-              handleClick={(e) => this.handleClick(e)}
-            />
-          </SplitButton>
+          {user ? (
+            <SplitButton
+              alignRight
+              variant='primary'
+              title={
+                org_name +
+                (pathname === paths.PEOPLE_SEARCH_PATH
+                  ? ' | ' + (city !== '' ? city : 'Location')
+                  : '')
+              }
+              disabled={pathname === paths.PEOPLE_SEARCH_PATH ? false : true}
+            >
+              <CityDropdown
+                cities={cities}
+                searchCity={city}
+                handleClick={(e) => this.handleClick(e)}
+              />
+            </SplitButton>
+          ) : null}
+
           {isAuthenticated ? (
             <LogoutButton handleLogout={() => this.handleLogout()} />
           ) : (
