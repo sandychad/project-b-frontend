@@ -3,7 +3,7 @@ import * as actions from './types';
 
 // Helper Functions
 import api from '../../utils/api';
-import { today } from '../../utils/today';
+import { getDateString } from '../../utils/today';
 
 // GET PEOPLE
 export const getPeople = (city = '') => async (dispatch) => {
@@ -13,7 +13,7 @@ export const getPeople = (city = '') => async (dispatch) => {
       type: actions.PEOPLE_LOADING,
     });
 
-    const todaysDate = today();
+    const todaysDate = getDateString();
 
     let querystring = `?date=${todaysDate}`;
 

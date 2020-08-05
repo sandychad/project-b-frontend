@@ -1,9 +1,13 @@
 // Import Action Types
 import * as actions from '../actions/types';
 
+// Helper functions
+import { getDateString } from '../../utils/today';
+
 // Initialize State
 const initialState = {
   isLoading: false,
+  date: getDateString(),
   avgTempByLocation: [],
   dailySurveyStatusByLocation: [],
   dailySurveyStatusLineByLocation: [],
@@ -16,6 +20,11 @@ const initialState = {
 // Reducer Function (switches on action type)
 export default function (state = initialState, action) {
   switch (action.type) {
+    case actions.SET_DATE:
+      return {
+        ...state,
+        date: action.payload,
+      };
     case actions.DATA_LOADING:
       return {
         ...state,

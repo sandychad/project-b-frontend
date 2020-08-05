@@ -18,6 +18,7 @@ export const SUBMIT_FORM = 'SUBMIT_FORM';
 export const DECISION_LOADED = 'DECISION_LOADED';
 export const DATA_LOADING = 'DATA_LOADING';
 export const DATA_LOADED = 'DATA_LOADED';
+export const SET_DATE = 'SET_DATE';
 
 // AUTH
 export const USER_LOADING = 'USER_LOADING';

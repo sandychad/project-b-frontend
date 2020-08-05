@@ -18,6 +18,7 @@ import FailedSurvey from './FailedSurvey';
 import AverageTemperature from './AverageTemperature';
 //import WeeklySurveyCount from './WeeklySurveyCount';
 //import WeeklyTemperatureTrend from './WeeklyTemperatureTrend';
+import ChooseDate from './ChooseDate';
 
 // Local Styles
 const containerStyle = {
@@ -27,6 +28,7 @@ const containerStyle = {
 
 export class Reports extends Component {
   static propTypes = {
+    date: PropTypes.string.isRequired,
     getData: PropTypes.func.isRequired,
     isLoading: PropTypes.bool.isRequired,
     avgTempByLocation: PropTypes.array.isRequired,
@@ -39,9 +41,17 @@ export class Reports extends Component {
   };
 
   componentDidMount() {
-    const { getData } = this.props;
+    const { getData, date } = this.props;
 
-    getData();
+    getData(date);
+  }
+
+  componentDidUpdate(prevProps) {
+    const { getData, date } = this.props;
+
+    if (prevProps.date !== date) {
+      getData(date);
+    }
   }
 
   render() {
@@ -57,11 +67,12 @@ export class Reports extends Component {
     } = this.props;
 
     return (
-      <Container style={containerStyle} className='justify-content-md-center'>
+      <Container style={containerStyle}>
         {isLoading ? (
           <Loading />
         ) : (
           <Fragment>
+            <ChooseDate />
             <h2 className='text-center'>Survey Status - Bar Chart</h2>
             <br />
             <SurveyStatus data={dailySurveyStatusByLocation} />
@@ -101,6 +112,7 @@ export class Reports extends Component {
 }
 
 const mapStateToProps = (state) => ({
+  date: state.data.date,
   isLoading: state.data.isLoading,
   avgTempByLocation: state.data.avgTempByLocation,
   dailySurveyStatusByLocation: state.data.dailySurveyStatusByLocation,

@@ -2,20 +2,30 @@
 import * as actions from './types';
 
 // Helper functions
-import { today } from '../../utils/today';
+import { getDateString } from '../../utils/today';
 import api from '../../utils/api';
 
+// SET DATE
+export const setDate = (date) => (dispatch) => {
+  // Process date
+  date = getDateString(date);
+
+  // Send Message: SET DATE
+  dispatch({
+    type: actions.SET_DATE,
+    payload: date,
+  });
+};
+
 // GET DATA
-export const getData = () => async (dispatch) => {
+export const getData = (date = getDateString()) => async (dispatch) => {
   try {
     // Send Message: DATA LOADING
     dispatch({
       type: actions.DATA_LOADING,
     });
 
-    const todaysDate = today();
-
-    let querystring = `?date=${todaysDate}`;
+    let querystring = `?date=${date}`;
 
     const avgTempByLocation = await api.get(
       `data/average-temp-by-location${querystring}`

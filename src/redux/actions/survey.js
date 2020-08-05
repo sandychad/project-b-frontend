@@ -2,7 +2,7 @@
 import * as actions from './types';
 
 // Helper functions
-import { today } from '../../utils/today';
+import { getDateString } from '../../utils/today';
 import api from '../../utils/api';
 
 // GET QUESTIONS
@@ -44,7 +44,7 @@ export const submitForm = (response) => async (dispatch) => {
     });
 
     // Add date
-    response['date'] = today();
+    response['date'] = getDateString();
 
     // Send POST request to /submit/ endpoint
     const res = await api.post('/submit/', response);
