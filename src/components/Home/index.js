@@ -7,24 +7,30 @@ import { Container, Image } from 'react-bootstrap';
 // HomePage image
 import HomePage1 from '../layout/assets/HomePage1.JPG';
 
+// CSS for the home page
+import '../../css/home.css';
+
 // Local Styles
 const containerStyle = {
   marginTop: '80px',
   height: '100%',
   textAlign: 'center',
+  width: '80%',
 };
 
 export class Home extends Component {
   render() {
     return (
       <Container style={containerStyle}>
-        <div className='ss-container'>
+        <div>
           <br /> <br />
           <Image src={HomePage1} height='500' width='100%' />
           <br />
           <br />
           <br />
-          <p>
+        </div>
+        <div>
+          <p class='impact' style={{ color: '#007bff' }}>
             Fast and Easy Self-Assessment by employees for COVID-19 Symptoms,
             enabling a Safe and Healthy Workplace
           </p>
