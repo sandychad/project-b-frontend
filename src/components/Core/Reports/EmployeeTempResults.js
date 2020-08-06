@@ -26,9 +26,9 @@ const getColorsFromData = (data) => {
   let cities = [];
   let colors = {};
   data.map((row) => {
-    const city = row['City'];
+    const city = row['City'].trim();
     if (!cities.includes(city)) {
-      cities.push(city.trim());
+      cities.push(city);
     }
     return row;
   });
