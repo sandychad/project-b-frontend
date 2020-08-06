@@ -1,5 +1,5 @@
 // React
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 
 // React Router
 import { Link, NavLink } from 'react-router-dom';
@@ -26,6 +26,26 @@ import * as paths from '../../../utils/paths';
 
 // Logo
 import logo from './assets/SymScreenLogo.JPG';
+
+const appLinks = (user) => (
+  <Fragment>
+    {user.role.includes('Location Security') ? (
+      <NavDropdown.Item as={NavLink} to={paths.SURVEY_PATH}>
+        Survey
+      </NavDropdown.Item>
+    ) : null}
+    {user.role.includes('COVID Admin') ? (
+      <NavDropdown.Item as={NavLink} to={paths.REPORTS_PATH}>
+        Reports
+      </NavDropdown.Item>
+    ) : null}
+    {/*{user.role.includes('System Admin') ? (
+      <NavDropdown.Item as={NavLink} to={paths.USER_MANAGEMENT_PATH}>
+        Users
+      </NavDropdown.Item>
+    ) : null}*/}
+  </Fragment>
+);
 
 // Component
 class Header extends Component {
@@ -81,21 +101,7 @@ class Header extends Component {
           </Nav.Link>
           {user ? (
             <NavDropdown title='App' id='basic-nav-dropdown'>
-              {user.role.includes('Location Security') ? (
-                <NavDropdown.Item as={NavLink} to={paths.SURVEY_PATH}>
-                  Survey
-                </NavDropdown.Item>
-              ) : null}
-              {user.role.includes('COVID Admin') ? (
-                <NavDropdown.Item as={NavLink} to={paths.REPORTS_PATH}>
-                  Reports
-                </NavDropdown.Item>
-              ) : null}
-              {user.role.includes('System Admin') ? (
-                <NavDropdown.Item as={NavLink} to={paths.USER_MANAGEMENT_PATH}>
-                  Users
-                </NavDropdown.Item>
-              ) : null}
+              {appLinks(user)}
             </NavDropdown>
           ) : null}
         </Nav>
