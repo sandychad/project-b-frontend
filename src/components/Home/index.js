@@ -13,7 +13,7 @@ import '../../css/home.css';
 // Local Styles
 const containerStyle = {
   marginTop: '80px',
-  height: '100%',
+
   textAlign: 'center',
   width: '80%',
 };
@@ -24,7 +24,7 @@ export class Home extends Component {
       <Container style={containerStyle}>
         <div>
           <br /> <br />
-          <Image src={HomePage1} height='500' width='100%' />
+          <Image src={HomePage1} height='100%' width='100%' />
           <br />
           <br />
           <br />
