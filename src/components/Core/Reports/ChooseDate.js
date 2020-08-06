@@ -26,7 +26,6 @@ const ChooseDate = (props) => {
         selected={dateObjectFromString(props.date)}
         maxDate={new Date()}
         onChange={(date) => props.setDate(date)}
-        dateFormat='yyyy-MM-dd'
       />
     </Container>
   );
