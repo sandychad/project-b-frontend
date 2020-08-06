@@ -23,26 +23,28 @@ const getRandomColor = () => {
 };
 
 const getColorsFromData = (data) => {
-  for (let row in data) {
-    let cities = [];
-    if (cities.includes(row.City)) {
-      cities.push(row.City);
+  let cities = [];
+  let colors = {};
+  data.map((row) => {
+    const city = row['City'];
+    if (!cities.includes(city)) {
+      cities.push(city.trim());
     }
-    let colors = {};
-    cities.map((city) => {
-      colors.city = getRandomColor();      
-    });
-  }
+    return row;
+  });
+  cities.map((city) => {
+    colors[city] = getRandomColor();
+    return city;
+  });
+  return colors;
 };
 
-export default class Example extends PureComponent {
+export default class EmployeeTempResults extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/9Lfxjjty/';
 
   render() {
     const { data } = this.props;
-
     const colors = getColorsFromData(data);
-
     return (
       <ResponsiveContainer width={'100%'} height={600}>
         <ScatterChart
@@ -93,13 +95,8 @@ export default class Example extends PureComponent {
             fill='#8884d8'
           >
             {data.map((row, index) => {
-
-            } (
-              <Cell
-                key={`cell-${index}`}
-                fill={colors}
-              />
-            ))}
+              return <Cell key={`cell-${index}`} fill={colors[row.City]} />;
+            })}
           </Scatter>
         </ScatterChart>
       </ResponsiveContainer>
