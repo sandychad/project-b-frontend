@@ -40,8 +40,9 @@ export default function (state = initialState, action) {
           action.payload.dailySurveyStatusLineByLocation,
         employeeTempByLocation: action.payload.employeeTempByLocation,
         failedSurveyCountByDate: action.payload.failedSurveyCountByDate,
-        weeklySurveyCountByLocation: action.payload.weeklySurveyCountByLocation,
-        weeklyTempTrendByLocation: action.payload.weeklyTempTrendByLocation,
+        // Trend endpoints not currently in use
+        // weeklySurveyCountByLocation: action.payload.weeklySurveyCountByLocation,
+        // weeklyTempTrendByLocation: action.payload.weeklyTempTrendByLocation,
       };
     default:
       return state;

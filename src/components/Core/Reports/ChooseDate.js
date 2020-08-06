@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 import { setDate } from '../../../redux/actions/data';
 
 // Bootstrap
-import { Container } from 'react-bootstrap';
+import { Container, Row } from 'react-bootstrap';
 
 // Date Picker
 import DatePicker from 'react-datepicker';
@@ -21,12 +21,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 
 const ChooseDate = (props) => {
   return (
-    <Container className='text-right'>
-      <DatePicker
-        selected={dateObjectFromString(props.date)}
-        maxDate={new Date()}
-        onChange={(date) => props.setDate(date)}
-      />
+    <Container>
+      <Row className='justify-content-md-end'>
+        <h5 style={{ marginTop: 4, marginRight: 5 }}>Select Date:</h5>
+        <DatePicker
+          selected={dateObjectFromString(props.date)}
+          maxDate={new Date()}
+          onChange={(date) => props.setDate(date)}
+        />
+      </Row>
     </Container>
   );
 };
