@@ -4,7 +4,7 @@ import {
   Scatter,
   XAxis,
   YAxis,
-  //ZAxis,
+  ZAxis,
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
@@ -12,43 +12,37 @@ import {
   ReferenceLine,
   Cell,
 } from 'recharts';
-import { scaleOrdinal } from 'd3-scale';
-import { schemeCategory10 } from 'd3-scale-chromatic';
 
-const colors = scaleOrdinal(schemeCategory10).range();
+const getRandomColor = () => {
+  const letters = '0123456789ABCDEF';
+  let color = '#';
+  for (let i = 0; i < 6; i++) {
+    color += letters[Math.floor(Math.random() * 16)];
+  }
+  return color;
+};
+
+const getColorsFromData = (data) => {
+  for (let row in data) {
+    let cities = [];
+    if (cities.includes(row.City)) {
+      cities.push(row.City);
+    }
+    let colors = {};
+    cities.map((city) => {
+      colors.city = getRandomColor();      
+    });
+  }
+};
 
 export default class Example extends PureComponent {
   static jsfiddleUrl = 'https://jsfiddle.net/alidingling/9Lfxjjty/';
 
-  state = {
-    opacity: {
-      City: 1,
-
-      //      fail: 1,
-    },
-  };
-
-  handleMouseEnter = (o) => {
-    const { dataKey } = o;
-    const { opacity } = this.state;
-
-    this.setState({
-      opacity: { ...opacity, [dataKey]: 0.5 },
-    });
-  };
-
-  handleMouseLeave = (o) => {
-    const { dataKey } = o;
-    const { opacity } = this.state;
-
-    this.setState({
-      opacity: { ...opacity, [dataKey]: 1 },
-    });
-  };
-
   render() {
-    const { opacity } = this.state;
     const { data } = this.props;
+
+    const colors = getColorsFromData(data);
+
     return (
       <ResponsiveContainer width={'100%'} height={600}>
         <ScatterChart
@@ -78,14 +72,8 @@ export default class Example extends PureComponent {
               position: 'insideLeft',
             }}
           />
-          {/* <ZAxis dataKey='City' name='City' />  */}
-          <Legend
-            verticalAlign='top'
-            height={50}
-            layout='vertical'
-            onMouseEnter={this.handleMouseEnter}
-            onMouseLeave={this.handleMouseLeave}
-          />
+          <ZAxis dataKey='City' name='City' />
+          <Legend verticalAlign='top' height={50} layout='vertical' />
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <ReferenceLine
             y={104}
@@ -101,14 +89,15 @@ export default class Example extends PureComponent {
             //            name='City'
             data={data}
             dataKey='City'
-            strokeOpacity={opacity.City}
             shape='wye'
             fill='#8884d8'
           >
-            {data.map((entry, index) => (
+            {data.map((row, index) => {
+
+            } (
               <Cell
                 key={`cell-${index}`}
-                fill={colors[index % colors.length]}
+                fill={colors}
               />
             ))}
           </Scatter>
