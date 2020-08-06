@@ -2,6 +2,7 @@ import React, { PureComponent } from 'react';
 import {
   BarChart,
   Bar,
+  Brush,
   XAxis,
   YAxis,
   CartesianGrid,
@@ -50,6 +51,7 @@ export default class SurveyStatus extends PureComponent {
             legendType='star'
             unit='%'
           />
+
           <Bar
             dataKey='fail'
             stackId='a'
@@ -57,6 +59,7 @@ export default class SurveyStatus extends PureComponent {
             legendType='star'
             unit='%'
           />
+          <Brush dataKey='name' height={30} stroke='#8884d8' />
         </BarChart>
       </ResponsiveContainer>
     );

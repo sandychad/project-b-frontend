@@ -8,7 +8,6 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
-  Legend,
 } from 'recharts';
 
 export default class AverageTemperature extends PureComponent {
@@ -30,6 +29,7 @@ export default class AverageTemperature extends PureComponent {
           <CartesianGrid />
           <XAxis
             dataKey='location'
+            name='Location'
             angle={-60}
             tickMargin={40}
             position='left'
@@ -42,7 +42,7 @@ export default class AverageTemperature extends PureComponent {
             domain={[94, 106]}
             unit='°F'
             label={{
-              value: 'Average Temperature',
+              value: 'Temperature',
               angle: -90,
               position: 'insideLeft',
             }}
@@ -54,7 +54,7 @@ export default class AverageTemperature extends PureComponent {
             name='Total People'
           />
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
-          <Legend verticalAlign='top' height={50} />
+          {/* <Legend /> */}
           <Scatter
             name='Average Temperature'
             data={data}

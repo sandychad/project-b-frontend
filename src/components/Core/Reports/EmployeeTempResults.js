@@ -8,7 +8,6 @@ import {
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
-  Legend,
   ReferenceLine,
   Cell,
 } from 'recharts';
@@ -75,7 +74,7 @@ export default class EmployeeTempResults extends PureComponent {
             }}
           />
           <ZAxis dataKey='City' name='City' />
-          <Legend verticalAlign='top' height={50} layout='vertical' />
+          {/* <Legend /> */}
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <ReferenceLine
             y={104}
@@ -87,13 +86,7 @@ export default class EmployeeTempResults extends PureComponent {
             label={{ position: 'bottom', value: 'Lower Limit' }}
             stroke='green'
           />
-          <Scatter
-            //            name='City'
-            data={data}
-            dataKey='City'
-            shape='wye'
-            fill='#8884d8'
-          >
+          <Scatter data={data} dataKey='City' shape='wye' fill='#8884d8'>
             {data.map((row, index) => {
               return <Cell key={`cell-${index}`} fill={colors[row.City]} />;
             })}
