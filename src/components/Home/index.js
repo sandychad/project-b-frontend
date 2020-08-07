@@ -23,14 +23,15 @@ export class Home extends Component {
     return (
       <Container style={containerStyle}>
         <div>
-          <br /> <br />
+          <br />
+          <br />
           <Image src={HomePage1} height='100%' width='100%' />
           <br />
           <br />
           <br />
         </div>
         <div>
-          <p class='impact' style={{ color: '#007bff' }}>
+          <p className='impact' style={{ color: '#007bff' }}>
             Fast and Easy Self-Assessment by employees for COVID-19 Symptoms,
             enabling a Safe and Healthy Workplace
           </p>

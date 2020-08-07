@@ -17,7 +17,7 @@ import * as paths from '../../utils/paths';
 const redirectPath = (user) => {
   const { role } = user;
   if (role.includes('Location Security')) {
-    return paths.SURVEY_PATH;
+    return paths.PEOPLE_SEARCH_PATH;
   } else if (role.includes('COVID Admin')) {
     return paths.REPORTS_PATH;
   } else {

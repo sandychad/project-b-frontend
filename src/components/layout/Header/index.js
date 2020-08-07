@@ -30,7 +30,7 @@ import logo from './assets/SymScreenLogo.JPG';
 const appLinks = (user) => (
   <Fragment>
     {user.role.includes('Location Security') ? (
-      <NavDropdown.Item as={NavLink} to={paths.SURVEY_PATH}>
+      <NavDropdown.Item as={NavLink} to={paths.PEOPLE_SEARCH_PATH}>
         Survey
       </NavDropdown.Item>
     ) : null}

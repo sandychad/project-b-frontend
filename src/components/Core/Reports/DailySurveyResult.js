@@ -4,7 +4,6 @@ import {
   Line,
   XAxis,
   YAxis,
-  ZAxis,
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
