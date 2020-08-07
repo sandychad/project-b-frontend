@@ -4,6 +4,7 @@ import {
   Line,
   XAxis,
   YAxis,
+  ZAxis,
   CartesianGrid,
   ResponsiveContainer,
   Tooltip,
@@ -25,7 +26,7 @@ export default class DailySurveyResult extends PureComponent {
     const { opacity } = this.state;
 
     this.setState({
-      opacity: { ...opacity, [dataKey]: 0.5 },
+      opacity: { ...opacity, [dataKey]: 1 },
     });
   };
 
@@ -34,13 +35,12 @@ export default class DailySurveyResult extends PureComponent {
     const { opacity } = this.state;
 
     this.setState({
-      opacity: { ...opacity, [dataKey]: 1 },
+      opacity: { ...opacity, [dataKey]: 0.5 },
     });
   };
 
   render() {
     const { opacity } = this.state;
-
     const { data } = this.props;
 
     return (
@@ -78,23 +78,23 @@ export default class DailySurveyResult extends PureComponent {
           <Line
             type='monotone'
             dataKey='total'
-            stroke='#8884d8'
+            stroke='#22239E'
             activeDot={{ r: 8 }}
             strokeOpacity={opacity.total}
-            strokeDasharray='3 4 5 1'
           />
           <Line
             type='monotone'
             dataKey='pass'
-            stroke='#82ca9d'
+            stroke='#46D22A'
+            activeDot={{ r: 8 }}
             strokeOpacity={opacity.pass}
           />
           <Line
             type='monotone'
             dataKey='fail'
-            stroke='red'
+            stroke='#FF5733'
+            activeDot={{ r: 8 }}
             strokeOpacity={opacity.fail}
-            strokeDasharray='3 4 5 2'
           />
         </LineChart>
       </ResponsiveContainer>
