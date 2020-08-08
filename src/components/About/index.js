@@ -2,7 +2,11 @@
 import React, { Component } from 'react';
 
 // React Bootstrap
-import { Container } from 'react-bootstrap';
+import { Container, Image } from 'react-bootstrap';
+
+// HomePage image
+import Survey_pic from '../layout/assets/Survey_pic.JPG';
+import Decision_pic from '../layout/assets/Decision_pic.JPG';
 
 // CSS for the About page
 import '../../css/faq.css';
@@ -51,13 +55,16 @@ export class About extends Component {
               </li>
             </ul>
 
-            <h4>Data Recording</h4>
+            <h4>Survey Workflow</h4>
             <ul className='a'>
               <li>Measure body temperature</li>
               <li>Employee selects their name</li>
               <li>
                 Enters temperature, answers few questions, and submits survey
               </li>
+              <Image src={Survey_pic} height='100%' width='100%' />
+              <li>Survey Pass / Fail decision shown to user</li>
+              <Image src={Decision_pic} height='100%' width='100%' />
             </ul>
           </div>
           <h3 className='ss-color'>Contact</h3>
