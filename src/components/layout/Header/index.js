@@ -47,6 +47,17 @@ const appLinks = (user) => (
   </Fragment>
 );
 
+const splitButtonTitle = (pathname, org_name, city) => {
+  if (
+    pathname === paths.PEOPLE_SEARCH_PATH ||
+    pathname === paths.SURVEY_QUESTIONS_PATH
+  ) {
+    return org_name + ' | ' + (city !== '' ? city : 'Location');
+  } else {
+    return org_name;
+  }
+};
+
 // Component
 class Header extends Component {
   static propTypes = {
@@ -110,12 +121,7 @@ class Header extends Component {
             <SplitButton
               alignRight
               variant='primary'
-              title={
-                org_name +
-                (pathname === paths.PEOPLE_SEARCH_PATH
-                  ? ' | ' + (city !== '' ? city : 'Location')
-                  : '')
-              }
+              title={splitButtonTitle(pathname, org_name, city)}
               disabled={pathname === paths.PEOPLE_SEARCH_PATH ? false : true}
             >
               <CityDropdown
