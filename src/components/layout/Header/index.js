@@ -73,12 +73,9 @@ class Header extends Component {
     city: PropTypes.string.isRequired,
   };
 
-  componentDidMount() {
-    if (this.props.org_name === '') {
+  componentDidUpdate(prevProps) {
+    if (this.props.auth.user !== prevProps.auth.user) {
       this.props.getOrgName();
-    }
-
-    if (this.props.cities.length === 0) {
       this.props.getCities();
     }
   }
