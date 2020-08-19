@@ -6,16 +6,20 @@ import api from '../../utils/api';
 import { getDateString } from '../../utils/today';
 
 // GET PEOPLE
-export const getPeople = (city = '') => async (dispatch) => {
+export const getPeople = (city = '') => async (dispatch, getState) => {
   try {
     // Send Message: PEOPLE_LOADING
     dispatch({
       type: actions.PEOPLE_LOADING,
     });
 
+    // Generate Today's Date
     const todaysDate = getDateString();
 
-    let querystring = `?date=${todaysDate}`;
+    // Get Org ID from user in state
+    const orgID = getState().auth.user.org;
+
+    let querystring = `?date=${todaysDate}&org=${orgID}`;
 
     // Set querystring if city was provided
     if (city !== '') {
