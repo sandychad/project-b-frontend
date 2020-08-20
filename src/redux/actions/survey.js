@@ -6,15 +6,18 @@ import { getDateString } from '../../utils/today';
 import api from '../../utils/api';
 
 // GET QUESTIONS
-export const getQuestions = () => async (dispatch) => {
+export const getQuestions = () => async (dispatch, getState) => {
   try {
     // Send Message: QUESTIONS_LOADING
     dispatch({
       type: actions.QUESTIONS_LOADING,
     });
 
+    // Get Org ID from user in state
+    const orgID = getState().auth.user.org;
+
     // Send GET request to /questions endpoint
-    const res = await api.get('/questions');
+    const res = await api.get(`/questions?org=${orgID}`);
 
     // Send Message: QUESTIONS_LOADED
     dispatch({
