@@ -18,14 +18,20 @@ export const setDate = (date) => (dispatch) => {
 };
 
 // GET DATA
-export const getData = (date = getDateString()) => async (dispatch) => {
+export const getData = (date = getDateString()) => async (
+  dispatch,
+  getState
+) => {
   try {
     // Send Message: DATA LOADING
     dispatch({
       type: actions.DATA_LOADING,
     });
 
-    let querystring = `?date=${date}`;
+    // Get Org ID from user in state
+    const orgID = getState().auth.user.org;
+
+    let querystring = `?date=${date}&org=${orgID}`;
 
     const avgTempByLocation = await api.get(
       `data/average-temp-by-location${querystring}`
