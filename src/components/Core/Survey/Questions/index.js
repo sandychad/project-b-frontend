@@ -41,11 +41,13 @@ export class Questions extends Component {
   };
 
   componentDidMount() {
-    // Get questions once
-    if (this.props.questions.length > 0) {
-      return;
-    }
     this.props.getQuestions();
+  }
+
+  componentDidUpdate(prevProps) {
+    if (this.props.user !== prevProps.user) {
+      this.props.getQuestions();
+    }
   }
 
   hideDecision() {
@@ -119,6 +121,7 @@ export class Questions extends Component {
 const mapStateToProps = (state) => ({
   questions: state.survey.questions,
   person: state.survey.person,
+  user: state.auth.user,
 });
 
 export default connect(mapStateToProps, { getQuestions, submitForm })(
