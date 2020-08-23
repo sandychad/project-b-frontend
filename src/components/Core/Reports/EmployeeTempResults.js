@@ -58,7 +58,7 @@ export default class EmployeeTempResults extends PureComponent {
           <CartesianGrid />
           <XAxis
             dataKey='Employee ID'
-            angle={-60}
+            angle={-20}
             tickMargin={40}
             position='left'
             padding={{ left: 50, right: 50 }}
@@ -73,7 +73,7 @@ export default class EmployeeTempResults extends PureComponent {
               position: 'insideLeft',
             }}
           />
-          <ZAxis dataKey='City' name='City' />
+          <ZAxis dataKey='City' name='Location' />
           {/* <Legend /> */}
           <Tooltip cursor={{ strokeDasharray: '3 3' }} />
           <ReferenceLine

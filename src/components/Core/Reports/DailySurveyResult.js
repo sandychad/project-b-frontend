@@ -15,8 +15,9 @@ export default class DailySurveyResult extends PureComponent {
 
   state = {
     opacity: {
-      pass: 1,
-      fail: 1,
+      pass: 0.5,
+      fail: 0.5,
+      total: 0.5,
     },
   };
 
@@ -25,7 +26,7 @@ export default class DailySurveyResult extends PureComponent {
     const { opacity } = this.state;
 
     this.setState({
-      opacity: { ...opacity, [dataKey]: 1 },
+      opacity: { ...opacity, [dataKey]: 1.0 },
     });
   };
 
@@ -54,12 +55,14 @@ export default class DailySurveyResult extends PureComponent {
           }}
         >
           <CartesianGrid strokeDasharray='3 3' />
-          <XAxis
-            dataKey='location'
-            tickMargin={40}
-            position='left'
-            angle={-60}
-          />
+          <XAxis name='Location' dataKey='location' tickMargin={30} angle={-20}>
+            <label
+              // position='Right'
+              dy={10}
+              dx={20}
+            />
+          </XAxis>
+
           <YAxis
             label={{
               value: 'Number Of Employees',
@@ -67,31 +70,35 @@ export default class DailySurveyResult extends PureComponent {
               position: 'insideLeft',
             }}
           />
-          <Tooltip cursor={{ strokeDasharray: '3 3' }} />
+
+          <Tooltip cursor={{ strokeDasharray: '4 4' }} />
           <Legend
             verticalAlign='top'
-            height={50}
+            height={40}
             onMouseEnter={this.handleMouseEnter}
             onMouseLeave={this.handleMouseLeave}
           />
           <Line
             type='monotone'
             dataKey='total'
-            stroke='#22239E'
+            name='Total'
+            stroke='Blue'
             activeDot={{ r: 8 }}
             strokeOpacity={opacity.total}
           />
           <Line
             type='monotone'
             dataKey='pass'
-            stroke='#46D22A'
+            name='Pass'
+            stroke='Green'
             activeDot={{ r: 8 }}
             strokeOpacity={opacity.pass}
           />
           <Line
             type='monotone'
             dataKey='fail'
-            stroke='#FF5733'
+            name='Fail'
+            stroke='Red'
             activeDot={{ r: 8 }}
             strokeOpacity={opacity.fail}
           />
