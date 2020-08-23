@@ -51,6 +51,7 @@ export class Questions extends Component {
 
   componentDidUpdate(prevProps) {
     if (this.props.user !== prevProps.user) {
+      this.props.clearQuestions();
       this.props.getQuestions();
     }
   }
@@ -63,10 +64,6 @@ export class Questions extends Component {
   setSubmit() {
     // Set submit flag
     this.setState({ submit: true });
-  }
-
-  componentWillUnmount() {
-    this.props.clearQuestions();
   }
 
   render() {
