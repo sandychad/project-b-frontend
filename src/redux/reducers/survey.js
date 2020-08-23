@@ -23,6 +23,11 @@ export default function (state = initialState, action) {
         questions: action.payload,
         isLoading: false,
       };
+    case actions.CLEAR_QUESTIONS:
+      return {
+        ...state,
+        questions: [],
+      };
     case actions.SET_PERSON:
       return {
         ...state,

@@ -29,6 +29,14 @@ export const getQuestions = () => async (dispatch, getState) => {
   }
 };
 
+// CLEAR QUESTIONS
+export const clearQuestions = () => (dispatch) => {
+  // CLEAR QUESTIONS
+  dispatch({
+    type: actions.CLEAR_QUESTIONS,
+  });
+};
+
 // SET PERSON
 export const setPerson = (person) => (dispatch) => {
   // SET PERSON
