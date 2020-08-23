@@ -55,7 +55,12 @@ export default class DailySurveyResult extends PureComponent {
           }}
         >
           <CartesianGrid strokeDasharray='3 3' />
-          <XAxis name='Location' dataKey='location' tickMargin={30} angle={-20}>
+          <XAxis
+            name='Location'
+            dataKey='location'
+            tickMargin={30}
+            //angle={-20}
+          >
             <label
               // position='Right'
               dy={10}

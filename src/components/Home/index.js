@@ -32,8 +32,8 @@ export class Home extends Component {
         </div>
         <div>
           <p className='impact' style={{ color: '#007bff' }}>
-            Fast and Easy Employee Self-Assessment for COVID-19 Symptoms,
-            Enabling a Safe and Healthy Workplace
+            Fast and Easy Self-Assessment for COVID-19 Symptoms, Enabling a Safe
+            and Healthy Workplace / School
           </p>
         </div>
       </Container>

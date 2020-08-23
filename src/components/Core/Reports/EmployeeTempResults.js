@@ -58,7 +58,7 @@ export default class EmployeeTempResults extends PureComponent {
           <CartesianGrid />
           <XAxis
             dataKey='Employee ID'
-            angle={-20}
+            // angle={-20}
             tickMargin={40}
             position='left'
             padding={{ left: 50, right: 50 }}
