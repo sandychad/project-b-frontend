@@ -52,7 +52,7 @@ export const loadUser = () => async (dispatch, getState) => {
 };
 
 // LOGIN USER
-export const login = (email, password) => async (dispatch, getState) => {
+export const login = (email, password) => async (dispatch) => {
   // Request Body
   const body = JSON.stringify({
     email,
@@ -62,6 +62,53 @@ export const login = (email, password) => async (dispatch, getState) => {
   // Attempt Request using Try-Catch
   try {
     const res = await api.post('/auth/login', body);
+
+    dispatch({
+      type: actions.LOGIN_SUCCESS,
+      payload: res.data,
+    });
+  } catch (err) {
+    // Error Handeling
+    console.error(err.response);
+    dispatch({
+      type: actions.LOGIN_FAILURE,
+      payload: err.response.data,
+    });
+  }
+};
+
+// SCHOOL VALIDATE Hash
+export const schoolValidateHash = (user_hash) => async (dispatch) => {
+  // Request Body
+  const body = JSON.stringify({
+    user_hash,
+  });
+
+  const res = await api.post('/auth/school/validate', body);
+
+  if (res.valid === true) {
+    dispatch({
+      type: actions.HASH_VALID,
+    });
+  } else {
+    // Error Handeling
+    dispatch({
+      type: actions.HASH_INVALID,
+    });
+  }
+};
+
+// SCHOOL LOGIN USER
+export const schoolLogin = (user_hash, student_id) => async (dispatch) => {
+  // Request Body
+  const body = JSON.stringify({
+    user_hash,
+    student_id,
+  });
+
+  // Attempt Request using Try-Catch
+  try {
+    const res = await api.post('/auth/school/login', body);
 
     dispatch({
       type: actions.LOGIN_SUCCESS,

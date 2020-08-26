@@ -4,6 +4,7 @@ import * as actions from '../actions/types';
 // Initialize State
 const initialState = {
   auth_token: localStorage.getItem('token'),
+  hashValid: null,
   isAuthenticated: false,
   isLoading: false,
   user: null,
@@ -54,6 +55,16 @@ export default function (state = initialState, action) {
         isAuthenticated: false,
         isLoading: false,
         errors: action.payload,
+      };
+    case actions.HASH_VALID:
+      return {
+        ...state,
+        hashValid: true,
+      };
+    case actions.HASH_INVALID:
+      return {
+        ...state,
+        hashValid: false,
       };
     default:
       return state;
