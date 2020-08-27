@@ -9,6 +9,7 @@ import {
   clearQuestions,
   submitForm,
 } from '../../../../redux/actions/survey';
+import { logout } from '../../../../redux/actions/auth';
 
 // React Router
 import { Redirect } from 'react-router-dom';
@@ -68,8 +69,8 @@ export class Questions extends Component {
 
   render() {
     const { submit, showDecision } = this.state;
-    const { person, questions, submitForm } = this.props;
-    const { id, employee_id, first_name, last_name } = person;
+    const { person, questions, submitForm, logout } = this.props;
+    const { id, employee_id, first_name, last_name, role } = person;
 
     // Redirect if no person (erroneously typed /main/questions without using People search)
     if (!person.employee_id) {
@@ -78,6 +79,9 @@ export class Questions extends Component {
 
     // Redirect if successful submit + decision closed
     if (this.state.submit && !this.state.showDecision) {
+      if (role.includes('Student')) {
+        logout();
+      }
       return <Redirect to={paths.PEOPLE_SEARCH_PATH} />;
     }
 
@@ -134,4 +138,5 @@ export default connect(mapStateToProps, {
   getQuestions,
   clearQuestions,
   submitForm,
+  logout,
 })(Questions);

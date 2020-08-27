@@ -86,7 +86,7 @@ export const schoolValidateHash = (user_hash) => async (dispatch) => {
 
   const res = await api.post('/auth/school/validate', body);
 
-  if (res.valid === true) {
+  if (res.data.valid) {
     dispatch({
       type: actions.HASH_VALID,
     });
