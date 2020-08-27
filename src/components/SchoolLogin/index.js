@@ -41,6 +41,9 @@ export default function SchoolLogin() {
   if (hashValid) {
     return (
       <Container style={containerStyle}>
+        <h2 className='text-center mt-4'>Student Login</h2>
+        <br />
+        <br />
         <Formik
           onSubmit={(values, { setSubmitting, resetForm }) => {
             const { studentID } = values;

@@ -17,33 +17,50 @@ export default function SchoolLogin(props) {
   } = formik;
 
   return (
-    <Container fluid>
+    <Container>
       <Form noValidate onSubmit={handleSubmit}>
-        <Form.Group as={Row} md={{ span: 4, offset: 4 }}>
-          <Form.Label>Login Code</Form.Label>
-          <Col md={6}>
-            <Form.Control plaintext readOnly defaultValue={user_hash} />
-          </Col>
-        </Form.Group>
-        <Form.Group as={Row} md={{ span: 4, offset: 4 }}>
-          <Form.Label>Student ID</Form.Label>
-          <Col md={6}>
-            <Form.Control
-              type='text'
-              name='studentID'
-              value={values.studentID}
-              onChange={handleChange}
-              onBlur={handleBlur}
-              isInvalid={touched.studentID && !!errors.studentID}
-            />
-          </Col>
-        </Form.Group>
-        <Form.Group as={Col} md={{ span: 2, offset: 7 }}>
-          <Button variant='primary' type='submit'>
-            Login
-          </Button>
-          <Button type='cancel'>Cancel</Button>
-        </Form.Group>
+        <Form.Row className='justify-content-md-center'>
+          <Form.Group as={Row} md={{ span: 4, offset: 4 }}>
+            <Form.Label>
+              <dt>Login Code</dt>
+            </Form.Label>
+            <Col>
+              <Form.Control plaintext readOnly defaultValue={user_hash} />
+            </Col>
+          </Form.Group>
+        </Form.Row>
+
+        <Form.Row className='justify-content-md-center'>
+          <Form.Group as={Row} md={{ span: 4, offset: 4 }}>
+            <Col>
+              <Form.Label>
+                <dt>Student ID</dt>
+              </Form.Label>
+            </Col>
+            <Col md={8}>
+              <Form.Control
+                type='text'
+                name='studentID'
+                value={values.studentID}
+                onChange={handleChange}
+                onBlur={handleBlur}
+                isInvalid={touched.studentID && !!errors.studentID}
+              />
+            </Col>
+          </Form.Group>
+        </Form.Row>
+        <Form.Row className='justify-content-md-center'>
+          <Form.Group as={Row} md={{ span: 4, offset: 4 }}>
+            <Col md={6}>
+              <Button variant='primary' type='submit'>
+                Login
+              </Button>
+            </Col>
+            <Col md={6}>
+              <Button type='cancel'>Cancel</Button>
+            </Col>
+          </Form.Group>
+        </Form.Row>
       </Form>
     </Container>
   );
