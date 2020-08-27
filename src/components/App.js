@@ -17,6 +17,7 @@ import Header from './layout/Header';
 import Home from './Home';
 import About from './About';
 import Login from './Login';
+import SchoolLogin from './SchoolLogin';
 import Core from './Core';
 import * as paths from '../utils/paths';
 
@@ -34,6 +35,7 @@ export class App extends Component {
               <Route exact path={paths.HOME_PATH} component={Home} />
               <Route path={paths.ABOUT_PATH} component={About} />
               <Route path={paths.LOGIN_PATH} component={Login} />
+              <Route path={paths.SCHOOL_LOGIN_PATH} component={SchoolLogin} />
               <Route path={paths.APP_PATH} component={Core} />
             </Switch>
           </Container>
