@@ -5,8 +5,7 @@ import React, { useEffect } from 'react';
 import { Redirect, useParams } from 'react-router-dom';
 
 // Redux
-import { useSelector } from 'react-redux';
-import store from '../../redux/store';
+import { useSelector, useDispatch } from 'react-redux';
 import { schoolLogin, schoolValidateHash } from '../../redux/actions/auth';
 import { setPerson } from '../../redux/actions/survey';
 
@@ -26,15 +25,16 @@ const containerStyle = {
 
 export default function SchoolLogin() {
   const { user_hash } = useParams();
+  const dispatch = useDispatch();
   const hashValid = useSelector((state) => state.auth.hashValid);
   const person = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    store.dispatch(schoolValidateHash(user_hash));
-  }, [user_hash]);
+    dispatch(schoolValidateHash(user_hash));
+  }, [dispatch, user_hash]);
 
   if (person) {
-    store.dispatch(setPerson(person));
+    dispatch(setPerson(person));
     return <Redirect to={paths.SURVEY_QUESTIONS_PATH} />;
   }
 
@@ -45,7 +45,7 @@ export default function SchoolLogin() {
           onSubmit={(values, { setSubmitting, resetForm }) => {
             const { studentID } = values;
             setSubmitting(true);
-            store.dispatch(schoolLogin(user_hash, studentID));
+            dispatch(schoolLogin(user_hash, studentID));
             resetForm();
             setSubmitting(false);
           }}
