@@ -27,18 +27,18 @@ export class About extends Component {
             <h4>Overview</h4>
             <ul className='a'>
               <li>
-                <strong>Build a safe workplace</strong> by pre-screening
-                employees before they enter the office, therby reducing the risk
-                of spread of COVID-19.
+                <strong>Ensure a safe workplace or school</strong> by
+                pre-screening employees/students before they enter premises,
+                therby reducing the risk of spread of COVID-19.
               </li>
               <li>
                 <strong>A self-assessment</strong> completed by consenting
-                employees allows for efficient control over the health and
-                safety of everyone working in close proximity
+                individuals allows for efficient control over the health and
+                safety of everyone working in close proximity.
               </li>
             </ul>
 
-            <h4>Setup</h4>
+            <h4>Setup - For an Office</h4>
             <ul className='a'>
               <li>
                 A kiosk with tablet/touchscreen computer and a thermometer is
@@ -54,7 +54,17 @@ export class About extends Component {
                 30 seconds and if successful enters office.
               </li>
             </ul>
-
+            <h4>Setup - For a School</h4>
+            <ul className='a'>
+              <li>
+                Student will complete SymScreen survey at home, prior to coming
+                to school.
+              </li>
+              <li>
+                An employee overseeing physical security of the building checks
+                temperature of students entering school.
+              </li>
+            </ul>
             <h4>Survey Workflow</h4>
             <ul className='a'>
               <li>Measure body temperature</li>
@@ -93,10 +103,10 @@ export class About extends Component {
             <div className='ss-content'>
               <p>
                 SymScreen is a Cloud-based platform to track Covid-19 Symptoms
-                of employees in any size organization. SymScreen makes the
-                process of capturing, reporting, and auditing Covid-19 symptoms
-                extremely fast and helps Organizations provide a safe and
-                healthy work environment to their employees.
+                of individuals in any size organization or school. SymScreen
+                makes the process of capturing, reporting, and auditing Covid-19
+                symptoms extremely fast and helps Organizations provide a safe
+                and healthy work/learning environment.
               </p>
             </div>
           </li>
@@ -106,17 +116,37 @@ export class About extends Component {
             <label htmlFor='a2'>How does it work?</label>
             <div className='ss-content'>
               <p>
-                Employer sets up a tracking station with a thermometer and a
-                touch enabled device such as Tablet or touch-screen PC/Laptop.
-                SymScreen takes care of the rest to track Body temperature and
-                collect employee response to few survey questions.
+                <strong>For an Office: </strong>Employer sets up a tracking
+                station with a thermometer and a touch enabled device such as
+                Tablet or touch-screen PC/Laptop. SymScreen takes care of the
+                rest to track Body temperature and collect employee response to
+                few survey questions.
+              </p>
+              <p>
+                <strong>For a School: </strong>SymScreen can also be configured
+                with a simplified workflow when a large number of people need to
+                be let inside a building, for example a school. Students can
+                submit the survey from home and go to school.
+              </p>
+            </div>
+          </li>
+          <li className='ss-items'>
+            <input type='checkbox' name='ac' id='a3' />
+            <label htmlFor='a3'>
+              How many questions are in the survey? Can they be customized?
+            </label>
+            <div className='ss-content'>
+              <p>
+                Yes, each organization can customize questions in the survey.
+                Various health deparments' guidelines suggest 4-8 questions
+                including body temperature measurement.
               </p>
             </div>
           </li>
 
           <li className='ss-items'>
-            <input type='checkbox' name='ac' id='a3' />
-            <label htmlFor='a3'>How long does it take to enter data?</label>
+            <input type='checkbox' name='ac' id='a4' />
+            <label htmlFor='a4'>How long does it take to enter data?</label>
             <div className='ss-content'>
               <p>
                 Within 30 sec, the end-to-end process including measuring
@@ -127,8 +157,8 @@ export class About extends Component {
           </li>
 
           <li className='ss-items'>
-            <input type='checkbox' name='ac' id='a4' />
-            <label htmlFor='a4'>How much does it cost?</label>
+            <input type='checkbox' name='ac' id='a5' />
+            <label htmlFor='a5'>How much does it cost?</label>
             <div className='ss-content'>
               <p>
                 Please contact{' '}
@@ -152,7 +182,8 @@ export class About extends Component {
               {' '}
               <b className='ss-color'>SymScreen</b> empowers Organizations to
               provide a safe work environment by keeping track of health and
-              wellbeing of employees, making COVID-19 screening a breeze.
+              wellbeing of employees/students, making COVID-19 screening a
+              breeze.
             </p>
           </div>
           <p>
