@@ -33,6 +33,11 @@ export default function (state = initialState, action) {
         ...state,
         person: action.payload,
       };
+    case actions.CLEAR_PERSON:
+      return {
+        ...state,
+        person: {},
+      };
     case actions.SUBMIT_FORM:
       return {
         ...state,

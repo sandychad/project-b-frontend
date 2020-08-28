@@ -8,6 +8,7 @@ export const CITIES_LOADED = 'CITIES_LOADED';
 export const PEOPLE_LOADING = 'PEOPLE_LOADING';
 export const PEOPLE_LOADED = 'PEOPLE_LOADED';
 export const SET_PERSON = 'SET_PERSON';
+export const CLEAR_PERSON = 'CLEAR_PERSON';
 export const SET_CITY = 'SET_CITY';
 export const CLEAR_CITY_AND_PEOPLE = 'CLEAR_CITY_AND_PEOPLE';
 

@@ -46,6 +46,14 @@ export const setPerson = (person) => (dispatch) => {
   });
 };
 
+// CLEAR PERSON
+export const clearPerson = () => (dispatch) => {
+  // CLEAR PERSON
+  dispatch({
+    type: actions.CLEAR_PERSON,
+  });
+};
+
 // SUBMIT FORM
 export const submitForm = (response) => async (dispatch) => {
   try {

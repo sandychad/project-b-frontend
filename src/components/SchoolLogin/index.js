@@ -35,6 +35,10 @@ export default function SchoolLogin() {
   const person = useSelector((state) => state.auth.user);
 
   useEffect(() => {
+    dispatch({ type: 'AUTH_ERROR' });
+  }, [dispatch]);
+
+  useEffect(() => {
     dispatch(schoolValidateHash(user_hash));
   }, [dispatch, user_hash]);
 

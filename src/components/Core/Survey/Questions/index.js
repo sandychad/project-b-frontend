@@ -7,6 +7,7 @@ import PropTypes from 'prop-types';
 import {
   getQuestions,
   clearQuestions,
+  clearPerson,
   submitForm,
 } from '../../../../redux/actions/survey';
 import { logout } from '../../../../redux/actions/auth';
@@ -42,6 +43,7 @@ export class Questions extends Component {
     questions: PropTypes.array.isRequired,
     getQuestions: PropTypes.func.isRequired,
     clearQuestions: PropTypes.func.isRequired,
+    clearPerson: PropTypes.func.isRequired,
     person: PropTypes.object.isRequired,
     submitForm: PropTypes.func.isRequired,
   };
@@ -55,6 +57,10 @@ export class Questions extends Component {
       this.props.clearQuestions();
       this.props.getQuestions();
     }
+  }
+
+  componentWillUnmount() {
+    this.props.clearPerson();
   }
 
   hideDecision() {
@@ -137,6 +143,7 @@ const mapStateToProps = (state) => ({
 export default connect(mapStateToProps, {
   getQuestions,
   clearQuestions,
+  clearPerson,
   submitForm,
   logout,
 })(Questions);
