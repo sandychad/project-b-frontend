@@ -2,7 +2,7 @@
 import React from 'react';
 
 // Bootstrap Components
-import { Container, Form, Col, Row, Button } from 'react-bootstrap';
+import { Form, Col, Row, Button } from 'react-bootstrap';
 
 export default function SchoolLogin(props) {
   const { formik, user_hash } = props;
@@ -17,51 +17,39 @@ export default function SchoolLogin(props) {
   } = formik;
 
   return (
-    <Container>
-      <Form noValidate onSubmit={handleSubmit}>
-        <Form.Row className='justify-content-md-center'>
-          <Form.Group as={Row} md={{ span: 4, offset: 4 }}>
-            <Form.Label>
-              <dt>Login Code</dt>
-            </Form.Label>
-            <Col>
-              <Form.Control plaintext readOnly defaultValue={user_hash} />
-            </Col>
-          </Form.Group>
-        </Form.Row>
+    <Form noValidate onSubmit={handleSubmit}>
+      <Form.Group as={Row} className='justify-content-md-center'>
+        <Form.Label column sm={2} className='text-right'>
+          <dt>Login Code</dt>
+        </Form.Label>
+        <Col sm={4}>
+          <Form.Control plaintext readOnly defaultValue={user_hash} />
+        </Col>
+      </Form.Group>
 
-        <Form.Row className='justify-content-md-center'>
-          <Form.Group as={Row} md={{ span: 4, offset: 4 }}>
-            <Col>
-              <Form.Label>
-                <dt>Student ID</dt>
-              </Form.Label>
-            </Col>
-            <Col md={8}>
-              <Form.Control
-                type='text'
-                name='studentID'
-                value={values.studentID}
-                onChange={handleChange}
-                onBlur={handleBlur}
-                isInvalid={touched.studentID && !!errors.studentID}
-              />
-            </Col>
-          </Form.Group>
-        </Form.Row>
-        <Form.Row className='justify-content-md-center'>
-          <Form.Group as={Row} md={{ span: 4, offset: 4 }}>
-            <Col md={6}>
-              <Button variant='primary' type='submit'>
-                Login
-              </Button>
-            </Col>
-            <Col md={6}>
-              <Button type='cancel'>Cancel</Button>
-            </Col>
-          </Form.Group>
-        </Form.Row>
-      </Form>
-    </Container>
+      <Form.Group as={Row} className='justify-content-md-center'>
+        <Form.Label column sm={2} className='text-right'>
+          <dt>Student ID</dt>
+        </Form.Label>
+        <Col sm={4}>
+          <Form.Control
+            type='text'
+            name='studentID'
+            value={values.studentID}
+            onChange={handleChange}
+            onBlur={handleBlur}
+            isInvalid={touched.studentID && !!errors.studentID}
+          />
+        </Col>
+      </Form.Group>
+      <Form.Group as={Row} className='justify-content-md-center'>
+        <Button variant='primary' type='submit' className='m-4'>
+          Login
+        </Button>
+        <Button type='cancel' className='m-4'>
+          Cancel
+        </Button>
+      </Form.Group>
+    </Form>
   );
 }

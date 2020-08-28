@@ -1,5 +1,6 @@
-// Import pre-configured api
+// Helper Functions
 import api from '../../utils/api';
+import { getDateString } from '../../utils/today';
 
 // Import Action Types
 import * as actions from './types';
@@ -79,21 +80,32 @@ export const login = (email, password) => async (dispatch) => {
 
 // SCHOOL VALIDATE Hash
 export const schoolValidateHash = (user_hash) => async (dispatch) => {
+  // USER LOADING
+  dispatch({
+    type: actions.HASH_LOADING,
+  });
+
+  // Generate Today's Date
+  const todaysDate = getDateString();
+  let querystring = `?date=${todaysDate}`;
+
   // Request Body
   const body = JSON.stringify({
     user_hash,
   });
 
-  const res = await api.post('/auth/school/validate', body);
+  try {
+    const res = await api.post(`/auth/school/validate${querystring}`, body);
 
-  if (res.data.valid) {
     dispatch({
       type: actions.HASH_VALID,
+      payload: res.data.name,
     });
-  } else {
+  } catch (error) {
     // Error Handeling
     dispatch({
       type: actions.HASH_INVALID,
+      payload: error.response.data.error,
     });
   }
 };

@@ -17,6 +17,8 @@ import { Container } from 'react-bootstrap';
 
 // Local Components
 import SchoolLoginForm from './SchoolLoginForm';
+import Loading from '../common/Loading';
+import ErrorMessage from '../common/ErrorMessage';
 import * as paths from '../../utils/paths';
 
 const containerStyle = {
@@ -27,6 +29,9 @@ export default function SchoolLogin() {
   const { user_hash } = useParams();
   const dispatch = useDispatch();
   const hashValid = useSelector((state) => state.auth.hashValid);
+  const hashName = useSelector((state) => state.auth.hashName);
+  const hashLoading = useSelector((state) => state.auth.hashLoading);
+  const errors = useSelector((state) => state.auth.errors);
   const person = useSelector((state) => state.auth.user);
 
   useEffect(() => {
@@ -37,36 +42,46 @@ export default function SchoolLogin() {
     dispatch(setPerson(person));
     return <Redirect to={paths.SURVEY_QUESTIONS_PATH} />;
   }
-
-  if (hashValid) {
+  if (hashLoading) {
     return (
-      <Container style={containerStyle}>
-        <h2 className='text-center mt-4'>Student Login</h2>
-        <br />
-        <br />
-        <Formik
-          onSubmit={(values, { setSubmitting, resetForm }) => {
-            const { studentID } = values;
-            setSubmitting(true);
-            dispatch(schoolLogin(user_hash, studentID));
-            resetForm();
-            setSubmitting(false);
-          }}
-          initialValues={{
-            studentID: '',
-          }}
-        >
-          {(formik) => (
-            <SchoolLoginForm user_hash={user_hash} formik={formik} />
-          )}
-        </Formik>
+      <Container fluid style={containerStyle}>
+        <Loading />
       </Container>
     );
   } else {
-    return (
-      <Container style={containerStyle}>
-        <h2>Invalid user code</h2>
-      </Container>
-    );
+    if (hashValid) {
+      return (
+        <Container fluid style={containerStyle}>
+          <h2 className='text-center mt-4'>Hello, {hashName}</h2>
+          <br />
+          {errors.permission_error ? (
+            <ErrorMessage message={errors.permission_error} />
+          ) : null}
+          <br />
+          <Formik
+            onSubmit={(values, { setSubmitting, resetForm }) => {
+              const { studentID } = values;
+              setSubmitting(true);
+              dispatch(schoolLogin(user_hash, studentID));
+              resetForm();
+              setSubmitting(false);
+            }}
+            initialValues={{
+              studentID: '',
+            }}
+          >
+            {(formik) => (
+              <SchoolLoginForm user_hash={user_hash} formik={formik} />
+            )}
+          </Formik>
+        </Container>
+      );
+    } else {
+      return (
+        <Container style={containerStyle} className='text-center'>
+          <h2>{errors.message}</h2>
+        </Container>
+      );
+    }
   }
 }

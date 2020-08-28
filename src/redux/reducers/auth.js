@@ -7,6 +7,8 @@ const initialState = {
   hashValid: null,
   isAuthenticated: false,
   isLoading: false,
+  hashLoading: false,
+  hashName: null,
   user: null,
   errors: {},
 };
@@ -18,6 +20,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isLoading: true,
+      };
+    case actions.HASH_LOADING:
+      return {
+        ...state,
+        hashLoading: true,
       };
     case actions.USER_LOADED:
       return {
@@ -60,11 +67,15 @@ export default function (state = initialState, action) {
       return {
         ...state,
         hashValid: true,
+        hashName: action.payload,
+        hashLoading: false,
       };
     case actions.HASH_INVALID:
       return {
         ...state,
         hashValid: false,
+        hashLoading: false,
+        errors: action.payload,
       };
     default:
       return state;
