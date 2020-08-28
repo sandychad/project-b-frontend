@@ -108,9 +108,11 @@ class Header extends Component {
             About
           </Nav.Link>
           {user ? (
-            <NavDropdown title='App' id='basic-nav-dropdown'>
-              {appLinks(user)}
-            </NavDropdown>
+            user.role.includes('Student') ? null : (
+              <NavDropdown title='App' id='basic-nav-dropdown'>
+                {appLinks(user)}
+              </NavDropdown>
+            )
           ) : null}
         </Nav>
         <Navbar.Collapse className='justify-content-end'>
