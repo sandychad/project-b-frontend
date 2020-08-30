@@ -3,6 +3,7 @@ export const HOME_PATH = '/';
 export const ABOUT_PATH = '/about';
 export const LOGIN_PATH = '/login';
 export const SCHOOL_LOGIN_PATH = '/sl/:user_hash';
+export const LOGOUT_PATH = '/logout';
 
 // App
 export const APP_PATH = '/app';
