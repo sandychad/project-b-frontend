@@ -8,6 +8,7 @@ import { Redirect, useParams } from 'react-router-dom';
 import { useSelector, useDispatch } from 'react-redux';
 import { schoolLogin, schoolValidateHash } from '../../redux/actions/auth';
 import { setPerson } from '../../redux/actions/survey';
+import * as types from '../../redux/actions/types';
 
 // Form Validation
 import { Formik } from 'formik';
@@ -35,14 +36,20 @@ export default function SchoolLogin() {
   const person = useSelector((state) => state.auth.user);
 
   useEffect(() => {
-    dispatch({ type: 'AUTH_ERROR' });
+    dispatch({ type: types.AUTH_ERROR });
   }, [dispatch]);
 
   useEffect(() => {
     dispatch(schoolValidateHash(user_hash));
   }, [dispatch, user_hash]);
 
-  if (person) {
+  useEffect(() => {
+    return () => {
+      dispatch({ type: types.CLEAR_HASH });
+    };
+  }, [dispatch]);
+
+  if (person && hashValid) {
     dispatch(setPerson(person));
     return <Redirect to={paths.SURVEY_QUESTIONS_PATH} />;
   }

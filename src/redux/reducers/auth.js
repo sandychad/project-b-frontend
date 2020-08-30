@@ -81,6 +81,13 @@ export default function (state = initialState, action) {
         hashLoading: false,
         errors: action.payload,
       };
+    case actions.CLEAR_HASH:
+      return {
+        ...state,
+        hashValid: null,
+        hashLoading: false,
+        hashName: null,
+      };
     default:
       return state;
   }

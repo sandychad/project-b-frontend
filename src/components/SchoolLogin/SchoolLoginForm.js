@@ -1,6 +1,10 @@
 // Import React
 import React from 'react';
 
+// React Router
+import { Link } from 'react-router-dom';
+import * as paths from '../../utils/paths';
+
 // Bootstrap Components
 import { Form, Col, Row, Button } from 'react-bootstrap';
 
@@ -46,7 +50,12 @@ export default function SchoolLogin(props) {
         <Button variant='primary' type='submit' className='m-4'>
           Login
         </Button>
-        <Button type='cancel' className='m-4'>
+        <Button
+          as={Link}
+          to={paths.HOME_PATH}
+          variant='secondary'
+          className='m-4'
+        >
           Cancel
         </Button>
       </Form.Group>

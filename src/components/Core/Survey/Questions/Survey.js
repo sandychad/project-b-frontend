@@ -1,8 +1,11 @@
 // React
-import React, { Component } from 'react';
+import React from 'react';
 
 // React Router
 import { Link } from 'react-router-dom';
+
+// Redux
+import { useSelector } from 'react-redux';
 
 // Bootstrap
 import { Container, Form, Button, Col } from 'react-bootstrap';
@@ -14,75 +17,83 @@ import Parent from './fields/Parent';
 import TemperatureWithoutParent from './fields/Temperature/TemperatureWithoutParent';
 import * as paths from '../../../../utils/paths';
 
-export class Survey extends Component {
-  render() {
-    const { questions, formik } = this.props;
-    const { handleSubmit, isValid } = this.props.formik;
+export default function Survey(props) {
+  const user = useSelector((state) => state.auth.user);
+  const { questions, formik } = props;
+  const { handleSubmit, isValid } = props.formik;
 
-    return (
-      <Form noValidate className='mt-4' onSubmit={handleSubmit}>
-        {questions.map((question) => {
-          const { id, question_type, parent_question_id } = question;
+  const cancelPath = (user) => {
+    const { user_hash, role } = user;
+    let path = '';
+    if (role.includes('Student')) {
+      path = paths.SCHOOL_LOGIN_STUB + user_hash;
+    } else {
+      path = paths.PEOPLE_SEARCH_PATH;
+    }
+    return path;
+  };
 
-          if (parent_question_id === '0') {
-            if (question_type === 'N/A') {
-              return <Parent key={id} question={question} />;
-            } else if (question_type === 'options') {
-              return (
-                <OptionsWithoutParent
-                  key={id}
-                  id={id}
-                  question={question}
-                  formik={formik}
-                />
-              );
-            } else if (question_type === 'temp') {
-              return (
-                <TemperatureWithoutParent
-                  key={id}
-                  id={id}
-                  question={question}
-                  formik={formik}
-                />
-              );
-            } else {
-              return <Container />;
-            }
+  return (
+    <Form noValidate className='mt-4' onSubmit={handleSubmit}>
+      {questions.map((question) => {
+        const { id, question_type, parent_question_id } = question;
+
+        if (parent_question_id === '0') {
+          if (question_type === 'N/A') {
+            return <Parent key={id} question={question} />;
+          } else if (question_type === 'options') {
+            return (
+              <OptionsWithoutParent
+                key={id}
+                id={id}
+                question={question}
+                formik={formik}
+              />
+            );
+          } else if (question_type === 'temp') {
+            return (
+              <TemperatureWithoutParent
+                key={id}
+                id={id}
+                question={question}
+                formik={formik}
+              />
+            );
           } else {
-            if (question_type === 'options') {
-              return (
-                <OptionsWithParent
-                  key={id}
-                  id={id}
-                  question={question}
-                  formik={formik}
-                />
-              );
-            } else {
-              return <Container />;
-            }
+            return <Container />;
           }
-        })}
-        <Col className='text-right m-4'>
-          <Button
-            as={Link}
-            to={paths.PEOPLE_SEARCH_PATH}
-            variant='secondary'
-            className='mr-2'
-          >
-            Cancel
-          </Button>
-          <Button
-            type='submit'
-            className='mr-2'
-            disabled={isValid ? false : true}
-          >
-            Submit
-          </Button>
-        </Col>
-      </Form>
-    );
-  }
+        } else {
+          if (question_type === 'options') {
+            return (
+              <OptionsWithParent
+                key={id}
+                id={id}
+                question={question}
+                formik={formik}
+              />
+            );
+          } else {
+            return <Container />;
+          }
+        }
+      })}
+      <Col className='text-right m-4'>
+        <Button
+          as={Link}
+          to={cancelPath(user)}
+          variant='secondary'
+          className='mr-2'
+        >
+          Cancel
+        </Button>
+        <Button
+          type='submit'
+          className='mr-2'
+          disabled={isValid ? false : true}
+        >
+          Submit
+        </Button>
+      </Col>
+    </Form>
+  );
 }
-
-export default Survey;
