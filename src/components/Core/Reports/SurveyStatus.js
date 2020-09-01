@@ -57,11 +57,14 @@ export default class SurveyStatus extends PureComponent {
           <CartesianGrid strokeDasharray='3 3' />
           <XAxis
             dataKey='location'
-            tickMargin={40}
+            //tickMargin={40}
             //angle={-20}
-            position='left'
+            //position='left'
+            textAnchor='end'
+            tick={{ angle: -20 }}
+            interval={0}
           >
-            <label position='insideBottomRight' dy={10} dx={20} />
+            {/* <label position='insideBottomRight' dy={10} dx={20} /> */}
           </XAxis>
           <YAxis
             type='number'

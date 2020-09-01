@@ -30,10 +30,10 @@ export default class AverageTemperature extends PureComponent {
           <XAxis
             dataKey='location'
             name='Location'
-            //angle={-20}
-            tickMargin={40}
-            position='left'
-            padding={{ left: 50, right: 50 }}
+            textAnchor='end'
+            tick={{ angle: -20 }}
+            interval={0}
+            // padding={{ left: 50, right: 50 }}
           />
           <YAxis
             type='number'

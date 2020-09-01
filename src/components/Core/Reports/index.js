@@ -77,24 +77,34 @@ export class Reports extends Component {
             <br />
             <SurveyStatus data={dailySurveyStatusByLocation} />
             <br /> <br />
+            <br />
+            <br />
             <h2 className='text-center'>Daily Survey Results - Line Chart</h2>
             <br />
             <DailySurveyResult data={dailySurveyStatusLineByLocation} />
             <br /> <br />
+            <br />
+            <br />
             <h2 className='text-center'>Failed Surveys</h2>
             <br />
             <FailedSurvey data={failedSurveyCountByDate} />
             <br /> <br />
+            <br />
+            <br />
             <h2 className='text-center'>
               Employee Temperature Results - Scatter Plot
             </h2>
             <br />
             <EmployeeTempResults data={employeeTempByLocation} />
             <br /> <br />
+            <br />
+            <br />
             <h2 className='text-center'>AverageTemperature</h2>
             <br />
             <AverageTemperature data={avgTempByLocation} />
             <br /> <br />
+            <br />
+            <br />
             {/* <h2 className='text-center'>Weekly Survey Count - Single Line Chart</h2>
             <br />
             <WeeklySurveyCount data={weeklySurveyCountByLocation} />

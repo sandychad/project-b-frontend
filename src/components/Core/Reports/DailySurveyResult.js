@@ -58,15 +58,11 @@ export default class DailySurveyResult extends PureComponent {
           <XAxis
             name='Location'
             dataKey='location'
-            tickMargin={30}
-            //angle={-20}
-          >
-            <label
-              // position='Right'
-              dy={10}
-              dx={20}
-            />
-          </XAxis>
+            textAnchor='end'
+            tick={{ angle: -20 }}
+            interval={0}
+            padding={{ left: 100, right: 30 }}
+          />
 
           <YAxis
             label={{
