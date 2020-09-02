@@ -61,7 +61,7 @@ export default class DailySurveyResult extends PureComponent {
             textAnchor='end'
             tick={{ angle: -20 }}
             interval={0}
-            padding={{ left: 100, right: 30 }}
+            padding={{ left: 50, right: 30 }}
           />
 
           <YAxis
